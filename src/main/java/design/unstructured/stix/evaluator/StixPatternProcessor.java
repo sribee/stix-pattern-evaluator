@@ -1,7 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * stix-pattern-evaluator
+ * Copyright (C) 2020 - Unstructured Design
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package design.unstructured.stix.evaluator;
 
@@ -20,9 +32,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author ccarv
+ * When ANTLR walks the grammer, this listener is notified when one of the
+ * parsing rules is triggered. An instance of this class should be passed to the
+ * ParseTreeWalker.
  */
+@SuppressWarnings({ "unchecked" })
 public class StixPatternProcessor implements StixPatternListener, Supplier<Pattern> {
 
     private static final Logger logger = LoggerFactory.getLogger(StixPatternProcessor.class);
@@ -52,9 +66,9 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
     }
 
     /**
-     * Extracts the object path from the context of the pattern and inserts into
-     * our scope. This is typically the first event that is fired when walking
-     * the parser tree.
+     * Extracts the object path from the context of the pattern and inserts into our
+     * scope. This is typically the first event that is fired when walking the
+     * parser tree.
      *
      * @param ctx
      */
@@ -67,9 +81,9 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
     }
 
     /**
-     * Extracts the string literal, or value, from the context of the pattern
-     * and inserts into our scope. This is typically the second event that is
-     * fired when walking the parser tree.
+     * Extracts the string literal, or value, from the context of the pattern and
+     * inserts into our scope. This is typically the second event that is fired when
+     * walking the parser tree.
      *
      * @param ctx
      */
@@ -96,7 +110,7 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
         logger.trace("exitPrimitiveLiteral: {} {}", ctx, ctx.getText());
 
         if (ctx.BoolLiteral() != null) {
-            scope.push(Boolean.getBoolean(ctx.getText()));
+            scope.push(Boolean.valueOf(ctx.getText()));
         }
     }
 
@@ -117,7 +131,8 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
 
         Object value = scope.pop();
         String objectPath = (String) scope.pop();
-        ComparisonComparators comparator = (ctx.EQ() != null ? ComparisonComparators.Equal : ComparisonComparators.NotEqual);
+        ComparisonComparators comparator = (ctx.EQ() != null ? ComparisonComparators.Equal
+                : ComparisonComparators.NotEqual);
 
         scope.push(new ComparisonExpression(objectPath, value, comparator, ctx.NOT()));
     }
@@ -139,7 +154,8 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
         } else if (ctx.LE() != null) {
             comparator = ComparisonComparators.GreaterThan;
         } else {
-            logger.error("an unrecognized ordering comparator was used in this pattern and cannot be evaluated, this may lead to an inconsistent or invalid result.");
+            logger.error(
+                    "an unrecognized ordering comparator was used in this pattern and cannot be evaluated, this may lead to an inconsistent or invalid result.");
         }
 
         scope.push(new ComparisonExpression(objectPath, value, comparator, ctx.NOT()));
@@ -157,9 +173,9 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
     }
 
     /**
-     * This event indicates that we are about parse a set literal. Since the
-     * length of the set is indeterminate, we must move everything from our
-     * scope onto another scope to create this set.
+     * This event indicates that we are about parse a set literal. Since the length
+     * of the set is indeterminate, we must move everything from our scope onto
+     * another scope to create this set.
      *
      *
      * @param ctx
@@ -217,7 +233,8 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
         BaseComparisonExpression firstExpression = (BaseComparisonExpression) scope.pop();
         BaseComparisonExpression secondExpression = (BaseComparisonExpression) scope.pop();
 
-        scope.push(new CombinedComparisonExpression(firstExpression, secondExpression, ComparisonExpressionOperators.And));
+        scope.push(
+                new CombinedComparisonExpression(firstExpression, secondExpression, ComparisonExpressionOperators.And));
     }
 
     @Override
@@ -227,7 +244,8 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
         BaseComparisonExpression firstExpression = (BaseComparisonExpression) scope.pop();
         BaseComparisonExpression secondExpression = (BaseComparisonExpression) scope.pop();
 
-        scope.push(new CombinedComparisonExpression(firstExpression, secondExpression, ComparisonExpressionOperators.Or));
+        scope.push(
+                new CombinedComparisonExpression(firstExpression, secondExpression, ComparisonExpressionOperators.Or));
     }
 
     @Override
@@ -237,15 +255,17 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
         BaseComparisonExpression expression = (BaseComparisonExpression) scope.pop();
 
         scope.push(new ObservationExpression(expression));
-//        comparison_expression = self.pop()
-//
-//        # object_name = self._current_object_type
-//        # self._current_object_type = None
-//
-//        logger.trace("Current Parser Stack: {}".format(self._stack))
-//        # logger.trace("Building DMQ with object_name={}, action={}, query={}".format(object_name, self.action, query))
-//        # self.push(DataModelQuery(object_name=object_name, action=self.action, query=query))
-//        self.push(ObservationExpression(comparison_expression))
+        // comparison_expression = self.pop()
+        //
+        // # object_name = self._current_object_type
+        // # self._current_object_type = None
+        //
+        // logger.trace("Current Parser Stack: {}".format(self._stack))
+        // # logger.trace("Building DMQ with object_name={}, action={},
+        // query={}".format(object_name, self.action, query))
+        // # self.push(DataModelQuery(object_name=object_name, action=self.action,
+        // query=query))
+        // self.push(ObservationExpression(comparison_expression))
     }
 
     @Override
@@ -290,7 +310,8 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
             BaseObservationExpression secondExpression = (BaseObservationExpression) scope.pop();
             BaseObservationExpression firstExpression = (BaseObservationExpression) scope.pop();
 
-            scope.push(new CombinedObservationExpression(firstExpression, secondExpression, ObservationOperators.FollowedBy));
+            scope.push(new CombinedObservationExpression(firstExpression, secondExpression,
+                    ObservationOperators.FollowedBy));
         }
     }
 
@@ -314,288 +335,288 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
      */
     @Override
     public void enterPattern(StixPatternParser.PatternContext ctx) {
-        //System.out.println("->enterPattern");
+        // System.out.println("->enterPattern");
     }
 
     @Override
     public void enterObservationExpressions(StixPatternParser.ObservationExpressionsContext ctx) {
-        //System.out.println("->enterObservationExpressions");
+        // System.out.println("->enterObservationExpressions");
     }
 
     @Override
     public void enterObservationExpressionOr(StixPatternParser.ObservationExpressionOrContext ctx) {
-        //System.out.println("->enterObservationExpressionOr");
+        // System.out.println("->enterObservationExpressionOr");
     }
 
     @Override
     public void enterObservationExpressionAnd(StixPatternParser.ObservationExpressionAndContext ctx) {
-        //System.out.println("->enterObservationExpressionAnd");
+        // System.out.println("->enterObservationExpressionAnd");
     }
 
     @Override
     public void enterObservationExpressionRepeated(StixPatternParser.ObservationExpressionRepeatedContext ctx) {
-        //System.out.println("->enterObservationExpressionRepeated");
+        // System.out.println("->enterObservationExpressionRepeated");
     }
 
     @Override
     public void exitObservationExpressionRepeated(StixPatternParser.ObservationExpressionRepeatedContext ctx) {
-        //System.out.println("->exitObservationExpressionRepeated");
+        // System.out.println("->exitObservationExpressionRepeated");
     }
 
     @Override
     public void enterObservationExpressionSimple(StixPatternParser.ObservationExpressionSimpleContext ctx) {
-        //System.out.println("->enterObservationExpressionSimple");
+        // System.out.println("->enterObservationExpressionSimple");
     }
 
     @Override
     public void enterObservationExpressionCompound(StixPatternParser.ObservationExpressionCompoundContext ctx) {
-        //System.out.println("->enterObservationExpressionCompound");
+        // System.out.println("->enterObservationExpressionCompound");
     }
 
     @Override
     public void exitObservationExpressionCompound(StixPatternParser.ObservationExpressionCompoundContext ctx) {
-        //System.out.println("->exitObservationExpressionCompound");
+        // System.out.println("->exitObservationExpressionCompound");
     }
 
     @Override
     public void enterObservationExpressionWithin(StixPatternParser.ObservationExpressionWithinContext ctx) {
-        //System.out.println("->enterObservationExpressionWithin");
+        // System.out.println("->enterObservationExpressionWithin");
     }
 
     @Override
     public void exitObservationExpressionWithin(StixPatternParser.ObservationExpressionWithinContext ctx) {
-        //System.out.println("->exitObservationExpressionWithin");
+        // System.out.println("->exitObservationExpressionWithin");
     }
 
     @Override
     public void enterObservationExpressionStartStop(StixPatternParser.ObservationExpressionStartStopContext ctx) {
-        //System.out.println("->enterObservationExpressionStartStop");
+        // System.out.println("->enterObservationExpressionStartStop");
     }
 
     @Override
     public void enterPropTestEqual(StixPatternParser.PropTestEqualContext ctx) {
-        //System.out.println("->enterPropTestEqual");
+        // System.out.println("->enterPropTestEqual");
     }
 
     @Override
     public void enterPropTestOrder(StixPatternParser.PropTestOrderContext ctx) {
-        //System.out.println("->enterPropTestOrder");
+        // System.out.println("->enterPropTestOrder");
     }
 
     @Override
     public void enterPropTestSet(StixPatternParser.PropTestSetContext ctx) {
-        //System.out.println("->enterPropTestSet");
+        // System.out.println("->enterPropTestSet");
     }
 
     @Override
     public void enterPropTestLike(StixPatternParser.PropTestLikeContext ctx) {
-        //System.out.println("->enterPropTestLike");
+        // System.out.println("->enterPropTestLike");
     }
 
     @Override
     public void enterPropTestRegex(StixPatternParser.PropTestRegexContext ctx) {
-        //System.out.println("->enterPropTestRegex");
+        // System.out.println("->enterPropTestRegex");
     }
 
     @Override
     public void enterPropTestIsSubset(StixPatternParser.PropTestIsSubsetContext ctx) {
-        //System.out.println("->enterPropTestIsSubset");
+        // System.out.println("->enterPropTestIsSubset");
     }
 
     @Override
     public void exitPropTestIsSubset(StixPatternParser.PropTestIsSubsetContext ctx) {
-        //System.out.println("->exitPropTestIsSubset");
+        // System.out.println("->exitPropTestIsSubset");
     }
 
     @Override
     public void enterPropTestIsSuperset(StixPatternParser.PropTestIsSupersetContext ctx) {
-        //System.out.println("->enterPropTestIsSuperset");
+        // System.out.println("->enterPropTestIsSuperset");
     }
 
     @Override
     public void exitPropTestIsSuperset(StixPatternParser.PropTestIsSupersetContext ctx) {
-        //System.out.println("->exitPropTestIsSuperset");
+        // System.out.println("->exitPropTestIsSuperset");
     }
 
     @Override
     public void enterPropTestParen(StixPatternParser.PropTestParenContext ctx) {
-        //System.out.println("->enterPropTestParen");
+        // System.out.println("->enterPropTestParen");
     }
 
     @Override
     public void exitPropTestParen(StixPatternParser.PropTestParenContext ctx) {
-        //System.out.println("->exitPropTestParen");
+        // System.out.println("->exitPropTestParen");
     }
 
     @Override
     public void enterPropTestExists(StixPatternParser.PropTestExistsContext ctx) {
-        //System.out.println("->enterPropTestExists");
+        // System.out.println("->enterPropTestExists");
     }
 
     @Override
     public void exitPropTestExists(StixPatternParser.PropTestExistsContext ctx) {
-        //System.out.println("->exitPropTestExists");
+        // System.out.println("->exitPropTestExists");
     }
 
     @Override
     public void enterStartStopQualifier(StixPatternParser.StartStopQualifierContext ctx) {
-        //System.out.println("->enterStartStopQualifier");
+        // System.out.println("->enterStartStopQualifier");
     }
 
     @Override
     public void exitStartStopQualifier(StixPatternParser.StartStopQualifierContext ctx) {
-        //System.out.println("->exitStartStopQualifier");
+        // System.out.println("->exitStartStopQualifier");
     }
 
     @Override
     public void enterWithinQualifier(StixPatternParser.WithinQualifierContext ctx) {
-        //System.out.println("->enterWithinQualifier");
+        // System.out.println("->enterWithinQualifier");
     }
 
     @Override
     public void exitWithinQualifier(StixPatternParser.WithinQualifierContext ctx) {
-        //System.out.println("->exitWithinQualifier");
+        // System.out.println("->exitWithinQualifier");
     }
 
     @Override
     public void enterRepeatedQualifier(StixPatternParser.RepeatedQualifierContext ctx) {
-        //System.out.println("->enterRepeatedQualifier");
+        // System.out.println("->enterRepeatedQualifier");
     }
 
     @Override
     public void exitRepeatedQualifier(StixPatternParser.RepeatedQualifierContext ctx) {
-        //System.out.println("->exitRepeatedQualifier");
+        // System.out.println("->exitRepeatedQualifier");
     }
 
     @Override
     public void enterObjectPath(StixPatternParser.ObjectPathContext ctx) {
-        //System.out.println("->enterObjectPath");
+        // System.out.println("->enterObjectPath");
     }
 
     @Override
     public void enterObjectType(StixPatternParser.ObjectTypeContext ctx) {
-        //System.out.println("->enterObjectType");
+        // System.out.println("->enterObjectType");
     }
 
     @Override
     public void exitObjectType(StixPatternParser.ObjectTypeContext ctx) {
-        //System.out.println("->exitObjectType");
+        // System.out.println("->exitObjectType");
     }
 
     @Override
     public void enterFirstPathComponent(StixPatternParser.FirstPathComponentContext ctx) {
-        //System.out.println("->enterFirstPathComponent");
+        // System.out.println("->enterFirstPathComponent");
     }
 
     @Override
     public void exitFirstPathComponent(StixPatternParser.FirstPathComponentContext ctx) {
-        //System.out.println("->exitFirstPathComponent");
+        // System.out.println("->exitFirstPathComponent");
     }
 
     @Override
     public void enterIndexPathStep(StixPatternParser.IndexPathStepContext ctx) {
-        //System.out.println("->enterIndexPathStep");
+        // System.out.println("->enterIndexPathStep");
     }
 
     @Override
     public void exitIndexPathStep(StixPatternParser.IndexPathStepContext ctx) {
-        //System.out.println("->exitIndexPathStep");
+        // System.out.println("->exitIndexPathStep");
     }
 
     @Override
     public void enterPathStep(StixPatternParser.PathStepContext ctx) {
-        //System.out.println("->enterPathStep");
+        // System.out.println("->enterPathStep");
     }
 
     @Override
     public void exitPathStep(StixPatternParser.PathStepContext ctx) {
-        //System.out.println("->exitPathStep");
+        // System.out.println("->exitPathStep");
     }
 
     @Override
     public void enterKeyPathStep(StixPatternParser.KeyPathStepContext ctx) {
-        //System.out.println("->enterKeyPathStep");
+        // System.out.println("->enterKeyPathStep");
     }
 
     @Override
     public void exitKeyPathStep(StixPatternParser.KeyPathStepContext ctx) {
-        //System.out.println("->exitKeyPathStep");
+        // System.out.println("->exitKeyPathStep");
     }
 
     @Override
     public void enterPrimitiveLiteral(StixPatternParser.PrimitiveLiteralContext ctx) {
-        //System.out.println("->exitPrimitiveLiteral");
+        // System.out.println("->exitPrimitiveLiteral");
     }
 
     @Override
     public void enterOrderableLiteral(StixPatternParser.OrderableLiteralContext ctx) {
-        //System.out.println("->enterOrderableLiteral");
+        // System.out.println("->enterOrderableLiteral");
     }
 
     @Override
     public void visitTerminal(TerminalNode tn) {
-        //System.out.println("->visitTerminal");
+        // System.out.println("->visitTerminal");
     }
 
     @Override
     public void visitErrorNode(ErrorNode en) {
-        //System.out.println("->visitErrorNode");
+        // System.out.println("->visitErrorNode");
     }
 
     @Override
     public void enterEveryRule(ParserRuleContext prc) {
-        ////System.out.println("Rule entered: " + prc.getText());
+        //// System.out.println("Rule entered: " + prc.getText());
     }
 
     @Override
     public void exitEveryRule(ParserRuleContext prc) {
-        //System.out.println("->exitEveryRule");
+        // System.out.println("->exitEveryRule");
     }
 
-// CREATED AFTER CHANGES TO STIXPATTERN GRAMMAR
+    // CREATED AFTER CHANGES TO STIXPATTERN GRAMMAR
     @Override
     public void enterOrderingComparator(StixPatternParser.OrderingComparatorContext ctx) {
-        //System.out.println("->enterOrderingComparator");
+        // System.out.println("->enterOrderingComparator");
     }
 
     @Override
     public void exitOrderingComparator(StixPatternParser.OrderingComparatorContext ctx) {
-        //System.out.println("->exitOrderingComparator");
+        // System.out.println("->exitOrderingComparator");
     }
 
     @Override
     public void enterStringLiteral(StixPatternParser.StringLiteralContext ctx) {
-        //System.out.println("->enterStringLiteral");
+        // System.out.println("->enterStringLiteral");
     }
 
     @Override
     public void enterComparisonExpressionAnd_(StixPatternParser.ComparisonExpressionAnd_Context ctx) {
-        //System.out.println("->enterComparisonExpressionAnd_");
+        // System.out.println("->enterComparisonExpressionAnd_");
     }
 
     @Override
     public void exitComparisonExpressionAnd_(StixPatternParser.ComparisonExpressionAnd_Context ctx) {
-        //System.out.println("->exitComparisonExpressionAnd_");
+        // System.out.println("->exitComparisonExpressionAnd_");
     }
 
     @Override
     public void enterComparisonExpressionOred(StixPatternParser.ComparisonExpressionOredContext ctx) {
-        //System.out.println("->enterComparisonExpressionOred");
+        // System.out.println("->enterComparisonExpressionOred");
     }
 
     @Override
     public void enterComparisonExpressionAndPropTest(StixPatternParser.ComparisonExpressionAndPropTestContext ctx) {
-        //System.out.println("->enterComparisonExpressionAndPropTest");
+        // System.out.println("->enterComparisonExpressionAndPropTest");
     }
 
     @Override
     public void exitComparisonExpressionAndPropTest(StixPatternParser.ComparisonExpressionAndPropTestContext ctx) {
-        //System.out.println("->exitComparisonExpressionAndPropTest");
+        // System.out.println("->exitComparisonExpressionAndPropTest");
     }
 
     @Override
     public void enterComparisonExpressionAnded(StixPatternParser.ComparisonExpressionAndedContext ctx) {
-        //System.out.println("->enterComparisonExpressionAnded");
+        // System.out.println("->enterComparisonExpressionAnded");
     }
 
 }

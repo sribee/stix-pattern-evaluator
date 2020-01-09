@@ -1,3 +1,21 @@
+
+/*
+ * stix-pattern-evaluator
+ * Copyright (C) 2020 - Unstructured Design
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package design.unstructured.stix.evaluator.grammar;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
@@ -7,7 +25,7 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * by {@link StixPatternParser}.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
- * operations with no return type.
+ *            operations with no return type.
  */
 public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
 
@@ -92,8 +110,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitObservationExpressionStartStop(StixPatternParser.ObservationExpressionStartStopContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code comparisonExpressionAnd_}
-     * labeled alternative in {@link StixPatternParser#comparisonExpression}.
+     * Visit a parse tree produced by the {@code comparisonExpressionAnd_} labeled
+     * alternative in {@link StixPatternParser#comparisonExpression}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -101,8 +119,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitComparisonExpressionAnd_(StixPatternParser.ComparisonExpressionAnd_Context ctx);
 
     /**
-     * Visit a parse tree produced by the {@code comparisonExpressionOred}
-     * labeled alternative in {@link StixPatternParser#comparisonExpression}.
+     * Visit a parse tree produced by the {@code comparisonExpressionOred} labeled
+     * alternative in {@link StixPatternParser#comparisonExpression}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -110,9 +128,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitComparisonExpressionOred(StixPatternParser.ComparisonExpressionOredContext ctx);
 
     /**
-     * Visit a parse tree produced by the
-     * {@code comparisonExpressionAndPropTest} labeled alternative in
-     * {@link StixPatternParser#comparisonExpressionAnd}.
+     * Visit a parse tree produced by the {@code comparisonExpressionAndPropTest}
+     * labeled alternative in {@link StixPatternParser#comparisonExpressionAnd}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -120,8 +137,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitComparisonExpressionAndPropTest(StixPatternParser.ComparisonExpressionAndPropTestContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code comparisonExpressionAnded}
-     * labeled alternative in {@link StixPatternParser#comparisonExpressionAnd}.
+     * Visit a parse tree produced by the {@code comparisonExpressionAnded} labeled
+     * alternative in {@link StixPatternParser#comparisonExpressionAnd}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -129,8 +146,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitComparisonExpressionAnded(StixPatternParser.ComparisonExpressionAndedContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code propTestEqual} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Visit a parse tree produced by the {@code propTestEqual} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -138,8 +155,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitPropTestEqual(StixPatternParser.PropTestEqualContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code propTestOrder} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Visit a parse tree produced by the {@code propTestOrder} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -147,8 +164,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitPropTestOrder(StixPatternParser.PropTestOrderContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code propTestSet} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Visit a parse tree produced by the {@code propTestSet} labeled alternative in
+     * {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -156,8 +173,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitPropTestSet(StixPatternParser.PropTestSetContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code propTestLike} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Visit a parse tree produced by the {@code propTestLike} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -165,8 +182,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitPropTestLike(StixPatternParser.PropTestLikeContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code propTestRegex} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Visit a parse tree produced by the {@code propTestRegex} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -192,8 +209,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitPropTestIsSuperset(StixPatternParser.PropTestIsSupersetContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code propTestParen} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Visit a parse tree produced by the {@code propTestParen} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -201,8 +218,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitPropTestParen(StixPatternParser.PropTestParenContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code propTestExists} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Visit a parse tree produced by the {@code propTestExists} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -210,8 +227,7 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitPropTestExists(StixPatternParser.PropTestExistsContext ctx);
 
     /**
-     * Visit a parse tree produced by
-     * {@link StixPatternParser#orderingComparator}.
+     * Visit a parse tree produced by {@link StixPatternParser#orderingComparator}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -227,8 +243,7 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitStringLiteral(StixPatternParser.StringLiteralContext ctx);
 
     /**
-     * Visit a parse tree produced by
-     * {@link StixPatternParser#startStopQualifier}.
+     * Visit a parse tree produced by {@link StixPatternParser#startStopQualifier}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -244,8 +259,7 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitWithinQualifier(StixPatternParser.WithinQualifierContext ctx);
 
     /**
-     * Visit a parse tree produced by
-     * {@link StixPatternParser#repeatedQualifier}.
+     * Visit a parse tree produced by {@link StixPatternParser#repeatedQualifier}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -269,8 +283,7 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitObjectType(StixPatternParser.ObjectTypeContext ctx);
 
     /**
-     * Visit a parse tree produced by
-     * {@link StixPatternParser#firstPathComponent}.
+     * Visit a parse tree produced by {@link StixPatternParser#firstPathComponent}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -278,8 +291,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitFirstPathComponent(StixPatternParser.FirstPathComponentContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code indexPathStep} labeled
-     * alternative in {@link StixPatternParser#objectPathComponent}.
+     * Visit a parse tree produced by the {@code indexPathStep} labeled alternative
+     * in {@link StixPatternParser#objectPathComponent}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -287,8 +300,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitIndexPathStep(StixPatternParser.IndexPathStepContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code pathStep} labeled alternative
-     * in {@link StixPatternParser#objectPathComponent}.
+     * Visit a parse tree produced by the {@code pathStep} labeled alternative in
+     * {@link StixPatternParser#objectPathComponent}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -296,8 +309,8 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitPathStep(StixPatternParser.PathStepContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code keyPathStep} labeled
-     * alternative in {@link StixPatternParser#objectPathComponent}.
+     * Visit a parse tree produced by the {@code keyPathStep} labeled alternative in
+     * {@link StixPatternParser#objectPathComponent}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -313,8 +326,7 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitSetLiteral(StixPatternParser.SetLiteralContext ctx);
 
     /**
-     * Visit a parse tree produced by
-     * {@link StixPatternParser#primitiveLiteral}.
+     * Visit a parse tree produced by {@link StixPatternParser#primitiveLiteral}.
      *
      * @param ctx the parse tree
      * @return the visitor result
@@ -322,8 +334,7 @@ public interface StixPatternVisitor<T> extends ParseTreeVisitor<T> {
     T visitPrimitiveLiteral(StixPatternParser.PrimitiveLiteralContext ctx);
 
     /**
-     * Visit a parse tree produced by
-     * {@link StixPatternParser#orderableLiteral}.
+     * Visit a parse tree produced by {@link StixPatternParser#orderableLiteral}.
      *
      * @param ctx the parse tree
      * @return the visitor result

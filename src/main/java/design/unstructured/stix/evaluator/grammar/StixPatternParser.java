@@ -1,3 +1,20 @@
+/*
+ * stix-pattern-evaluator
+ * Copyright (C) 2020 - Unstructured Design
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package design.unstructured.stix.evaluator.grammar;
 
 import java.util.List;
@@ -6,7 +23,7 @@ import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.tree.*;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({ "all", "warnings", "unchecked", "unused", "cast" })
 public class StixPatternParser extends Parser {
 
     static {
@@ -14,60 +31,52 @@ public class StixPatternParser extends Parser {
     }
 
     protected static final DFA[] _decisionToDFA;
-    protected static final PredictionContextCache _sharedContextCache
-            = new PredictionContextCache();
+    protected static final PredictionContextCache _sharedContextCache = new PredictionContextCache();
     public static final int IntNegLiteral = 1, IntPosLiteral = 2, FloatNegLiteral = 3, FloatPosLiteral = 4,
-            HexLiteral = 5, BinaryLiteral = 6, StringLiteral = 7, BoolLiteral = 8, TimestampLiteral = 9,
-            AND = 10, OR = 11, NOT = 12, FOLLOWEDBY = 13, LIKE = 14, MATCHES = 15, ISSUPERSET = 16,
-            ISSUBSET = 17, EXISTS = 18, LAST = 19, IN = 20, START = 21, STOP = 22, SECONDS = 23,
-            TRUE = 24, FALSE = 25, WITHIN = 26, REPEATS = 27, TIMES = 28, IdentifierWithoutHyphen = 29,
-            IdentifierWithHyphen = 30, EQ = 31, NEQ = 32, LT = 33, LE = 34, GT = 35, GE = 36, QUOTE = 37,
-            COLON = 38, DOT = 39, COMMA = 40, RPAREN = 41, LPAREN = 42, RBRACK = 43, LBRACK = 44,
-            PLUS = 45, HYPHEN = 46, MINUS = 47, POWER_OP = 48, DIVIDE = 49, ASTERISK = 50, WS = 51,
+            HexLiteral = 5, BinaryLiteral = 6, StringLiteral = 7, BoolLiteral = 8, TimestampLiteral = 9, AND = 10,
+            OR = 11, NOT = 12, FOLLOWEDBY = 13, LIKE = 14, MATCHES = 15, ISSUPERSET = 16, ISSUBSET = 17, EXISTS = 18,
+            LAST = 19, IN = 20, START = 21, STOP = 22, SECONDS = 23, TRUE = 24, FALSE = 25, WITHIN = 26, REPEATS = 27,
+            TIMES = 28, IdentifierWithoutHyphen = 29, IdentifierWithHyphen = 30, EQ = 31, NEQ = 32, LT = 33, LE = 34,
+            GT = 35, GE = 36, QUOTE = 37, COLON = 38, DOT = 39, COMMA = 40, RPAREN = 41, LPAREN = 42, RBRACK = 43,
+            LBRACK = 44, PLUS = 45, HYPHEN = 46, MINUS = 47, POWER_OP = 48, DIVIDE = 49, ASTERISK = 50, WS = 51,
             COMMENT = 52, LINE_COMMENT = 53, InvalidCharacter = 54;
     public static final int RULE_pattern = 0, RULE_observationExpressions = 1, RULE_observationExpressionOr = 2,
             RULE_observationExpressionAnd = 3, RULE_observationExpression = 4, RULE_comparisonExpression = 5,
-            RULE_comparisonExpressionAnd = 6, RULE_propTest = 7, RULE_orderingComparator = 8,
-            RULE_stringLiteral = 9, RULE_startStopQualifier = 10, RULE_withinQualifier = 11,
-            RULE_repeatedQualifier = 12, RULE_objectPath = 13, RULE_objectType = 14,
-            RULE_firstPathComponent = 15, RULE_objectPathComponent = 16, RULE_setLiteral = 17,
+            RULE_comparisonExpressionAnd = 6, RULE_propTest = 7, RULE_orderingComparator = 8, RULE_stringLiteral = 9,
+            RULE_startStopQualifier = 10, RULE_withinQualifier = 11, RULE_repeatedQualifier = 12, RULE_objectPath = 13,
+            RULE_objectType = 14, RULE_firstPathComponent = 15, RULE_objectPathComponent = 16, RULE_setLiteral = 17,
             RULE_primitiveLiteral = 18, RULE_orderableLiteral = 19;
 
     private static String[] makeRuleNames() {
-        return new String[]{
-            "pattern", "observationExpressions", "observationExpressionOr", "observationExpressionAnd",
-            "observationExpression", "comparisonExpression", "comparisonExpressionAnd",
-            "propTest", "orderingComparator", "stringLiteral", "startStopQualifier",
-            "withinQualifier", "repeatedQualifier", "objectPath", "objectType", "firstPathComponent",
-            "objectPathComponent", "setLiteral", "primitiveLiteral", "orderableLiteral"
-        };
+        return new String[] { "pattern", "observationExpressions", "observationExpressionOr",
+                "observationExpressionAnd", "observationExpression", "comparisonExpression", "comparisonExpressionAnd",
+                "propTest", "orderingComparator", "stringLiteral", "startStopQualifier", "withinQualifier",
+                "repeatedQualifier", "objectPath", "objectType", "firstPathComponent", "objectPathComponent",
+                "setLiteral", "primitiveLiteral", "orderableLiteral" };
     }
+
     public static final String[] ruleNames = makeRuleNames();
 
     private static String[] makeLiteralNames() {
-        return new String[]{
-            null, null, null, null, null, null, null, null, null, null, "'AND'",
-            "'OR'", "'NOT'", "'FOLLOWEDBY'", "'LIKE'", "'MATCHES'", "'ISSUPERSET'",
-            "'ISSUBSET'", "'EXISTS'", "'LAST'", "'IN'", "'START'", "'STOP'", "'SECONDS'",
-            "'true'", "'false'", "'WITHIN'", "'REPEATS'", "'TIMES'", null, null,
-            null, null, "'<'", "'<='", "'>'", "'>='", "'''", "':'", "'.'", "','",
-            "')'", "'('", "']'", "'['", "'+'", null, "'-'", "'^'", "'/'", "'*'"
-        };
+        return new String[] { null, null, null, null, null, null, null, null, null, null, "'AND'", "'OR'", "'NOT'",
+                "'FOLLOWEDBY'", "'LIKE'", "'MATCHES'", "'ISSUPERSET'", "'ISSUBSET'", "'EXISTS'", "'LAST'", "'IN'",
+                "'START'", "'STOP'", "'SECONDS'", "'true'", "'false'", "'WITHIN'", "'REPEATS'", "'TIMES'", null, null,
+                null, null, "'<'", "'<='", "'>'", "'>='", "'''", "':'", "'.'", "','", "')'", "'('", "']'", "'['", "'+'",
+                null, "'-'", "'^'", "'/'", "'*'" };
     }
+
     private static final String[] _LITERAL_NAMES = makeLiteralNames();
 
     private static String[] makeSymbolicNames() {
-        return new String[]{
-            null, "IntNegLiteral", "IntPosLiteral", "FloatNegLiteral", "FloatPosLiteral",
-            "HexLiteral", "BinaryLiteral", "StringLiteral", "BoolLiteral", "TimestampLiteral",
-            "AND", "OR", "NOT", "FOLLOWEDBY", "LIKE", "MATCHES", "ISSUPERSET", "ISSUBSET",
-            "EXISTS", "LAST", "IN", "START", "STOP", "SECONDS", "TRUE", "FALSE",
-            "WITHIN", "REPEATS", "TIMES", "IdentifierWithoutHyphen", "IdentifierWithHyphen",
-            "EQ", "NEQ", "LT", "LE", "GT", "GE", "QUOTE", "COLON", "DOT", "COMMA",
-            "RPAREN", "LPAREN", "RBRACK", "LBRACK", "PLUS", "HYPHEN", "MINUS", "POWER_OP",
-            "DIVIDE", "ASTERISK", "WS", "COMMENT", "LINE_COMMENT", "InvalidCharacter"
-        };
+        return new String[] { null, "IntNegLiteral", "IntPosLiteral", "FloatNegLiteral", "FloatPosLiteral",
+                "HexLiteral", "BinaryLiteral", "StringLiteral", "BoolLiteral", "TimestampLiteral", "AND", "OR", "NOT",
+                "FOLLOWEDBY", "LIKE", "MATCHES", "ISSUPERSET", "ISSUBSET", "EXISTS", "LAST", "IN", "START", "STOP",
+                "SECONDS", "TRUE", "FALSE", "WITHIN", "REPEATS", "TIMES", "IdentifierWithoutHyphen",
+                "IdentifierWithHyphen", "EQ", "NEQ", "LT", "LE", "GT", "GE", "QUOTE", "COLON", "DOT", "COMMA", "RPAREN",
+                "LPAREN", "RBRACK", "LBRACK", "PLUS", "HYPHEN", "MINUS", "POWER_OP", "DIVIDE", "ASTERISK", "WS",
+                "COMMENT", "LINE_COMMENT", "InvalidCharacter" };
     }
+
     private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
     public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -757,33 +766,33 @@ public class StixPatternParser extends Parser {
                 setState(85);
                 _errHandler.sync(this);
                 switch (_input.LA(1)) {
-                    case LBRACK: {
-                        _localctx = new ObservationExpressionSimpleContext(_localctx);
-                        _ctx = _localctx;
-                        _prevctx = _localctx;
+                case LBRACK: {
+                    _localctx = new ObservationExpressionSimpleContext(_localctx);
+                    _ctx = _localctx;
+                    _prevctx = _localctx;
 
-                        setState(77);
-                        match(LBRACK);
-                        setState(78);
-                        comparisonExpression(0);
-                        setState(79);
-                        match(RBRACK);
-                    }
+                    setState(77);
+                    match(LBRACK);
+                    setState(78);
+                    comparisonExpression(0);
+                    setState(79);
+                    match(RBRACK);
+                }
                     break;
-                    case LPAREN: {
-                        _localctx = new ObservationExpressionCompoundContext(_localctx);
-                        _ctx = _localctx;
-                        _prevctx = _localctx;
-                        setState(81);
-                        match(LPAREN);
-                        setState(82);
-                        observationExpressions(0);
-                        setState(83);
-                        match(RPAREN);
-                    }
+                case LPAREN: {
+                    _localctx = new ObservationExpressionCompoundContext(_localctx);
+                    _ctx = _localctx;
+                    _prevctx = _localctx;
+                    setState(81);
+                    match(LPAREN);
+                    setState(82);
+                    observationExpressions(0);
+                    setState(83);
+                    match(RPAREN);
+                }
                     break;
-                    default:
-                        throw new NoViableAltException(this);
+                default:
+                    throw new NoViableAltException(this);
                 }
                 _ctx.stop = _input.LT(-1);
                 setState(95);
@@ -799,38 +808,41 @@ public class StixPatternParser extends Parser {
                             setState(93);
                             _errHandler.sync(this);
                             switch (getInterpreter().adaptivePredict(_input, 4, _ctx)) {
-                                case 1: {
-                                    _localctx = new ObservationExpressionStartStopContext(new ObservationExpressionContext(_parentctx, _parentState));
-                                    pushNewRecursionContext(_localctx, _startState, RULE_observationExpression);
-                                    setState(87);
-                                    if (!(precpred(_ctx, 3))) {
-                                        throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-                                    }
-                                    setState(88);
-                                    startStopQualifier();
+                            case 1: {
+                                _localctx = new ObservationExpressionStartStopContext(
+                                        new ObservationExpressionContext(_parentctx, _parentState));
+                                pushNewRecursionContext(_localctx, _startState, RULE_observationExpression);
+                                setState(87);
+                                if (!(precpred(_ctx, 3))) {
+                                    throw new FailedPredicateException(this, "precpred(_ctx, 3)");
                                 }
+                                setState(88);
+                                startStopQualifier();
+                            }
                                 break;
-                                case 2: {
-                                    _localctx = new ObservationExpressionWithinContext(new ObservationExpressionContext(_parentctx, _parentState));
-                                    pushNewRecursionContext(_localctx, _startState, RULE_observationExpression);
-                                    setState(89);
-                                    if (!(precpred(_ctx, 2))) {
-                                        throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-                                    }
-                                    setState(90);
-                                    withinQualifier();
+                            case 2: {
+                                _localctx = new ObservationExpressionWithinContext(
+                                        new ObservationExpressionContext(_parentctx, _parentState));
+                                pushNewRecursionContext(_localctx, _startState, RULE_observationExpression);
+                                setState(89);
+                                if (!(precpred(_ctx, 2))) {
+                                    throw new FailedPredicateException(this, "precpred(_ctx, 2)");
                                 }
+                                setState(90);
+                                withinQualifier();
+                            }
                                 break;
-                                case 3: {
-                                    _localctx = new ObservationExpressionRepeatedContext(new ObservationExpressionContext(_parentctx, _parentState));
-                                    pushNewRecursionContext(_localctx, _startState, RULE_observationExpression);
-                                    setState(91);
-                                    if (!(precpred(_ctx, 1))) {
-                                        throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-                                    }
-                                    setState(92);
-                                    repeatedQualifier();
+                            case 3: {
+                                _localctx = new ObservationExpressionRepeatedContext(
+                                        new ObservationExpressionContext(_parentctx, _parentState));
+                                pushNewRecursionContext(_localctx, _startState, RULE_observationExpression);
+                                setState(91);
+                                if (!(precpred(_ctx, 1))) {
+                                    throw new FailedPredicateException(this, "precpred(_ctx, 1)");
                                 }
+                                setState(92);
+                                repeatedQualifier();
+                            }
                                 break;
                             }
                         }
@@ -980,7 +992,8 @@ public class StixPatternParser extends Parser {
                         _prevctx = _localctx;
                         {
                             {
-                                _localctx = new ComparisonExpressionOredContext(new ComparisonExpressionContext(_parentctx, _parentState));
+                                _localctx = new ComparisonExpressionOredContext(
+                                        new ComparisonExpressionContext(_parentctx, _parentState));
                                 pushNewRecursionContext(_localctx, _startState, RULE_comparisonExpression);
                                 setState(101);
                                 if (!(precpred(_ctx, 2))) {
@@ -1138,7 +1151,8 @@ public class StixPatternParser extends Parser {
                         _prevctx = _localctx;
                         {
                             {
-                                _localctx = new ComparisonExpressionAndedContext(new ComparisonExpressionAndContext(_parentctx, _parentState));
+                                _localctx = new ComparisonExpressionAndedContext(
+                                        new ComparisonExpressionAndContext(_parentctx, _parentState));
                                 pushNewRecursionContext(_localctx, _startState, RULE_comparisonExpressionAnd);
                                 setState(112);
                                 if (!(precpred(_ctx, 2))) {
@@ -1611,200 +1625,192 @@ public class StixPatternParser extends Parser {
             setState(175);
             _errHandler.sync(this);
             switch (getInterpreter().adaptivePredict(_input, 15, _ctx)) {
-                case 1:
-                    _localctx = new PropTestEqualContext(_localctx);
-                    enterOuterAlt(_localctx, 1);
-                     {
-                        setState(120);
-                        objectPath();
-                        setState(122);
-                        _errHandler.sync(this);
-                        _la = _input.LA(1);
-                        if (_la == NOT) {
-                            {
-                                setState(121);
-                                match(NOT);
-                            }
-                        }
+            case 1:
+                _localctx = new PropTestEqualContext(_localctx);
+                enterOuterAlt(_localctx, 1); {
+                setState(120);
+                objectPath();
+                setState(122);
+                _errHandler.sync(this);
+                _la = _input.LA(1);
+                if (_la == NOT) {
+                    {
+                        setState(121);
+                        match(NOT);
+                    }
+                }
 
-                        setState(124);
-                        _la = _input.LA(1);
-                        if (!(_la == EQ || _la == NEQ)) {
-                            _errHandler.recoverInline(this);
-                        } else {
-                            if (_input.LA(1) == Token.EOF) {
-                                matchedEOF = true;
-                            }
-                            _errHandler.reportMatch(this);
-                            consume();
-                        }
-                        setState(125);
-                        primitiveLiteral();
+                setState(124);
+                _la = _input.LA(1);
+                if (!(_la == EQ || _la == NEQ)) {
+                    _errHandler.recoverInline(this);
+                } else {
+                    if (_input.LA(1) == Token.EOF) {
+                        matchedEOF = true;
                     }
-                    break;
-                case 2:
-                    _localctx = new PropTestOrderContext(_localctx);
-                    enterOuterAlt(_localctx, 2);
-                     {
-                        setState(127);
-                        objectPath();
-                        setState(129);
-                        _errHandler.sync(this);
-                        _la = _input.LA(1);
-                        if (_la == NOT) {
-                            {
-                                setState(128);
-                                match(NOT);
-                            }
-                        }
+                    _errHandler.reportMatch(this);
+                    consume();
+                }
+                setState(125);
+                primitiveLiteral();
+            }
+                break;
+            case 2:
+                _localctx = new PropTestOrderContext(_localctx);
+                enterOuterAlt(_localctx, 2); {
+                setState(127);
+                objectPath();
+                setState(129);
+                _errHandler.sync(this);
+                _la = _input.LA(1);
+                if (_la == NOT) {
+                    {
+                        setState(128);
+                        match(NOT);
+                    }
+                }
 
-                        setState(131);
-                        _la = _input.LA(1);
-                        if (!((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LT) | (1L << LE) | (1L << GT) | (1L << GE))) != 0))) {
-                            _errHandler.recoverInline(this);
-                        } else {
-                            if (_input.LA(1) == Token.EOF) {
-                                matchedEOF = true;
-                            }
-                            _errHandler.reportMatch(this);
-                            consume();
-                        }
-                        setState(132);
-                        orderableLiteral();
+                setState(131);
+                _la = _input.LA(1);
+                if (!((((_la) & ~0x3f) == 0
+                        && ((1L << _la) & ((1L << LT) | (1L << LE) | (1L << GT) | (1L << GE))) != 0))) {
+                    _errHandler.recoverInline(this);
+                } else {
+                    if (_input.LA(1) == Token.EOF) {
+                        matchedEOF = true;
                     }
-                    break;
-                case 3:
-                    _localctx = new PropTestSetContext(_localctx);
-                    enterOuterAlt(_localctx, 3);
-                     {
-                        setState(134);
-                        objectPath();
-                        setState(136);
-                        _errHandler.sync(this);
-                        _la = _input.LA(1);
-                        if (_la == NOT) {
-                            {
-                                setState(135);
-                                match(NOT);
-                            }
-                        }
+                    _errHandler.reportMatch(this);
+                    consume();
+                }
+                setState(132);
+                orderableLiteral();
+            }
+                break;
+            case 3:
+                _localctx = new PropTestSetContext(_localctx);
+                enterOuterAlt(_localctx, 3); {
+                setState(134);
+                objectPath();
+                setState(136);
+                _errHandler.sync(this);
+                _la = _input.LA(1);
+                if (_la == NOT) {
+                    {
+                        setState(135);
+                        match(NOT);
+                    }
+                }
 
-                        setState(138);
-                        match(IN);
-                        setState(139);
-                        setLiteral();
+                setState(138);
+                match(IN);
+                setState(139);
+                setLiteral();
+            }
+                break;
+            case 4:
+                _localctx = new PropTestLikeContext(_localctx);
+                enterOuterAlt(_localctx, 4); {
+                setState(141);
+                objectPath();
+                setState(143);
+                _errHandler.sync(this);
+                _la = _input.LA(1);
+                if (_la == NOT) {
+                    {
+                        setState(142);
+                        match(NOT);
                     }
-                    break;
-                case 4:
-                    _localctx = new PropTestLikeContext(_localctx);
-                    enterOuterAlt(_localctx, 4);
-                     {
-                        setState(141);
-                        objectPath();
-                        setState(143);
-                        _errHandler.sync(this);
-                        _la = _input.LA(1);
-                        if (_la == NOT) {
-                            {
-                                setState(142);
-                                match(NOT);
-                            }
-                        }
+                }
 
-                        setState(145);
-                        match(LIKE);
-                        setState(146);
-                        stringLiteral();
+                setState(145);
+                match(LIKE);
+                setState(146);
+                stringLiteral();
+            }
+                break;
+            case 5:
+                _localctx = new PropTestRegexContext(_localctx);
+                enterOuterAlt(_localctx, 5); {
+                setState(148);
+                objectPath();
+                setState(150);
+                _errHandler.sync(this);
+                _la = _input.LA(1);
+                if (_la == NOT) {
+                    {
+                        setState(149);
+                        match(NOT);
                     }
-                    break;
-                case 5:
-                    _localctx = new PropTestRegexContext(_localctx);
-                    enterOuterAlt(_localctx, 5);
-                     {
-                        setState(148);
-                        objectPath();
-                        setState(150);
-                        _errHandler.sync(this);
-                        _la = _input.LA(1);
-                        if (_la == NOT) {
-                            {
-                                setState(149);
-                                match(NOT);
-                            }
-                        }
+                }
 
-                        setState(152);
-                        match(MATCHES);
-                        setState(153);
-                        stringLiteral();
+                setState(152);
+                match(MATCHES);
+                setState(153);
+                stringLiteral();
+            }
+                break;
+            case 6:
+                _localctx = new PropTestIsSubsetContext(_localctx);
+                enterOuterAlt(_localctx, 6); {
+                setState(155);
+                objectPath();
+                setState(157);
+                _errHandler.sync(this);
+                _la = _input.LA(1);
+                if (_la == NOT) {
+                    {
+                        setState(156);
+                        match(NOT);
                     }
-                    break;
-                case 6:
-                    _localctx = new PropTestIsSubsetContext(_localctx);
-                    enterOuterAlt(_localctx, 6);
-                     {
-                        setState(155);
-                        objectPath();
-                        setState(157);
-                        _errHandler.sync(this);
-                        _la = _input.LA(1);
-                        if (_la == NOT) {
-                            {
-                                setState(156);
-                                match(NOT);
-                            }
-                        }
+                }
 
-                        setState(159);
-                        match(ISSUBSET);
-                        setState(160);
-                        stringLiteral();
+                setState(159);
+                match(ISSUBSET);
+                setState(160);
+                stringLiteral();
+            }
+                break;
+            case 7:
+                _localctx = new PropTestIsSupersetContext(_localctx);
+                enterOuterAlt(_localctx, 7); {
+                setState(162);
+                objectPath();
+                setState(164);
+                _errHandler.sync(this);
+                _la = _input.LA(1);
+                if (_la == NOT) {
+                    {
+                        setState(163);
+                        match(NOT);
                     }
-                    break;
-                case 7:
-                    _localctx = new PropTestIsSupersetContext(_localctx);
-                    enterOuterAlt(_localctx, 7);
-                     {
-                        setState(162);
-                        objectPath();
-                        setState(164);
-                        _errHandler.sync(this);
-                        _la = _input.LA(1);
-                        if (_la == NOT) {
-                            {
-                                setState(163);
-                                match(NOT);
-                            }
-                        }
+                }
 
-                        setState(166);
-                        match(ISSUPERSET);
-                        setState(167);
-                        stringLiteral();
-                    }
-                    break;
-                case 8:
-                    _localctx = new PropTestParenContext(_localctx);
-                    enterOuterAlt(_localctx, 8);
-                     {
-                        setState(169);
-                        match(LPAREN);
-                        setState(170);
-                        comparisonExpression(0);
-                        setState(171);
-                        match(RPAREN);
-                    }
-                    break;
-                case 9:
-                    _localctx = new PropTestExistsContext(_localctx);
-                    enterOuterAlt(_localctx, 9);
-                     {
-                        setState(173);
-                        match(EXISTS);
-                        setState(174);
-                        objectPath();
-                    }
-                    break;
+                setState(166);
+                match(ISSUPERSET);
+                setState(167);
+                stringLiteral();
+            }
+                break;
+            case 8:
+                _localctx = new PropTestParenContext(_localctx);
+                enterOuterAlt(_localctx, 8); {
+                setState(169);
+                match(LPAREN);
+                setState(170);
+                comparisonExpression(0);
+                setState(171);
+                match(RPAREN);
+            }
+                break;
+            case 9:
+                _localctx = new PropTestExistsContext(_localctx);
+                enterOuterAlt(_localctx, 9); {
+                setState(173);
+                match(EXISTS);
+                setState(174);
+                objectPath();
+            }
+                break;
             }
         } catch (RecognitionException re) {
             _localctx.exception = re;
@@ -1876,7 +1882,8 @@ public class StixPatternParser extends Parser {
             {
                 setState(177);
                 _la = _input.LA(1);
-                if (!((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LT) | (1L << LE) | (1L << GT) | (1L << GE))) != 0))) {
+                if (!((((_la) & ~0x3f) == 0
+                        && ((1L << _la) & ((1L << LT) | (1L << LE) | (1L << GT) | (1L << GE))) != 0))) {
                     _errHandler.recoverInline(this);
                 } else {
                     if (_input.LA(1) == Token.EOF) {
@@ -2250,10 +2257,10 @@ public class StixPatternParser extends Parser {
                 setState(198);
                 _errHandler.sync(this);
                 switch (getInterpreter().adaptivePredict(_input, 16, _ctx)) {
-                    case 1: {
-                        setState(197);
-                        objectPathComponent(0);
-                    }
+                case 1: {
+                    setState(197);
+                    objectPathComponent(0);
+                }
                     break;
                 }
             }
@@ -2579,49 +2586,50 @@ public class StixPatternParser extends Parser {
                 setState(210);
                 _errHandler.sync(this);
                 switch (_input.LA(1)) {
-                    case DOT: {
-                        _localctx = new KeyPathStepContext(_localctx);
-                        _ctx = _localctx;
-                        _prevctx = _localctx;
+                case DOT: {
+                    _localctx = new KeyPathStepContext(_localctx);
+                    _ctx = _localctx;
+                    _prevctx = _localctx;
 
-                        setState(205);
-                        match(DOT);
-                        setState(206);
-                        _la = _input.LA(1);
-                        if (!(_la == StringLiteral || _la == IdentifierWithoutHyphen)) {
-                            _errHandler.recoverInline(this);
-                        } else {
-                            if (_input.LA(1) == Token.EOF) {
-                                matchedEOF = true;
-                            }
-                            _errHandler.reportMatch(this);
-                            consume();
+                    setState(205);
+                    match(DOT);
+                    setState(206);
+                    _la = _input.LA(1);
+                    if (!(_la == StringLiteral || _la == IdentifierWithoutHyphen)) {
+                        _errHandler.recoverInline(this);
+                    } else {
+                        if (_input.LA(1) == Token.EOF) {
+                            matchedEOF = true;
                         }
+                        _errHandler.reportMatch(this);
+                        consume();
                     }
+                }
                     break;
-                    case LBRACK: {
-                        _localctx = new IndexPathStepContext(_localctx);
-                        _ctx = _localctx;
-                        _prevctx = _localctx;
-                        setState(207);
-                        match(LBRACK);
-                        setState(208);
-                        _la = _input.LA(1);
-                        if (!((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IntNegLiteral) | (1L << IntPosLiteral) | (1L << ASTERISK))) != 0))) {
-                            _errHandler.recoverInline(this);
-                        } else {
-                            if (_input.LA(1) == Token.EOF) {
-                                matchedEOF = true;
-                            }
-                            _errHandler.reportMatch(this);
-                            consume();
+                case LBRACK: {
+                    _localctx = new IndexPathStepContext(_localctx);
+                    _ctx = _localctx;
+                    _prevctx = _localctx;
+                    setState(207);
+                    match(LBRACK);
+                    setState(208);
+                    _la = _input.LA(1);
+                    if (!((((_la) & ~0x3f) == 0 && ((1L << _la)
+                            & ((1L << IntNegLiteral) | (1L << IntPosLiteral) | (1L << ASTERISK))) != 0))) {
+                        _errHandler.recoverInline(this);
+                    } else {
+                        if (_input.LA(1) == Token.EOF) {
+                            matchedEOF = true;
                         }
-                        setState(209);
-                        match(RBRACK);
+                        _errHandler.reportMatch(this);
+                        consume();
                     }
+                    setState(209);
+                    match(RBRACK);
+                }
                     break;
-                    default:
-                        throw new NoViableAltException(this);
+                default:
+                    throw new NoViableAltException(this);
                 }
                 _ctx.stop = _input.LT(-1);
                 setState(216);
@@ -2635,7 +2643,8 @@ public class StixPatternParser extends Parser {
                         _prevctx = _localctx;
                         {
                             {
-                                _localctx = new PathStepContext(new ObjectPathComponentContext(_parentctx, _parentState));
+                                _localctx = new PathStepContext(
+                                        new ObjectPathComponentContext(_parentctx, _parentState));
                                 pushNewRecursionContext(_localctx, _startState, RULE_objectPathComponent);
                                 setState(212);
                                 if (!(precpred(_ctx, 3))) {
@@ -2728,42 +2737,40 @@ public class StixPatternParser extends Parser {
             setState(232);
             _errHandler.sync(this);
             switch (getInterpreter().adaptivePredict(_input, 20, _ctx)) {
-                case 1:
-                    enterOuterAlt(_localctx, 1);
-                     {
-                        setState(219);
-                        match(LPAREN);
-                        setState(220);
-                        match(RPAREN);
-                    }
-                    break;
-                case 2:
-                    enterOuterAlt(_localctx, 2);
-                     {
-                        setState(221);
-                        match(LPAREN);
-                        setState(222);
-                        primitiveLiteral();
-                        setState(227);
-                        _errHandler.sync(this);
-                        _la = _input.LA(1);
-                        while (_la == COMMA) {
-                            {
-                                {
-                                    setState(223);
-                                    match(COMMA);
-                                    setState(224);
-                                    primitiveLiteral();
-                                }
-                            }
-                            setState(229);
-                            _errHandler.sync(this);
-                            _la = _input.LA(1);
+            case 1:
+                enterOuterAlt(_localctx, 1); {
+                setState(219);
+                match(LPAREN);
+                setState(220);
+                match(RPAREN);
+            }
+                break;
+            case 2:
+                enterOuterAlt(_localctx, 2); {
+                setState(221);
+                match(LPAREN);
+                setState(222);
+                primitiveLiteral();
+                setState(227);
+                _errHandler.sync(this);
+                _la = _input.LA(1);
+                while (_la == COMMA) {
+                    {
+                        {
+                            setState(223);
+                            match(COMMA);
+                            setState(224);
+                            primitiveLiteral();
                         }
-                        setState(230);
-                        match(RPAREN);
                     }
-                    break;
+                    setState(229);
+                    _errHandler.sync(this);
+                    _la = _input.LA(1);
+                }
+                setState(230);
+                match(RPAREN);
+            }
+                break;
             }
         } catch (RecognitionException re) {
             _localctx.exception = re;
@@ -2825,29 +2832,27 @@ public class StixPatternParser extends Parser {
             setState(236);
             _errHandler.sync(this);
             switch (_input.LA(1)) {
-                case IntNegLiteral:
-                case IntPosLiteral:
-                case FloatNegLiteral:
-                case FloatPosLiteral:
-                case HexLiteral:
-                case BinaryLiteral:
-                case StringLiteral:
-                case TimestampLiteral:
-                    enterOuterAlt(_localctx, 1);
-                     {
-                        setState(234);
-                        orderableLiteral();
-                    }
-                    break;
-                case BoolLiteral:
-                    enterOuterAlt(_localctx, 2);
-                     {
-                        setState(235);
-                        match(BoolLiteral);
-                    }
-                    break;
-                default:
-                    throw new NoViableAltException(this);
+            case IntNegLiteral:
+            case IntPosLiteral:
+            case FloatNegLiteral:
+            case FloatPosLiteral:
+            case HexLiteral:
+            case BinaryLiteral:
+            case StringLiteral:
+            case TimestampLiteral:
+                enterOuterAlt(_localctx, 1); {
+                setState(234);
+                orderableLiteral();
+            }
+                break;
+            case BoolLiteral:
+                enterOuterAlt(_localctx, 2); {
+                setState(235);
+                match(BoolLiteral);
+            }
+                break;
+            default:
+                throw new NoViableAltException(this);
             }
         } catch (RecognitionException re) {
             _localctx.exception = re;
@@ -2933,64 +2938,56 @@ public class StixPatternParser extends Parser {
             setState(246);
             _errHandler.sync(this);
             switch (_input.LA(1)) {
-                case IntPosLiteral:
-                    enterOuterAlt(_localctx, 1);
-                     {
-                        setState(238);
-                        match(IntPosLiteral);
-                    }
-                    break;
-                case IntNegLiteral:
-                    enterOuterAlt(_localctx, 2);
-                     {
-                        setState(239);
-                        match(IntNegLiteral);
-                    }
-                    break;
-                case FloatPosLiteral:
-                    enterOuterAlt(_localctx, 3);
-                     {
-                        setState(240);
-                        match(FloatPosLiteral);
-                    }
-                    break;
-                case FloatNegLiteral:
-                    enterOuterAlt(_localctx, 4);
-                     {
-                        setState(241);
-                        match(FloatNegLiteral);
-                    }
-                    break;
-                case StringLiteral:
-                    enterOuterAlt(_localctx, 5);
-                     {
-                        setState(242);
-                        stringLiteral();
-                    }
-                    break;
-                case BinaryLiteral:
-                    enterOuterAlt(_localctx, 6);
-                     {
-                        setState(243);
-                        match(BinaryLiteral);
-                    }
-                    break;
-                case HexLiteral:
-                    enterOuterAlt(_localctx, 7);
-                     {
-                        setState(244);
-                        match(HexLiteral);
-                    }
-                    break;
-                case TimestampLiteral:
-                    enterOuterAlt(_localctx, 8);
-                     {
-                        setState(245);
-                        match(TimestampLiteral);
-                    }
-                    break;
-                default:
-                    throw new NoViableAltException(this);
+            case IntPosLiteral:
+                enterOuterAlt(_localctx, 1); {
+                setState(238);
+                match(IntPosLiteral);
+            }
+                break;
+            case IntNegLiteral:
+                enterOuterAlt(_localctx, 2); {
+                setState(239);
+                match(IntNegLiteral);
+            }
+                break;
+            case FloatPosLiteral:
+                enterOuterAlt(_localctx, 3); {
+                setState(240);
+                match(FloatPosLiteral);
+            }
+                break;
+            case FloatNegLiteral:
+                enterOuterAlt(_localctx, 4); {
+                setState(241);
+                match(FloatNegLiteral);
+            }
+                break;
+            case StringLiteral:
+                enterOuterAlt(_localctx, 5); {
+                setState(242);
+                stringLiteral();
+            }
+                break;
+            case BinaryLiteral:
+                enterOuterAlt(_localctx, 6); {
+                setState(243);
+                match(BinaryLiteral);
+            }
+                break;
+            case HexLiteral:
+                enterOuterAlt(_localctx, 7); {
+                setState(244);
+                match(HexLiteral);
+            }
+                break;
+            case TimestampLiteral:
+                enterOuterAlt(_localctx, 8); {
+                setState(245);
+                match(TimestampLiteral);
+            }
+                break;
+            default:
+                throw new NoViableAltException(this);
             }
         } catch (RecognitionException re) {
             _localctx.exception = re;
@@ -3004,86 +3001,85 @@ public class StixPatternParser extends Parser {
 
     public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
         switch (ruleIndex) {
-            case 1:
-                return observationExpressions_sempred((ObservationExpressionsContext) _localctx, predIndex);
-            case 2:
-                return observationExpressionOr_sempred((ObservationExpressionOrContext) _localctx, predIndex);
-            case 3:
-                return observationExpressionAnd_sempred((ObservationExpressionAndContext) _localctx, predIndex);
-            case 4:
-                return observationExpression_sempred((ObservationExpressionContext) _localctx, predIndex);
-            case 5:
-                return comparisonExpression_sempred((ComparisonExpressionContext) _localctx, predIndex);
-            case 6:
-                return comparisonExpressionAnd_sempred((ComparisonExpressionAndContext) _localctx, predIndex);
-            case 16:
-                return objectPathComponent_sempred((ObjectPathComponentContext) _localctx, predIndex);
+        case 1:
+            return observationExpressions_sempred((ObservationExpressionsContext) _localctx, predIndex);
+        case 2:
+            return observationExpressionOr_sempred((ObservationExpressionOrContext) _localctx, predIndex);
+        case 3:
+            return observationExpressionAnd_sempred((ObservationExpressionAndContext) _localctx, predIndex);
+        case 4:
+            return observationExpression_sempred((ObservationExpressionContext) _localctx, predIndex);
+        case 5:
+            return comparisonExpression_sempred((ComparisonExpressionContext) _localctx, predIndex);
+        case 6:
+            return comparisonExpressionAnd_sempred((ComparisonExpressionAndContext) _localctx, predIndex);
+        case 16:
+            return objectPathComponent_sempred((ObjectPathComponentContext) _localctx, predIndex);
         }
         return true;
     }
 
     private boolean observationExpressions_sempred(ObservationExpressionsContext _localctx, int predIndex) {
         switch (predIndex) {
-            case 0:
-                return precpred(_ctx, 2);
+        case 0:
+            return precpred(_ctx, 2);
         }
         return true;
     }
 
     private boolean observationExpressionOr_sempred(ObservationExpressionOrContext _localctx, int predIndex) {
         switch (predIndex) {
-            case 1:
-                return precpred(_ctx, 2);
+        case 1:
+            return precpred(_ctx, 2);
         }
         return true;
     }
 
     private boolean observationExpressionAnd_sempred(ObservationExpressionAndContext _localctx, int predIndex) {
         switch (predIndex) {
-            case 2:
-                return precpred(_ctx, 2);
+        case 2:
+            return precpred(_ctx, 2);
         }
         return true;
     }
 
     private boolean observationExpression_sempred(ObservationExpressionContext _localctx, int predIndex) {
         switch (predIndex) {
-            case 3:
-                return precpred(_ctx, 3);
-            case 4:
-                return precpred(_ctx, 2);
-            case 5:
-                return precpred(_ctx, 1);
+        case 3:
+            return precpred(_ctx, 3);
+        case 4:
+            return precpred(_ctx, 2);
+        case 5:
+            return precpred(_ctx, 1);
         }
         return true;
     }
 
     private boolean comparisonExpression_sempred(ComparisonExpressionContext _localctx, int predIndex) {
         switch (predIndex) {
-            case 6:
-                return precpred(_ctx, 2);
+        case 6:
+            return precpred(_ctx, 2);
         }
         return true;
     }
 
     private boolean comparisonExpressionAnd_sempred(ComparisonExpressionAndContext _localctx, int predIndex) {
         switch (predIndex) {
-            case 7:
-                return precpred(_ctx, 2);
+        case 7:
+            return precpred(_ctx, 2);
         }
         return true;
     }
 
     private boolean objectPathComponent_sempred(ObjectPathComponentContext _localctx, int predIndex) {
         switch (predIndex) {
-            case 8:
-                return precpred(_ctx, 3);
+        case 8:
+            return precpred(_ctx, 3);
         }
         return true;
     }
 
-    public static final String _serializedATN
-            = "\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\38\u00fb\4\2\t\2\4"
+    public static final String _serializedATN = "\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\38\u00fb\4\2\t\2\4"
             + "\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"
             + "\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"
             + "\4\23\t\23\4\24\t\24\4\25\t\25\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\7\3"
@@ -3164,10 +3160,8 @@ public class StixPatternParser extends Parser {
             + "\7\7\2\2\u00f7\u00f9\7\13\2\2\u00f8\u00f0\3\2\2\2\u00f8\u00f1\3\2\2\2"
             + "\u00f8\u00f2\3\2\2\2\u00f8\u00f3\3\2\2\2\u00f8\u00f4\3\2\2\2\u00f8\u00f5"
             + "\3\2\2\2\u00f8\u00f6\3\2\2\2\u00f8\u00f7\3\2\2\2\u00f9)\3\2\2\2\31\65"
-            + "@KW_alw|\u0083\u008a\u0091\u0098\u009f\u00a6\u00b1\u00c8\u00d4\u00da\u00e5"
-            + "\u00ea\u00ee\u00f8";
-    public static final ATN _ATN
-            = new ATNDeserializer().deserialize(_serializedATN.toCharArray());
+            + "@KW_alw|\u0083\u008a\u0091\u0098\u009f\u00a6\u00b1\u00c8\u00d4\u00da\u00e5" + "\u00ea\u00ee\u00f8";
+    public static final ATN _ATN = new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 
     static {
         _decisionToDFA = new DFA[_ATN.getNumberOfDecisions()];

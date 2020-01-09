@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Command was executed",
+        "description": "A basic test pattern to evaluate whether cmd.exe has started",
+        "pattern": "[process:name = 'cmd.exe']"
+    },
+    {
+        "name": "Command line trying to access network protocol",
+        "description": "cmd.exe was started trying to access a network protocol",
+        "pattern": "[process:name = 'cmd.exe' AND process:command_line MATCHES '.*(http|ftp|https)://([\\\\w_-]+(?:(?:\\\\.[\\\\w_-]+)+))([\\\\w.,@?^=%&:/~+#-]*[\\\\w@?^=%&/~+#-])?.*']"
+    },
+    {
+        "name": "Command was executed from the desktop",
+        "description": "A user has ran cmd.exe",
+        "pattern": "[process:parent.name = 'explorer.exe' AND process:name = 'cmd.exe']"
+    }
+]
