@@ -82,10 +82,10 @@ public class StixMapper implements ObjectPathResolver {
     };
 
     /**
-     * The StixObservableTreeIntrospector uses reflection (type introspection)
-     * to build a STIX observable tree. This tree is essentially a cache of
-     * resolvable STIX observables to their Java object counterparts. Object
-     * path collisions will throw an exception.
+     * The StixObservableTreeIntrospector uses reflection (type introspection) to
+     * build a STIX observable tree. This tree is essentially a cache of resolvable
+     * STIX observables to their Java object counterparts. Object path collisions
+     * will throw an exception.
      */
     class StixObservableTreeIntrospector {
 
@@ -108,7 +108,8 @@ public class StixMapper implements ObjectPathResolver {
             StixObservablePropertyNode node = null;
 
             if (entity.name().isEmpty()) {
-                logger.debug("--> @StixEntity did not provide a class level stix observable 'name', only fields that have @StixProperty annnotations will be parsed...");
+                logger.debug(
+                        "--> @StixEntity did not provide a class level stix observable 'name', only fields that have @StixProperty annnotations will be parsed...");
             } else {
                 logger.debug("--> @StixEntity '{}'", entity.name());
                 node = new StixObservablePropertyNode(null, entity.name(), null, clazz, false);
@@ -121,7 +122,8 @@ public class StixMapper implements ObjectPathResolver {
         }
 
         private void build(Class<?> clazz, StixObservablePropertyNode nodeParent) {
-            // Need to keep track of classes that have already been mapped to avoid infinite loop
+            // Need to keep track of classes that have already been mapped to avoid infinite
+            // loop
             visitedClasses.add(clazz);
 
             getFields(clazz).entrySet().forEach((entry) -> {
@@ -133,13 +135,16 @@ public class StixMapper implements ObjectPathResolver {
                 Boolean isGeneric = isGenericJavaType(field.getType());
 
                 if (!stixObservables.containsKey(field.getType()) && !isGeneric) {
-                    logger.warn("field '{}' type '{}' has no interpreter and is not available as a @StixObject, add @StixObject annotation to custom type or add a custom interpreter.", field.getName(), field.getType().getName());
+                    logger.warn(
+                            "field '{}' type '{}' has no interpreter and is not available as a @StixObject, add @StixObject annotation to custom type or add a custom interpreter.",
+                            field.getName(), field.getType().getName());
                 } else {
                     if (properties.length > 1) {
                         logger.trace("@StixProperty {} is overriding the path but thats OK. :)", propertyName);
                     }
 
-                    StixObservablePropertyNode node = new StixObservablePropertyNode(nodeParent, propertyName, field, clazz, isReferenceNode);
+                    StixObservablePropertyNode node = new StixObservablePropertyNode(nodeParent, propertyName, field,
+                            clazz, isReferenceNode);
 
                     field.setAccessible(true);
                     tree.put(isReferenceNode ? node.toPath() + ":" + propertyName : node.toPath(), node);
@@ -148,14 +153,16 @@ public class StixMapper implements ObjectPathResolver {
                         nodeParent.addChild(propertyName, node);
                     }
 
-                    logger.debug("mapped field '{}' => '{}' {fullPath={}}", field.getName(), propertyName, node.toPath());
+                    logger.debug("mapped field '{}' => '{}' {fullPath={}}", field.getName(), propertyName,
+                            node.toPath());
 
                     if (!isGeneric && !visitedClasses.contains(field.getType())) {
                         logger.trace("entering nested field '{}=>{}'...", field.getName(), propertyName);
                         build(field.getType(), node);
 
                     } else if (visitedClasses.contains(field.getType())) {
-                        logger.trace("nested field '{}=>{}' type '{}' has already been mapped", field.getName(), propertyName, field.getType());
+                        logger.trace("nested field '{}=>{}' type '{}' has already been mapped", field.getName(),
+                                propertyName, field.getType());
                     }
                 }
             });
@@ -164,8 +171,8 @@ public class StixMapper implements ObjectPathResolver {
     }
 
     /**
-     * Provide a set of classes that use one of the STIX annotations from the
-     * mapper annotations package.
+     * Provide a set of classes that use one of the STIX annotations from the mapper
+     * annotations package.
      *
      * @see design.unstructured.stix.evaluator.mapper.annotations}
      * @param stixClasses
@@ -176,52 +183,25 @@ public class StixMapper implements ObjectPathResolver {
         // Scan for STIX Entity annotations
         stixClasses.forEach((clazz) -> {
             logger.debug("class [{}] matched stix annotation type, scanning for properties...", clazz.getName());
-            stixObservables.put(clazz, (clazz.isAnnotationPresent(StixEntity.class) ? StixAnnotationType.ENTITY : StixAnnotationType.OBJECT));
+            stixObservables.put(clazz, (clazz.isAnnotationPresent(StixEntity.class) ? StixAnnotationType.ENTITY
+                    : StixAnnotationType.OBJECT));
         });
 
         logger.debug("finished scanning metagrid system artifacts, found {} stix observables", stixObservables.size());
         logger.debug("building stix observable tree on all @StixEntity...");
-        stixObservables.entrySet().stream().filter((entry) -> entry.getValue().equals(StixAnnotationType.ENTITY)).forEach(entry -> {
-            Class<?> clazz = entry.getKey();
-            stixTree.putAll(new StixObservableTreeIntrospector(clazz).map());
-        });
+        stixObservables.entrySet().stream().filter((entry) -> entry.getValue().equals(StixAnnotationType.ENTITY))
+                .forEach(entry -> {
+                    Class<?> clazz = entry.getKey();
+                    stixTree.putAll(new StixObservableTreeIntrospector(clazz).map());
+                });
         logger.debug("finished building stix observable tree");
 
         if (logger.isTraceEnabled()) {
-            stixTree.entrySet().forEach((entry) -> logger.trace("Observable: " + entry.getKey() + " = " + entry.getValue().toString()));
+            stixTree.entrySet().forEach(
+                    (entry) -> logger.trace("Observable: " + entry.getKey() + " = " + entry.getValue().toString()));
         }
 
     }
-//
-//    public StixMapper() {
-//        logger.debug("scanning for @StixEntity and @StixObject in package '{}'", METAGRID_ARTIFACTS_PACKAGE);
-//        ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(true);
-//
-//        // Scan for STIX Entity annotations
-//        scanner.addIncludeFilter(new AnnotationTypeFilter(StixEntity.class));
-//        scanner.addIncludeFilter(new AnnotationTypeFilter(StixObject.class));
-//        scanner.findCandidateComponents(METAGRID_ARTIFACTS_PACKAGE).forEach((bean) -> {
-//            try {
-//                Class<?> clazz = Class.forName(bean.getBeanClassName());
-//                logger.debug("class [{}] matched stix annotation type, scanning for properties...", bean.getBeanClassName());
-//                stixObservables.put(clazz, (clazz.isAnnotationPresent(StixEntity.class) ? StixAnnotationType.ENTITY : StixAnnotationType.OBJECT));
-//            } catch (ClassNotFoundException ex) {
-//            }
-//        });
-//
-//        logger.debug("finished scanning metagrid system artifacts, found {} stix observables", stixObservables.size());
-//        logger.debug("building stix observable tree on all @StixEntity...");
-//        stixObservables.entrySet().stream().filter((entry) -> entry.getValue().equals(StixAnnotationType.ENTITY)).forEach(entry -> {
-//            Class<?> clazz = entry.getKey();
-//            stixTree.putAll(new StixObservableTreeIntrospector(clazz).map());
-//        });
-//        logger.debug("finished building stix observable tree");
-//
-//        if (logger.isTraceEnabled()) {
-//            stixTree.entrySet().forEach((entry) -> logger.trace("Observable: " + entry.getKey() + " = " + entry.getValue().toString()));
-//        }
-//
-//    }
 
     /**
      * Adds a path filter that will be used during getFilter(...).
@@ -231,9 +211,8 @@ public class StixMapper implements ObjectPathResolver {
     }
 
     /**
-     * Gets the value from an object using the specified object path. The path
-     * must point to a valid property, otherwise an empty string value will be
-     * returned.
+     * Gets the value from an object using the specified object path. The path must
+     * point to a valid property, otherwise an empty string value will be returned.
      *
      * @param object
      * @param path
@@ -251,7 +230,8 @@ public class StixMapper implements ObjectPathResolver {
                 Object instance = object;
 
                 for (StixObservablePropertyNode node : nodePath) {
-                    logger.trace("observing {} node '{}'...", node.isReference() ? "reference" : "property", node.getName());
+                    logger.trace("observing {} node '{}'...", node.isReference() ? "reference" : "property",
+                            node.getName());
                     if (node.getField() != null && instance != null) {
                         try {
                             instance = node.getField().get(instance);
@@ -259,7 +239,8 @@ public class StixMapper implements ObjectPathResolver {
                             throw new StixMapperException(ex.getMessage());
                         }
                     } else if (instance != null) {
-                        logger.trace("property node '{}' is an entity and has no nested type, skipping", node.getName());
+                        logger.trace("property node '{}' is an entity and has no nested type, skipping",
+                                node.getName());
                     }
                 }
 
@@ -293,7 +274,8 @@ public class StixMapper implements ObjectPathResolver {
             node = stixTree.get(properties[0]);
 
             if (node == null) {
-                throw new StixMapperException("Unable to find root observable node for path '" + path + "', the property '" + properties[0] + "' has no observable");
+                throw new StixMapperException("Unable to find root observable node for path '" + path
+                        + "', the property '" + properties[0] + "' has no observable");
             }
 
             nodePath.add(node);
@@ -308,12 +290,15 @@ public class StixMapper implements ObjectPathResolver {
                     if (stixObservables.get(node.getClazz()).equals(StixAnnotationType.ENTITY)) {
                         String newPath = propertyJoiner.apply(ArrayUtils.remove(properties, i));
 
-                        logger.trace("child node '{}' class type is type @StixEntity, using existing cache for lookup of path '{}'", node.getName(), newPath);
+                        logger.trace(
+                                "child node '{}' class type is type @StixEntity, using existing cache for lookup of path '{}'",
+                                node.getName(), newPath);
                         nodePath.addAll(buildNodePath(newPath));
                         break;
                     }
                 } else {
-                    throw new StixMapperException("Unable to find observable node for path '" + path + "', property '" + properties[i] + "' has no observable");
+                    throw new StixMapperException("Unable to find observable node for path '" + path + "', property '"
+                            + properties[i] + "' has no observable");
                 }
             }
         }
@@ -333,7 +318,8 @@ public class StixMapper implements ObjectPathResolver {
             if (field.isAnnotationPresent(StixProperty.class)) {
                 for (String property : field.getAnnotation(StixProperty.class).name()) {
                     fields.put(property, field);
-                    logger.trace("@StixProperty annotation found [{} => {}::{}]", property, clazz.getSimpleName(), field.getName());
+                    logger.trace("@StixProperty annotation found [{} => {}::{}]", property, clazz.getSimpleName(),
+                            field.getName());
                 }
             } else if (!filterForStixProperties) {
                 fields.put(CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field.getName()), field);
@@ -344,9 +330,8 @@ public class StixMapper implements ObjectPathResolver {
     }
 
     public static boolean isGenericJavaType(Class<?> type) {
-        return (type.isPrimitive() && type != void.class)
-                || type == Double.class || type == Float.class || type == Long.class
-                || type == Integer.class || type == Short.class || type == Character.class
+        return (type.isPrimitive() && type != void.class) || type == Double.class || type == Float.class
+                || type == Long.class || type == Integer.class || type == Short.class || type == Character.class
                 || type == Byte.class || type == Boolean.class || type == String.class;
     }
 }
