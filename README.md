@@ -47,7 +47,7 @@ As you can see, it is very straight forward. This is a very basic expression tre
 ### Resolving the object path
 The STIX object path is part of the Cyber Oservable data model. In our above example, this would be the `process:name` in our condition. This example will demonstrate how the `PatternEvaluator` interacts with the `ObjectPathResolver`.
 
-First, we need to create a static resolver and initialize this with some dummy data:
+First, we need to create a static resolver:
 ```java
 public class StaticObjectPathResolver implements ObjectPathResolver {
     private final Map<String, Object> objectPaths = new HashMap<>();
@@ -65,6 +65,7 @@ public class StaticObjectPathResolver implements ObjectPathResolver {
 }
 ```
 
+Now initialize our static resolver with some dummy data and evaluate:
 ```java
 // Create an instance of our static resolver and add some dummy data
 final StaticObjectPathResolver resolver = new StaticObjectPathResolver()
@@ -82,7 +83,7 @@ Boolean evaluation = evaluator.get();
 if (evaluation) {
     System.out.println("The evaluation was true!");
 } else {
-    System.out.println("Well this is odd...");
+    System.out.println("Well, this is odd...");
 }
 ```
 
