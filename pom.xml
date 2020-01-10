@@ -20,7 +20,7 @@
 
     <scm>
         <connection>scm:git:git://github.com/hashdelta/stix-pattern-evaluator.git</connection>
-        <developerConnection>scm:git:git@github.com:hashdelta/hashdelta.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:hashdelta/stix-pattern-evaluator.git</developerConnection>
         <url>https://github.com/hashdelta/stix-pattern-evaluator/</url>
         <tag>HEAD</tag>
     </scm>
