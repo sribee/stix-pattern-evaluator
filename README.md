@@ -20,6 +20,17 @@ Since this library is still in its infant stages, it might be necessary to provi
 - Java 8 +
 - Maven
 
+## Dependency
+Right now, this library is only available through Maven.
+
+```
+<dependency>
+  <groupId>design.unstructured</groupId>
+  <artifactId>stix-pattern-evaluator</artifactId>
+  <version>1.0.0-M1</version>
+</dependency>
+```
+
 ## License
 Copyright (C) 2020 - Christopher Carver
 
