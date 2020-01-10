@@ -121,27 +121,27 @@ public class PatternEvaluator {
             }
 
             case In: {
-                comparisonExpression.setEvaluation(!((Set) comparisonExpression.getValue()).contains(objectPathValue));
+                comparisonExpression.setEvaluation(((Set) comparisonExpression.getValue()).contains(objectPathValue));
                 break;
             }
 
             case GreaterThan: {
-                comparisonExpression.setEvaluation(!((long) objectPathValue > (long) comparisonExpression.getValue()));
+                comparisonExpression.setEvaluation(((int) objectPathValue > (int) comparisonExpression.getValue()));
                 break;
             }
 
             case GreaterThanOrEqual: {
-                comparisonExpression.setEvaluation(!((long) objectPathValue >= (long) comparisonExpression.getValue()));
+                comparisonExpression.setEvaluation(((int) objectPathValue >= (int) comparisonExpression.getValue()));
                 break;
             }
 
             case LessThan: {
-                comparisonExpression.setEvaluation(!((long) objectPathValue < (long) comparisonExpression.getValue()));
+                comparisonExpression.setEvaluation(((int) objectPathValue < (int) comparisonExpression.getValue()));
                 break;
             }
 
             case LessThanOrEqual: {
-                comparisonExpression.setEvaluation(!((long) objectPathValue <= (long) comparisonExpression.getValue()));
+                comparisonExpression.setEvaluation(((int) objectPathValue <= (int) comparisonExpression.getValue()));
                 break;
             }
 

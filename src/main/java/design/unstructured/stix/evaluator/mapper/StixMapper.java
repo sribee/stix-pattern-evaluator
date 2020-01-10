@@ -34,17 +34,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The purpose of the StixMapper is to provide a one-stop-shop for building and
- * resolving STIX observables (process:name -> com.package.pojos.Process::name)
- * to your applications Java objects.
+ * The purpose of this class is to bring the Cyber Observable data model to your
+ * java objects. This implementation is still a WIP and should be used with
+ * caution.
  *
  * @author ccarv
  */
 public class StixMapper implements ObjectPathResolver {
 
     private static final Logger logger = LoggerFactory.getLogger(StixMapper.class);
-
-    private static final String METAGRID_ARTIFACTS_PACKAGE = "com.redlambda.metagrid.correlator.artifacts";
 
     private final Map<Class<?>, StixAnnotationType> stixObservables = new HashMap<>();
 
@@ -178,7 +176,7 @@ public class StixMapper implements ObjectPathResolver {
      * @param stixClasses
      */
     public StixMapper(final Set<Class<?>> stixClasses) {
-        logger.debug("scanning for @StixEntity and @StixObject in package '{}'", METAGRID_ARTIFACTS_PACKAGE);
+        logger.debug("scanning for @StixEntity and @StixObject in {} classes", stixClasses.size());
 
         // Scan for STIX Entity annotations
         stixClasses.forEach((clazz) -> {

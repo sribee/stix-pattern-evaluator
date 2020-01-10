@@ -154,7 +154,7 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
         } else if (ctx.GE() != null) {
             comparator = ComparisonComparators.GreaterThanOrEqual;
         } else if (ctx.LE() != null) {
-            comparator = ComparisonComparators.GreaterThan;
+            comparator = ComparisonComparators.LessThanOrEqual;
         } else {
             logger.error(
                     "an unrecognized ordering comparator was used in this pattern and cannot be evaluated, this may lead to an inconsistent or invalid result.");

@@ -25,6 +25,7 @@ public class PatternEvaluatorTest {
 
     @BeforeEach
     void setup() {
+        System.out.println();
         resolver.add("process:name", "cmd.exe")
                 .add("process:parent.command_line", "cmd.exe --help --this --test_a_long_argument")
                 .add("process:administrator", true).add("process:id", 459);
@@ -33,7 +34,7 @@ public class PatternEvaluatorTest {
     @Test
     void processNameEvaluation_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
         final String rawPattern = "[process:name = 'cmd.exe']";
-        System.out.println("Evaluating pattern: " + rawPattern);
+        printPattern(rawPattern);
         PatternEvaluator evaluator = new PatternEvaluator(PatternUtils.parsePattern(rawPattern), resolver, null);
 
         assertTrue(evaluator.get());
@@ -42,7 +43,7 @@ public class PatternEvaluatorTest {
     @Test
     void processNameEvaluation_ReturnsFalse() throws PatternEvaluatorException, StixMapperException {
         final String rawPattern = "[process:name = 'shouldnotequate.exe']";
-        System.out.println("Evaluating pattern: " + rawPattern);
+        printPattern(rawPattern);
         PatternEvaluator evaluator = new PatternEvaluator(PatternUtils.parsePattern(rawPattern), resolver, null);
 
         assertFalse(evaluator.get());
@@ -51,7 +52,7 @@ public class PatternEvaluatorTest {
     @Test
     void multipleConditionsWithAndComparator_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
         final String rawPattern = "[process:name = 'cmd.exe' AND process:parent.command_line = 'cmd.exe --help --this --test_a_long_argument' AND process:id = 459 AND process:administrator = true]";
-        System.out.println("Evaluating pattern: " + rawPattern);
+        printPattern(rawPattern);
         PatternEvaluator evaluator = new PatternEvaluator(PatternUtils.parsePattern(rawPattern), resolver, null);
 
         assertTrue(evaluator.get());
@@ -60,7 +61,7 @@ public class PatternEvaluatorTest {
     @Test
     void multipleConditionsWithOrComparator_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
         final String rawPattern = "[process:name = 'thisreturnsfalse.exe' OR process:parent.command_line = 'cmd.exe --help --this --test_a_long_argument']";
-        System.out.println("Evaluating pattern: " + rawPattern);
+        printPattern(rawPattern);
         PatternEvaluator evaluator = new PatternEvaluator(PatternUtils.parsePattern(rawPattern), resolver, null);
 
         assertTrue(evaluator.get());
@@ -75,6 +76,7 @@ public class PatternEvaluatorTest {
 
         resolver.add("process:parent.name", "explorer.exe");
         resolver.add("process:command_line", "ftp://127.0.0.1/virus.exe");
+        resolver.add("process:name_in_test", "looking_for_this_process_name.exe");
 
         System.out.println("Loaded " + patterns.size() + " patterns from " + TEST_PATTERN_FILE);
         System.out.println("Evaluating all patterns...");
@@ -84,9 +86,20 @@ public class PatternEvaluatorTest {
         for (StixPattern stixPattern : patterns) {
             PatternEvaluator evaluator = new PatternEvaluator(stixPattern.getParsedPattern(), resolver, null);
 
-            System.out.println("Evaluating rule " + stixPattern.getName() + ": " + stixPattern.getPattern());
-            assertTrue(evaluator.get());
+            System.out.println();
+            printPattern(stixPattern);
+            Boolean evaluation = evaluator.get();
+            System.out.println("Result: " + evaluation);
+            assertTrue(evaluation);
         }
+    }
+
+    private static void printPattern(StixPattern stixPattern) {
+        System.out.println("Evaluating pattern '" + stixPattern.getName() + "':\n    " + stixPattern.getPattern());
+    }
+
+    private static void printPattern(String stixPattern) {
+        System.out.println("Evaluating pattern:\n    " + stixPattern);
     }
 
 }
