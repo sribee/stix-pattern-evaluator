@@ -3,7 +3,7 @@ This library is still considered a prototype and should not be depended on in a 
 
 This project is a Cyber Threat Intelligence (CTI) STIX v2.1 pattern compiler and expression evaluator written in Java 8 using the [ANTLR 4](https://www.antlr.org/) language parser. The ANTLR grammar is based on the OASIS [cti-stix2-json-schemas](https://github.com/oasis-open/cti-stix2-json-schemas) with [some minor changes](https://github.com/hashdelta/stix-pattern-evaluator/tree/master/src/main/resources/StixPattern.g4). The goal of this application is to compile a STIX Pattern expression and convert it into a logical Java expression tree. The project also provides means to evaluate the compiled pattern expressions and provide results right out of the box.
 
-It also provides STIX annotations and an object mapper to map your Java objects to the STIX [Cyber Observable](https://docs.oasis-open.org/cti/stix/v2.1/csprd02/stix-v2.1-csprd02.html#_Toc26789822) data model (it is still a WIP). The mapper provides an interface in the event you plan to provide your own object mapper while still using the built-in pattern evaluator.
+It also provides STIX annotations and an object mapper to map your Java objects to the [STIX Cyber Observable](https://docs.oasis-open.org/cti/stix/v2.1/csprd02/stix-v2.1-csprd02.html#_Toc26789822) data model (it is still a WIP). The mapper provides an interface in the event you plan to provide your own object mapper while still using the built-in pattern evaluator.
 
 This was originally designed for another project of mine that has since been abandoned. I am repurposing the code for public use, which means there will be a lack of authoritative documentation until I find the time to migrate the existing documentation over.
 
@@ -45,7 +45,7 @@ final Pattern compiledPattern = Pattern.build("[process:name = 'bad_behavior.exe
 As you can see, it is very straight forward. This is a very basic expression tree with only one condition. This will not produce any results until you initialize a `PatternEvaluator` and provide an object resolver. As mentioned above, there may be a specific use case where you would want to provide your own.
 
 ### Resolving the object path
-The STIX object path is part of the Cyber Oservable data model. In our above example, this would be the `process:name` in our condition. This example will demonstrate how the `PatternEvaluator` interacts with the `ObjectPathResolver`.
+The STIX object path is part of the [STIX Cyber Observable](https://docs.oasis-open.org/cti/stix/v2.1/csprd02/stix-v2.1-csprd02.html#_Toc26789822) data model. In our above example, this would be the `process:name` in our condition. This example will demonstrate how the `PatternEvaluator` interacts with the `ObjectPathResolver`.
 
 First, we need to create a static resolver:
 ```java
