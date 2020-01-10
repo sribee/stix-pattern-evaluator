@@ -1,6 +1,6 @@
 /*
  * stix-pattern-evaluator
- * Copyright (C) 2020 - Unstructured Design
+ * Copyright (C) 2020 - Christopher Carver
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterPattern(StixPatternParser.PatternContext ctx) {
@@ -42,7 +43,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitPattern(StixPatternParser.PatternContext ctx) {
@@ -52,7 +54,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterObservationExpressions(StixPatternParser.ObservationExpressionsContext ctx) {
@@ -62,7 +65,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitObservationExpressions(StixPatternParser.ObservationExpressionsContext ctx) {
@@ -72,7 +76,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterObservationExpressionOr(StixPatternParser.ObservationExpressionOrContext ctx) {
@@ -82,7 +87,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitObservationExpressionOr(StixPatternParser.ObservationExpressionOrContext ctx) {
@@ -92,7 +98,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterObservationExpressionAnd(StixPatternParser.ObservationExpressionAndContext ctx) {
@@ -102,7 +109,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitObservationExpressionAnd(StixPatternParser.ObservationExpressionAndContext ctx) {
@@ -112,7 +120,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterObservationExpressionRepeated(StixPatternParser.ObservationExpressionRepeatedContext ctx) {
@@ -122,7 +131,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitObservationExpressionRepeated(StixPatternParser.ObservationExpressionRepeatedContext ctx) {
@@ -132,7 +142,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterObservationExpressionSimple(StixPatternParser.ObservationExpressionSimpleContext ctx) {
@@ -142,7 +153,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitObservationExpressionSimple(StixPatternParser.ObservationExpressionSimpleContext ctx) {
@@ -152,7 +164,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterObservationExpressionCompound(StixPatternParser.ObservationExpressionCompoundContext ctx) {
@@ -162,7 +175,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitObservationExpressionCompound(StixPatternParser.ObservationExpressionCompoundContext ctx) {
@@ -172,7 +186,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterObservationExpressionWithin(StixPatternParser.ObservationExpressionWithinContext ctx) {
@@ -182,7 +197,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitObservationExpressionWithin(StixPatternParser.ObservationExpressionWithinContext ctx) {
@@ -192,7 +208,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterObservationExpressionStartStop(StixPatternParser.ObservationExpressionStartStopContext ctx) {
@@ -202,7 +219,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitObservationExpressionStartStop(StixPatternParser.ObservationExpressionStartStopContext ctx) {
@@ -212,7 +230,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterComparisonExpressionAnd_(StixPatternParser.ComparisonExpressionAnd_Context ctx) {
@@ -222,7 +241,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitComparisonExpressionAnd_(StixPatternParser.ComparisonExpressionAnd_Context ctx) {
@@ -232,7 +252,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterComparisonExpressionOred(StixPatternParser.ComparisonExpressionOredContext ctx) {
@@ -242,7 +263,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitComparisonExpressionOred(StixPatternParser.ComparisonExpressionOredContext ctx) {
@@ -252,7 +274,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterComparisonExpressionAndPropTest(StixPatternParser.ComparisonExpressionAndPropTestContext ctx) {
@@ -262,7 +285,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitComparisonExpressionAndPropTest(StixPatternParser.ComparisonExpressionAndPropTestContext ctx) {
@@ -272,7 +296,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterComparisonExpressionAnded(StixPatternParser.ComparisonExpressionAndedContext ctx) {
@@ -282,7 +307,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitComparisonExpressionAnded(StixPatternParser.ComparisonExpressionAndedContext ctx) {
@@ -292,7 +318,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterPropTestEqual(StixPatternParser.PropTestEqualContext ctx) {
@@ -302,7 +329,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitPropTestEqual(StixPatternParser.PropTestEqualContext ctx) {
@@ -312,7 +340,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterPropTestOrder(StixPatternParser.PropTestOrderContext ctx) {
@@ -322,7 +351,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitPropTestOrder(StixPatternParser.PropTestOrderContext ctx) {
@@ -332,7 +362,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterPropTestSet(StixPatternParser.PropTestSetContext ctx) {
@@ -342,7 +373,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitPropTestSet(StixPatternParser.PropTestSetContext ctx) {
@@ -352,7 +384,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterPropTestLike(StixPatternParser.PropTestLikeContext ctx) {
@@ -362,7 +395,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitPropTestLike(StixPatternParser.PropTestLikeContext ctx) {
@@ -372,7 +406,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterPropTestRegex(StixPatternParser.PropTestRegexContext ctx) {
@@ -382,7 +417,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitPropTestRegex(StixPatternParser.PropTestRegexContext ctx) {
@@ -392,7 +428,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterPropTestIsSubset(StixPatternParser.PropTestIsSubsetContext ctx) {
@@ -402,7 +439,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitPropTestIsSubset(StixPatternParser.PropTestIsSubsetContext ctx) {
@@ -412,7 +450,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterPropTestIsSuperset(StixPatternParser.PropTestIsSupersetContext ctx) {
@@ -422,7 +461,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitPropTestIsSuperset(StixPatternParser.PropTestIsSupersetContext ctx) {
@@ -432,7 +472,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterPropTestParen(StixPatternParser.PropTestParenContext ctx) {
@@ -442,7 +483,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitPropTestParen(StixPatternParser.PropTestParenContext ctx) {
@@ -452,7 +494,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterPropTestExists(StixPatternParser.PropTestExistsContext ctx) {
@@ -462,7 +505,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitPropTestExists(StixPatternParser.PropTestExistsContext ctx) {
@@ -472,7 +516,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterOrderingComparator(StixPatternParser.OrderingComparatorContext ctx) {
@@ -482,7 +527,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitOrderingComparator(StixPatternParser.OrderingComparatorContext ctx) {
@@ -492,7 +538,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterStringLiteral(StixPatternParser.StringLiteralContext ctx) {
@@ -502,7 +549,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitStringLiteral(StixPatternParser.StringLiteralContext ctx) {
@@ -512,7 +560,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterStartStopQualifier(StixPatternParser.StartStopQualifierContext ctx) {
@@ -522,7 +571,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitStartStopQualifier(StixPatternParser.StartStopQualifierContext ctx) {
@@ -532,7 +582,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterWithinQualifier(StixPatternParser.WithinQualifierContext ctx) {
@@ -542,7 +593,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitWithinQualifier(StixPatternParser.WithinQualifierContext ctx) {
@@ -552,7 +604,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterRepeatedQualifier(StixPatternParser.RepeatedQualifierContext ctx) {
@@ -562,7 +615,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitRepeatedQualifier(StixPatternParser.RepeatedQualifierContext ctx) {
@@ -572,7 +626,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterObjectPath(StixPatternParser.ObjectPathContext ctx) {
@@ -582,7 +637,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitObjectPath(StixPatternParser.ObjectPathContext ctx) {
@@ -592,7 +648,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterObjectType(StixPatternParser.ObjectTypeContext ctx) {
@@ -602,7 +659,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitObjectType(StixPatternParser.ObjectTypeContext ctx) {
@@ -612,7 +670,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterFirstPathComponent(StixPatternParser.FirstPathComponentContext ctx) {
@@ -622,7 +681,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitFirstPathComponent(StixPatternParser.FirstPathComponentContext ctx) {
@@ -632,7 +692,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterIndexPathStep(StixPatternParser.IndexPathStepContext ctx) {
@@ -642,7 +703,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitIndexPathStep(StixPatternParser.IndexPathStepContext ctx) {
@@ -652,7 +714,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterPathStep(StixPatternParser.PathStepContext ctx) {
@@ -662,7 +725,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitPathStep(StixPatternParser.PathStepContext ctx) {
@@ -672,7 +736,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterKeyPathStep(StixPatternParser.KeyPathStepContext ctx) {
@@ -682,7 +747,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitKeyPathStep(StixPatternParser.KeyPathStepContext ctx) {
@@ -692,7 +758,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterSetLiteral(StixPatternParser.SetLiteralContext ctx) {
@@ -702,7 +769,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitSetLiteral(StixPatternParser.SetLiteralContext ctx) {
@@ -712,7 +780,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterPrimitiveLiteral(StixPatternParser.PrimitiveLiteralContext ctx) {
@@ -722,7 +791,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitPrimitiveLiteral(StixPatternParser.PrimitiveLiteralContext ctx) {
@@ -732,7 +802,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterOrderableLiteral(StixPatternParser.OrderableLiteralContext ctx) {
@@ -742,7 +813,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitOrderableLiteral(StixPatternParser.OrderableLiteralContext ctx) {
@@ -752,7 +824,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void enterEveryRule(ParserRuleContext ctx) {
@@ -762,7 +835,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void exitEveryRule(ParserRuleContext ctx) {
@@ -772,7 +846,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void visitTerminal(TerminalNode node) {
@@ -782,7 +857,8 @@ public class StixPatternBaseListener implements StixPatternListener {
      * {@inheritDoc}
      *
      * <p>
-     * The default implementation does nothing.</p>
+     * The default implementation does nothing.
+     * </p>
      */
     @Override
     public void visitErrorNode(ErrorNode node) {

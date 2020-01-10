@@ -1,6 +1,6 @@
 /*
  * stix-pattern-evaluator
- * Copyright (C) 2020 - Unstructured Design
+ * Copyright (C) 2020 - Christopher Carver
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,5 @@ package design.unstructured.stix.evaluator;
  * @author ccarv
  */
 public enum ObservationOperators {
-    And,
-    Or,
-    FollowedBy
+    And, Or, FollowedBy
 }

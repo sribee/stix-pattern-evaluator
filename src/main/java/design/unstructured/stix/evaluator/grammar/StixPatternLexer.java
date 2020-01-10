@@ -1,6 +1,6 @@
 /*
  * stix-pattern-evaluator
- * Copyright (C) 2020 - Unstructured Design
+ * Copyright (C) 2020 - Christopher Carver
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({ "all", "warnings", "unchecked", "unused", "cast" })
 public class StixPatternLexer extends Lexer {
 
     static {
@@ -29,64 +29,51 @@ public class StixPatternLexer extends Lexer {
     }
 
     protected static final DFA[] _decisionToDFA;
-    protected static final PredictionContextCache _sharedContextCache
-            = new PredictionContextCache();
+    protected static final PredictionContextCache _sharedContextCache = new PredictionContextCache();
     public static final int IntNegLiteral = 1, IntPosLiteral = 2, FloatNegLiteral = 3, FloatPosLiteral = 4,
-            HexLiteral = 5, BinaryLiteral = 6, StringLiteral = 7, BoolLiteral = 8, TimestampLiteral = 9,
-            AND = 10, OR = 11, NOT = 12, FOLLOWEDBY = 13, LIKE = 14, MATCHES = 15, ISSUPERSET = 16,
-            ISSUBSET = 17, EXISTS = 18, LAST = 19, IN = 20, START = 21, STOP = 22, SECONDS = 23,
-            TRUE = 24, FALSE = 25, WITHIN = 26, REPEATS = 27, TIMES = 28, IdentifierWithoutHyphen = 29,
-            IdentifierWithHyphen = 30, EQ = 31, NEQ = 32, LT = 33, LE = 34, GT = 35, GE = 36, QUOTE = 37,
-            COLON = 38, DOT = 39, COMMA = 40, RPAREN = 41, LPAREN = 42, RBRACK = 43, LBRACK = 44,
-            PLUS = 45, HYPHEN = 46, MINUS = 47, POWER_OP = 48, DIVIDE = 49, ASTERISK = 50, WS = 51,
+            HexLiteral = 5, BinaryLiteral = 6, StringLiteral = 7, BoolLiteral = 8, TimestampLiteral = 9, AND = 10,
+            OR = 11, NOT = 12, FOLLOWEDBY = 13, LIKE = 14, MATCHES = 15, ISSUPERSET = 16, ISSUBSET = 17, EXISTS = 18,
+            LAST = 19, IN = 20, START = 21, STOP = 22, SECONDS = 23, TRUE = 24, FALSE = 25, WITHIN = 26, REPEATS = 27,
+            TIMES = 28, IdentifierWithoutHyphen = 29, IdentifierWithHyphen = 30, EQ = 31, NEQ = 32, LT = 33, LE = 34,
+            GT = 35, GE = 36, QUOTE = 37, COLON = 38, DOT = 39, COMMA = 40, RPAREN = 41, LPAREN = 42, RBRACK = 43,
+            LBRACK = 44, PLUS = 45, HYPHEN = 46, MINUS = 47, POWER_OP = 48, DIVIDE = 49, ASTERISK = 50, WS = 51,
             COMMENT = 52, LINE_COMMENT = 53, InvalidCharacter = 54;
-    public static String[] channelNames = {
-        "DEFAULT_TOKEN_CHANNEL", "HIDDEN"
-    };
+    public static String[] channelNames = { "DEFAULT_TOKEN_CHANNEL", "HIDDEN" };
 
-    public static String[] modeNames = {
-        "DEFAULT_MODE"
-    };
+    public static String[] modeNames = { "DEFAULT_MODE" };
 
     private static String[] makeRuleNames() {
-        return new String[]{
-            "IntNegLiteral", "IntPosLiteral", "FloatNegLiteral", "FloatPosLiteral",
-            "HexLiteral", "BinaryLiteral", "StringLiteral", "BoolLiteral", "TimestampLiteral",
-            "AND", "OR", "NOT", "FOLLOWEDBY", "LIKE", "MATCHES", "ISSUPERSET", "ISSUBSET",
-            "EXISTS", "LAST", "IN", "START", "STOP", "SECONDS", "TRUE", "FALSE",
-            "WITHIN", "REPEATS", "TIMES", "IdentifierWithoutHyphen", "IdentifierWithHyphen",
-            "EQ", "NEQ", "LT", "LE", "GT", "GE", "QUOTE", "COLON", "DOT", "COMMA",
-            "RPAREN", "LPAREN", "RBRACK", "LBRACK", "PLUS", "HYPHEN", "MINUS", "POWER_OP",
-            "DIVIDE", "ASTERISK", "HexDigit", "TwoHexDigits", "Base64Char", "WS",
-            "COMMENT", "LINE_COMMENT", "InvalidCharacter"
-        };
+        return new String[] { "IntNegLiteral", "IntPosLiteral", "FloatNegLiteral", "FloatPosLiteral", "HexLiteral",
+                "BinaryLiteral", "StringLiteral", "BoolLiteral", "TimestampLiteral", "AND", "OR", "NOT", "FOLLOWEDBY",
+                "LIKE", "MATCHES", "ISSUPERSET", "ISSUBSET", "EXISTS", "LAST", "IN", "START", "STOP", "SECONDS", "TRUE",
+                "FALSE", "WITHIN", "REPEATS", "TIMES", "IdentifierWithoutHyphen", "IdentifierWithHyphen", "EQ", "NEQ",
+                "LT", "LE", "GT", "GE", "QUOTE", "COLON", "DOT", "COMMA", "RPAREN", "LPAREN", "RBRACK", "LBRACK",
+                "PLUS", "HYPHEN", "MINUS", "POWER_OP", "DIVIDE", "ASTERISK", "HexDigit", "TwoHexDigits", "Base64Char",
+                "WS", "COMMENT", "LINE_COMMENT", "InvalidCharacter" };
     }
+
     public static final String[] ruleNames = makeRuleNames();
 
     private static String[] makeLiteralNames() {
-        return new String[]{
-            null, null, null, null, null, null, null, null, null, null, "'AND'",
-            "'OR'", "'NOT'", "'FOLLOWEDBY'", "'LIKE'", "'MATCHES'", "'ISSUPERSET'",
-            "'ISSUBSET'", "'EXISTS'", "'LAST'", "'IN'", "'START'", "'STOP'", "'SECONDS'",
-            "'true'", "'false'", "'WITHIN'", "'REPEATS'", "'TIMES'", null, null,
-            null, null, "'<'", "'<='", "'>'", "'>='", "'''", "':'", "'.'", "','",
-            "')'", "'('", "']'", "'['", "'+'", null, "'-'", "'^'", "'/'", "'*'"
-        };
+        return new String[] { null, null, null, null, null, null, null, null, null, null, "'AND'", "'OR'", "'NOT'",
+                "'FOLLOWEDBY'", "'LIKE'", "'MATCHES'", "'ISSUPERSET'", "'ISSUBSET'", "'EXISTS'", "'LAST'", "'IN'",
+                "'START'", "'STOP'", "'SECONDS'", "'true'", "'false'", "'WITHIN'", "'REPEATS'", "'TIMES'", null, null,
+                null, null, "'<'", "'<='", "'>'", "'>='", "'''", "':'", "'.'", "','", "')'", "'('", "']'", "'['", "'+'",
+                null, "'-'", "'^'", "'/'", "'*'" };
     }
+
     private static final String[] _LITERAL_NAMES = makeLiteralNames();
 
     private static String[] makeSymbolicNames() {
-        return new String[]{
-            null, "IntNegLiteral", "IntPosLiteral", "FloatNegLiteral", "FloatPosLiteral",
-            "HexLiteral", "BinaryLiteral", "StringLiteral", "BoolLiteral", "TimestampLiteral",
-            "AND", "OR", "NOT", "FOLLOWEDBY", "LIKE", "MATCHES", "ISSUPERSET", "ISSUBSET",
-            "EXISTS", "LAST", "IN", "START", "STOP", "SECONDS", "TRUE", "FALSE",
-            "WITHIN", "REPEATS", "TIMES", "IdentifierWithoutHyphen", "IdentifierWithHyphen",
-            "EQ", "NEQ", "LT", "LE", "GT", "GE", "QUOTE", "COLON", "DOT", "COMMA",
-            "RPAREN", "LPAREN", "RBRACK", "LBRACK", "PLUS", "HYPHEN", "MINUS", "POWER_OP",
-            "DIVIDE", "ASTERISK", "WS", "COMMENT", "LINE_COMMENT", "InvalidCharacter"
-        };
+        return new String[] { null, "IntNegLiteral", "IntPosLiteral", "FloatNegLiteral", "FloatPosLiteral",
+                "HexLiteral", "BinaryLiteral", "StringLiteral", "BoolLiteral", "TimestampLiteral", "AND", "OR", "NOT",
+                "FOLLOWEDBY", "LIKE", "MATCHES", "ISSUPERSET", "ISSUBSET", "EXISTS", "LAST", "IN", "START", "STOP",
+                "SECONDS", "TRUE", "FALSE", "WITHIN", "REPEATS", "TIMES", "IdentifierWithoutHyphen",
+                "IdentifierWithHyphen", "EQ", "NEQ", "LT", "LE", "GT", "GE", "QUOTE", "COLON", "DOT", "COMMA", "RPAREN",
+                "LPAREN", "RBRACK", "LBRACK", "PLUS", "HYPHEN", "MINUS", "POWER_OP", "DIVIDE", "ASTERISK", "WS",
+                "COMMENT", "LINE_COMMENT", "InvalidCharacter" };
     }
+
     private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
     public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -157,8 +144,7 @@ public class StixPatternLexer extends Lexer {
         return _ATN;
     }
 
-    public static final String _serializedATN
-            = "\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\28\u01f8\b\1\4\2\t"
+    public static final String _serializedATN = "\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\28\u01f8\b\1\4\2\t"
             + "\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"
             + "\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"
             + "\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"
@@ -334,10 +320,8 @@ public class StixPatternLexer extends Lexer {
             + "\3\2\2\2\u01f2\u01f4\3\2\2\2\u01f3\u01f1\3\2\2\2\u01f4\u01f5\b9\2\2\u01f5"
             + "r\3\2\2\2\u01f6\u01f7\13\2\2\2\u01f7t\3\2\2\2 \2{~\u0081\u0088\u008b\u0091"
             + "\u0098\u009b\u00a0\u00a7\u00ae\u00bc\u00d0\u00da\u00dc\u00e3\u00f0\u00f9"
-            + "\u0100\u010a\u0110\u0112\u0194\u019b\u01a1\u01a7\u01d9\u01e3\u01f1\3\b"
-            + "\2\2";
-    public static final ATN _ATN
-            = new ATNDeserializer().deserialize(_serializedATN.toCharArray());
+            + "\u0100\u010a\u0110\u0112\u0194\u019b\u01a1\u01a7\u01d9\u01e3\u01f1\3\b" + "\2\2";
+    public static final ATN _ATN = new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 
     static {
         _decisionToDFA = new DFA[_ATN.getNumberOfDecisions()];

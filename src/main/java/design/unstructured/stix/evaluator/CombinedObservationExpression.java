@@ -1,6 +1,6 @@
 /*
  * stix-pattern-evaluator
- * Copyright (C) 2020 - Unstructured Design
+ * Copyright (C) 2020 - Christopher Carver
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,8 @@ public class CombinedObservationExpression extends BaseObservationExpression imp
 
     private final ObservationOperators operator;
 
-    CombinedObservationExpression(BaseObservationExpression firstExpression, BaseObservationExpression secondExpression, ObservationOperators operator) {
+    CombinedObservationExpression(BaseObservationExpression firstExpression, BaseObservationExpression secondExpression,
+            ObservationOperators operator) {
         this.firstExpression = firstExpression;
         this.secondExpression = secondExpression;
         this.operator = operator;
@@ -70,6 +71,7 @@ public class CombinedObservationExpression extends BaseObservationExpression imp
 
     @Override
     public String toString() {
-        return "CombinedObservationExpression(" + this.getFirstExpression() + ", " + this.getSecondExpression() + ", " + this.getOperator() + ")";
+        return "CombinedObservationExpression(" + this.getFirstExpression() + ", " + this.getSecondExpression() + ", "
+                + this.getOperator() + ")";
     }
 }

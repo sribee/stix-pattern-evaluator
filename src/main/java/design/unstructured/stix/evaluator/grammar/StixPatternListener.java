@@ -1,6 +1,6 @@
 /*
  * stix-pattern-evaluator
- * Copyright (C) 2020 - Unstructured Design
+ * Copyright (C) 2020 - Christopher Carver
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -112,8 +112,8 @@ public interface StixPatternListener extends ParseTreeListener {
     void enterObservationExpressionSimple(StixPatternParser.ObservationExpressionSimpleContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code observationExpressionSimple}
-     * labeled alternative in {@link StixPatternParser#observationExpression}.
+     * Exit a parse tree produced by the {@code observationExpressionSimple} labeled
+     * alternative in {@link StixPatternParser#observationExpression}.
      *
      * @param ctx the parse tree
      */
@@ -144,8 +144,8 @@ public interface StixPatternListener extends ParseTreeListener {
     void enterObservationExpressionWithin(StixPatternParser.ObservationExpressionWithinContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code observationExpressionWithin}
-     * labeled alternative in {@link StixPatternParser#observationExpression}.
+     * Exit a parse tree produced by the {@code observationExpressionWithin} labeled
+     * alternative in {@link StixPatternParser#observationExpression}.
      *
      * @param ctx the parse tree
      */
@@ -168,41 +168,40 @@ public interface StixPatternListener extends ParseTreeListener {
     void exitObservationExpressionStartStop(StixPatternParser.ObservationExpressionStartStopContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code comparisonExpressionAnd_}
-     * labeled alternative in {@link StixPatternParser#comparisonExpression}.
+     * Enter a parse tree produced by the {@code comparisonExpressionAnd_} labeled
+     * alternative in {@link StixPatternParser#comparisonExpression}.
      *
      * @param ctx the parse tree
      */
     void enterComparisonExpressionAnd_(StixPatternParser.ComparisonExpressionAnd_Context ctx);
 
     /**
-     * Exit a parse tree produced by the {@code comparisonExpressionAnd_}
-     * labeled alternative in {@link StixPatternParser#comparisonExpression}.
+     * Exit a parse tree produced by the {@code comparisonExpressionAnd_} labeled
+     * alternative in {@link StixPatternParser#comparisonExpression}.
      *
      * @param ctx the parse tree
      */
     void exitComparisonExpressionAnd_(StixPatternParser.ComparisonExpressionAnd_Context ctx);
 
     /**
-     * Enter a parse tree produced by the {@code comparisonExpressionOred}
-     * labeled alternative in {@link StixPatternParser#comparisonExpression}.
+     * Enter a parse tree produced by the {@code comparisonExpressionOred} labeled
+     * alternative in {@link StixPatternParser#comparisonExpression}.
      *
      * @param ctx the parse tree
      */
     void enterComparisonExpressionOred(StixPatternParser.ComparisonExpressionOredContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code comparisonExpressionOred}
-     * labeled alternative in {@link StixPatternParser#comparisonExpression}.
+     * Exit a parse tree produced by the {@code comparisonExpressionOred} labeled
+     * alternative in {@link StixPatternParser#comparisonExpression}.
      *
      * @param ctx the parse tree
      */
     void exitComparisonExpressionOred(StixPatternParser.ComparisonExpressionOredContext ctx);
 
     /**
-     * Enter a parse tree produced by the
-     * {@code comparisonExpressionAndPropTest} labeled alternative in
-     * {@link StixPatternParser#comparisonExpressionAnd}.
+     * Enter a parse tree produced by the {@code comparisonExpressionAndPropTest}
+     * labeled alternative in {@link StixPatternParser#comparisonExpressionAnd}.
      *
      * @param ctx the parse tree
      */
@@ -217,96 +216,96 @@ public interface StixPatternListener extends ParseTreeListener {
     void exitComparisonExpressionAndPropTest(StixPatternParser.ComparisonExpressionAndPropTestContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code comparisonExpressionAnded}
-     * labeled alternative in {@link StixPatternParser#comparisonExpressionAnd}.
+     * Enter a parse tree produced by the {@code comparisonExpressionAnded} labeled
+     * alternative in {@link StixPatternParser#comparisonExpressionAnd}.
      *
      * @param ctx the parse tree
      */
     void enterComparisonExpressionAnded(StixPatternParser.ComparisonExpressionAndedContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code comparisonExpressionAnded}
-     * labeled alternative in {@link StixPatternParser#comparisonExpressionAnd}.
+     * Exit a parse tree produced by the {@code comparisonExpressionAnded} labeled
+     * alternative in {@link StixPatternParser#comparisonExpressionAnd}.
      *
      * @param ctx the parse tree
      */
     void exitComparisonExpressionAnded(StixPatternParser.ComparisonExpressionAndedContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code propTestEqual} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Enter a parse tree produced by the {@code propTestEqual} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void enterPropTestEqual(StixPatternParser.PropTestEqualContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code propTestEqual} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Exit a parse tree produced by the {@code propTestEqual} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void exitPropTestEqual(StixPatternParser.PropTestEqualContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code propTestOrder} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Enter a parse tree produced by the {@code propTestOrder} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void enterPropTestOrder(StixPatternParser.PropTestOrderContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code propTestOrder} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Exit a parse tree produced by the {@code propTestOrder} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void exitPropTestOrder(StixPatternParser.PropTestOrderContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code propTestSet} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Enter a parse tree produced by the {@code propTestSet} labeled alternative in
+     * {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void enterPropTestSet(StixPatternParser.PropTestSetContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code propTestSet} labeled alternative
-     * in {@link StixPatternParser#propTest}.
+     * Exit a parse tree produced by the {@code propTestSet} labeled alternative in
+     * {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void exitPropTestSet(StixPatternParser.PropTestSetContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code propTestLike} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Enter a parse tree produced by the {@code propTestLike} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void enterPropTestLike(StixPatternParser.PropTestLikeContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code propTestLike} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Exit a parse tree produced by the {@code propTestLike} labeled alternative in
+     * {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void exitPropTestLike(StixPatternParser.PropTestLikeContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code propTestRegex} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Enter a parse tree produced by the {@code propTestRegex} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void enterPropTestRegex(StixPatternParser.PropTestRegexContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code propTestRegex} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Exit a parse tree produced by the {@code propTestRegex} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
@@ -345,48 +344,46 @@ public interface StixPatternListener extends ParseTreeListener {
     void exitPropTestIsSuperset(StixPatternParser.PropTestIsSupersetContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code propTestParen} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Enter a parse tree produced by the {@code propTestParen} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void enterPropTestParen(StixPatternParser.PropTestParenContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code propTestParen} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Exit a parse tree produced by the {@code propTestParen} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void exitPropTestParen(StixPatternParser.PropTestParenContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code propTestExists} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Enter a parse tree produced by the {@code propTestExists} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void enterPropTestExists(StixPatternParser.PropTestExistsContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code propTestExists} labeled
-     * alternative in {@link StixPatternParser#propTest}.
+     * Exit a parse tree produced by the {@code propTestExists} labeled alternative
+     * in {@link StixPatternParser#propTest}.
      *
      * @param ctx the parse tree
      */
     void exitPropTestExists(StixPatternParser.PropTestExistsContext ctx);
 
     /**
-     * Enter a parse tree produced by
-     * {@link StixPatternParser#orderingComparator}.
+     * Enter a parse tree produced by {@link StixPatternParser#orderingComparator}.
      *
      * @param ctx the parse tree
      */
     void enterOrderingComparator(StixPatternParser.OrderingComparatorContext ctx);
 
     /**
-     * Exit a parse tree produced by
-     * {@link StixPatternParser#orderingComparator}.
+     * Exit a parse tree produced by {@link StixPatternParser#orderingComparator}.
      *
      * @param ctx the parse tree
      */
@@ -407,16 +404,14 @@ public interface StixPatternListener extends ParseTreeListener {
     void exitStringLiteral(StixPatternParser.StringLiteralContext ctx);
 
     /**
-     * Enter a parse tree produced by
-     * {@link StixPatternParser#startStopQualifier}.
+     * Enter a parse tree produced by {@link StixPatternParser#startStopQualifier}.
      *
      * @param ctx the parse tree
      */
     void enterStartStopQualifier(StixPatternParser.StartStopQualifierContext ctx);
 
     /**
-     * Exit a parse tree produced by
-     * {@link StixPatternParser#startStopQualifier}.
+     * Exit a parse tree produced by {@link StixPatternParser#startStopQualifier}.
      *
      * @param ctx the parse tree
      */
@@ -437,16 +432,14 @@ public interface StixPatternListener extends ParseTreeListener {
     void exitWithinQualifier(StixPatternParser.WithinQualifierContext ctx);
 
     /**
-     * Enter a parse tree produced by
-     * {@link StixPatternParser#repeatedQualifier}.
+     * Enter a parse tree produced by {@link StixPatternParser#repeatedQualifier}.
      *
      * @param ctx the parse tree
      */
     void enterRepeatedQualifier(StixPatternParser.RepeatedQualifierContext ctx);
 
     /**
-     * Exit a parse tree produced by
-     * {@link StixPatternParser#repeatedQualifier}.
+     * Exit a parse tree produced by {@link StixPatternParser#repeatedQualifier}.
      *
      * @param ctx the parse tree
      */
@@ -481,40 +474,38 @@ public interface StixPatternListener extends ParseTreeListener {
     void exitObjectType(StixPatternParser.ObjectTypeContext ctx);
 
     /**
-     * Enter a parse tree produced by
-     * {@link StixPatternParser#firstPathComponent}.
+     * Enter a parse tree produced by {@link StixPatternParser#firstPathComponent}.
      *
      * @param ctx the parse tree
      */
     void enterFirstPathComponent(StixPatternParser.FirstPathComponentContext ctx);
 
     /**
-     * Exit a parse tree produced by
-     * {@link StixPatternParser#firstPathComponent}.
+     * Exit a parse tree produced by {@link StixPatternParser#firstPathComponent}.
      *
      * @param ctx the parse tree
      */
     void exitFirstPathComponent(StixPatternParser.FirstPathComponentContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code indexPathStep} labeled
-     * alternative in {@link StixPatternParser#objectPathComponent}.
+     * Enter a parse tree produced by the {@code indexPathStep} labeled alternative
+     * in {@link StixPatternParser#objectPathComponent}.
      *
      * @param ctx the parse tree
      */
     void enterIndexPathStep(StixPatternParser.IndexPathStepContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code indexPathStep} labeled
-     * alternative in {@link StixPatternParser#objectPathComponent}.
+     * Exit a parse tree produced by the {@code indexPathStep} labeled alternative
+     * in {@link StixPatternParser#objectPathComponent}.
      *
      * @param ctx the parse tree
      */
     void exitIndexPathStep(StixPatternParser.IndexPathStepContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code pathStep} labeled alternative
-     * in {@link StixPatternParser#objectPathComponent}.
+     * Enter a parse tree produced by the {@code pathStep} labeled alternative in
+     * {@link StixPatternParser#objectPathComponent}.
      *
      * @param ctx the parse tree
      */
@@ -529,16 +520,16 @@ public interface StixPatternListener extends ParseTreeListener {
     void exitPathStep(StixPatternParser.PathStepContext ctx);
 
     /**
-     * Enter a parse tree produced by the {@code keyPathStep} labeled
-     * alternative in {@link StixPatternParser#objectPathComponent}.
+     * Enter a parse tree produced by the {@code keyPathStep} labeled alternative in
+     * {@link StixPatternParser#objectPathComponent}.
      *
      * @param ctx the parse tree
      */
     void enterKeyPathStep(StixPatternParser.KeyPathStepContext ctx);
 
     /**
-     * Exit a parse tree produced by the {@code keyPathStep} labeled alternative
-     * in {@link StixPatternParser#objectPathComponent}.
+     * Exit a parse tree produced by the {@code keyPathStep} labeled alternative in
+     * {@link StixPatternParser#objectPathComponent}.
      *
      * @param ctx the parse tree
      */
@@ -559,8 +550,7 @@ public interface StixPatternListener extends ParseTreeListener {
     void exitSetLiteral(StixPatternParser.SetLiteralContext ctx);
 
     /**
-     * Enter a parse tree produced by
-     * {@link StixPatternParser#primitiveLiteral}.
+     * Enter a parse tree produced by {@link StixPatternParser#primitiveLiteral}.
      *
      * @param ctx the parse tree
      */
@@ -574,8 +564,7 @@ public interface StixPatternListener extends ParseTreeListener {
     void exitPrimitiveLiteral(StixPatternParser.PrimitiveLiteralContext ctx);
 
     /**
-     * Enter a parse tree produced by
-     * {@link StixPatternParser#orderableLiteral}.
+     * Enter a parse tree produced by {@link StixPatternParser#orderableLiteral}.
      *
      * @param ctx the parse tree
      */

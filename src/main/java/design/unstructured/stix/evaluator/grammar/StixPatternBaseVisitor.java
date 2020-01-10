@@ -1,6 +1,6 @@
 /*
  * stix-pattern-evaluator
- * Copyright (C) 2020 - Unstructured Design
+ * Copyright (C) 2020 - Christopher Carver
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * of the available methods.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
- * operations with no return type.
+ *            operations with no return type.
  */
 public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements StixPatternVisitor<T> {
 
@@ -34,7 +34,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitPattern(StixPatternParser.PatternContext ctx) {
@@ -46,7 +47,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitObservationExpressions(StixPatternParser.ObservationExpressionsContext ctx) {
@@ -58,7 +60,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitObservationExpressionOr(StixPatternParser.ObservationExpressionOrContext ctx) {
@@ -70,7 +73,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitObservationExpressionAnd(StixPatternParser.ObservationExpressionAndContext ctx) {
@@ -82,7 +86,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitObservationExpressionRepeated(StixPatternParser.ObservationExpressionRepeatedContext ctx) {
@@ -94,7 +99,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitObservationExpressionSimple(StixPatternParser.ObservationExpressionSimpleContext ctx) {
@@ -106,7 +112,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitObservationExpressionCompound(StixPatternParser.ObservationExpressionCompoundContext ctx) {
@@ -118,7 +125,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitObservationExpressionWithin(StixPatternParser.ObservationExpressionWithinContext ctx) {
@@ -130,7 +138,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitObservationExpressionStartStop(StixPatternParser.ObservationExpressionStartStopContext ctx) {
@@ -142,7 +151,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitComparisonExpressionAnd_(StixPatternParser.ComparisonExpressionAnd_Context ctx) {
@@ -154,7 +164,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitComparisonExpressionOred(StixPatternParser.ComparisonExpressionOredContext ctx) {
@@ -166,7 +177,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitComparisonExpressionAndPropTest(StixPatternParser.ComparisonExpressionAndPropTestContext ctx) {
@@ -178,7 +190,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitComparisonExpressionAnded(StixPatternParser.ComparisonExpressionAndedContext ctx) {
@@ -190,7 +203,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitPropTestEqual(StixPatternParser.PropTestEqualContext ctx) {
@@ -202,7 +216,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitPropTestOrder(StixPatternParser.PropTestOrderContext ctx) {
@@ -214,7 +229,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitPropTestSet(StixPatternParser.PropTestSetContext ctx) {
@@ -226,7 +242,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitPropTestLike(StixPatternParser.PropTestLikeContext ctx) {
@@ -238,7 +255,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitPropTestRegex(StixPatternParser.PropTestRegexContext ctx) {
@@ -250,7 +268,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitPropTestIsSubset(StixPatternParser.PropTestIsSubsetContext ctx) {
@@ -262,7 +281,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitPropTestIsSuperset(StixPatternParser.PropTestIsSupersetContext ctx) {
@@ -274,7 +294,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitPropTestParen(StixPatternParser.PropTestParenContext ctx) {
@@ -286,7 +307,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitPropTestExists(StixPatternParser.PropTestExistsContext ctx) {
@@ -298,7 +320,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitOrderingComparator(StixPatternParser.OrderingComparatorContext ctx) {
@@ -310,7 +333,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitStringLiteral(StixPatternParser.StringLiteralContext ctx) {
@@ -322,7 +346,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitStartStopQualifier(StixPatternParser.StartStopQualifierContext ctx) {
@@ -334,7 +359,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitWithinQualifier(StixPatternParser.WithinQualifierContext ctx) {
@@ -346,7 +372,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitRepeatedQualifier(StixPatternParser.RepeatedQualifierContext ctx) {
@@ -358,7 +385,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitObjectPath(StixPatternParser.ObjectPathContext ctx) {
@@ -370,7 +398,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitObjectType(StixPatternParser.ObjectTypeContext ctx) {
@@ -382,7 +411,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitFirstPathComponent(StixPatternParser.FirstPathComponentContext ctx) {
@@ -394,7 +424,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitIndexPathStep(StixPatternParser.IndexPathStepContext ctx) {
@@ -406,7 +437,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitPathStep(StixPatternParser.PathStepContext ctx) {
@@ -418,7 +450,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitKeyPathStep(StixPatternParser.KeyPathStepContext ctx) {
@@ -430,7 +463,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitSetLiteral(StixPatternParser.SetLiteralContext ctx) {
@@ -442,7 +476,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitPrimitiveLiteral(StixPatternParser.PrimitiveLiteralContext ctx) {
@@ -454,7 +489,8 @@ public class StixPatternBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      *
      * <p>
      * The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
+     * {@link #visitChildren} on {@code ctx}.
+     * </p>
      */
     @Override
     public T visitOrderableLiteral(StixPatternParser.OrderableLiteralContext ctx) {

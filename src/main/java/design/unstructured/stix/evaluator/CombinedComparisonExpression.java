@@ -1,6 +1,6 @@
 /*
  * stix-pattern-evaluator
- * Copyright (C) 2020 - Unstructured Design
+ * Copyright (C) 2020 - Christopher Carver
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,8 @@ public class CombinedComparisonExpression extends BaseComparisonExpression imple
 
     private final ComparisonExpressionOperators operator;
 
-    CombinedComparisonExpression(BaseComparisonExpression firstExpression, BaseComparisonExpression secondExpression, ComparisonExpressionOperators operator) {
+    CombinedComparisonExpression(BaseComparisonExpression firstExpression, BaseComparisonExpression secondExpression,
+            ComparisonExpressionOperators operator) {
         this.firstExpression = firstExpression;
         this.secondExpression = secondExpression;
         this.operator = operator;
@@ -70,7 +71,8 @@ public class CombinedComparisonExpression extends BaseComparisonExpression imple
 
     @Override
     public String toString() {
-        return "CombinedComparisonExpression(" + this.getFirstExpression() + ", " + this.getSecondExpression() + ", " + this.getOperator() + ")";
+        return "CombinedComparisonExpression(" + this.getFirstExpression() + ", " + this.getSecondExpression() + ", "
+                + this.getOperator() + ")";
     }
 
 }

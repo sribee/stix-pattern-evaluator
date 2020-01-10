@@ -1,6 +1,6 @@
 /*
  * stix-pattern-evaluator
- * Copyright (C) 2020 - Unstructured Design
+ * Copyright (C) 2020 - Christopher Carver
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,7 +50,8 @@ public class StixObservablePropertyNode {
      * @param name
      * @param field
      */
-    StixObservablePropertyNode(StixObservablePropertyNode parent, String name, Field field, Class<?> clazz, boolean isReference) {
+    StixObservablePropertyNode(StixObservablePropertyNode parent, String name, Field field, Class<?> clazz,
+            boolean isReference) {
         this.name = name;
         this.parent = parent;
         this.field = field;
@@ -105,8 +106,8 @@ public class StixObservablePropertyNode {
     }
 
     /**
-     * Gets every parent from this node represented as an ordered (oldest to
-     * newest) list.
+     * Gets every parent from this node represented as an ordered (oldest to newest)
+     * list.
      *
      * @return
      */
