@@ -20,15 +20,70 @@ Since this library is still in its infant stages, it might be necessary to provi
 - Java 8 +
 - Maven
 
-## Dependency
-Right now, this library is only available through Maven.
 
-```
+## Using stix-pattern-evaluator in your project
+This library is available through Maven Central Repository.
+
+```xml
 <dependency>
   <groupId>design.unstructured</groupId>
   <artifactId>stix-pattern-evaluator</artifactId>
   <version>1.0.0-M1</version>
 </dependency>
+```
+
+There are a few different ways to implement this library. Depending on your use case, you may want to use your own expression tree evaluator or use the built-in evaluator. These snippets will, at the very minimum, get you started compiling and evaluating basic STIX expressions. For more  examples, take a look at the [examples](examples/) (still a WIP) directory.
+
+### Compiling a basic STIX pattern
+The [`StixPatternProcessor`](https://github.com/hashdelta/stix-pattern-evaluator/blob/master/src/main/java/design/unstructured/stix/evaluator/StixPatternProcessor.java) class is where the magic happens. When compiling a pattern, ANTLR will walk through the expression and notify the listener when a grammar rule is triggered. When ANTLR is finished walking through the STIX pattern, a binary expression tree structure is compiled and contained within the [`Pattern`](https://github.com/hashdelta/stix-pattern-evaluator/blob/master/src/main/java/design/unstructured/stix/evaluator/Pattern.java) object.
+
+```java
+// Compile our pattern
+final Pattern compiledPattern = Pattern.build("[process:name = 'bad_behavior.exe']");
+```
+
+As you can see, it is very straight forward. This is a very basic expression tree with only one condition. This will not produce any results until you initialize a `PatternEvaluator` and provide an object resolver. As mentioned above, there may be a specific use case where you would want to provide your own.
+
+### Resolving the object path
+The STIX object path is part of the Cyber Oservable data model. In our above example, this would be the `process:name` in our condition. This example will demonstrate how the `PatternEvaluator` interacts with the `ObjectPathResolver`.
+
+First, we need to create a static resolver and initialize this with some dummy data:
+```java
+public class StaticObjectPathResolver implements ObjectPathResolver {
+    private final Map<String, Object> objectPaths = new HashMap<>();
+
+    StaticObjectPathResolver add(String objectPath, Object objectValue) {
+        objectPaths.put(objectPath, objectValue);
+
+        return this;
+    }
+
+    @Override
+    public Object getValue(Object object, String objectPath) throws StixMapperException {
+        return objectPaths.get(objectPath);
+    }
+}
+```
+
+```java
+// Create an instance of our static resolver and add some dummy data
+final StaticObjectPathResolver resolver = new StaticObjectPathResolver()
+    .add("process:name", "bad_behavior.exe")
+    .add("process:id", 498);
+
+// Create a pattern with AND comparator
+final Pattern compiledPattern = Pattern.build("[process:name = 'bad_behavior.exe' AND process:id = 498]");
+
+// Create an instance of our PatternEvaluator, pass an empty object
+final PatternEvaluator evaluator = new PatternEvaluator(compiledPattern, resolver, null);
+
+Boolean evaluation = evaluator.get();
+
+if (evaluation) {
+    System.out.println("The evaluation was true!");
+} else {
+    System.out.println("Well this is odd...");
+}
 ```
 
 ## License

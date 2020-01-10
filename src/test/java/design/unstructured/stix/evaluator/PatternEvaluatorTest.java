@@ -35,7 +35,7 @@ public class PatternEvaluatorTest {
     void processNameEvaluation_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
         final String rawPattern = "[process:name = 'cmd.exe']";
         printPattern(rawPattern);
-        PatternEvaluator evaluator = new PatternEvaluator(PatternUtils.parsePattern(rawPattern), resolver, null);
+        PatternEvaluator evaluator = new PatternEvaluator(Pattern.build(rawPattern), resolver, null);
 
         assertTrue(evaluator.get());
     }
@@ -44,7 +44,7 @@ public class PatternEvaluatorTest {
     void processNameEvaluation_ReturnsFalse() throws PatternEvaluatorException, StixMapperException {
         final String rawPattern = "[process:name = 'shouldnotequate.exe']";
         printPattern(rawPattern);
-        PatternEvaluator evaluator = new PatternEvaluator(PatternUtils.parsePattern(rawPattern), resolver, null);
+        PatternEvaluator evaluator = new PatternEvaluator(Pattern.build(rawPattern), resolver, null);
 
         assertFalse(evaluator.get());
     }
@@ -53,7 +53,7 @@ public class PatternEvaluatorTest {
     void multipleConditionsWithAndComparator_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
         final String rawPattern = "[process:name = 'cmd.exe' AND process:parent.command_line = 'cmd.exe --help --this --test_a_long_argument' AND process:id = 459 AND process:administrator = true]";
         printPattern(rawPattern);
-        PatternEvaluator evaluator = new PatternEvaluator(PatternUtils.parsePattern(rawPattern), resolver, null);
+        PatternEvaluator evaluator = new PatternEvaluator(Pattern.build(rawPattern), resolver, null);
 
         assertTrue(evaluator.get());
     }
@@ -62,7 +62,7 @@ public class PatternEvaluatorTest {
     void multipleConditionsWithOrComparator_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
         final String rawPattern = "[process:name = 'thisreturnsfalse.exe' OR process:parent.command_line = 'cmd.exe --help --this --test_a_long_argument']";
         printPattern(rawPattern);
-        PatternEvaluator evaluator = new PatternEvaluator(PatternUtils.parsePattern(rawPattern), resolver, null);
+        PatternEvaluator evaluator = new PatternEvaluator(Pattern.build(rawPattern), resolver, null);
 
         assertTrue(evaluator.get());
     }

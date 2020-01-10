@@ -10,14 +10,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-
-import design.unstructured.stix.evaluator.grammar.StixPatternLexer;
-import design.unstructured.stix.evaluator.grammar.StixPatternParser;
-
 public class PatternUtils {
 
     static class PatternList extends ArrayList<StixPattern> {
@@ -28,7 +20,7 @@ public class PatternUtils {
             int pos = 0;
 
             for (StixPattern stixPattern : this) {
-                Pattern pattern = PatternUtils.parsePattern(stixPattern.getPattern());
+                Pattern pattern = Pattern.build(stixPattern.getPattern());
 
                 if (pattern == null) {
                     throw new ParseException("Unable to parse pattern: " + stixPattern.getPattern(), pos);
@@ -49,31 +41,12 @@ public class PatternUtils {
             if (parser.nextToken() != JsonToken.START_ARRAY) {
                 throw new IllegalStateException("Expected an array");
             }
+
             while (parser.nextToken() == JsonToken.START_OBJECT) {
                 StixPattern rule = JacksonMapperProvider.getMapper().readValue(parser, StixPattern.class);
                 patterns.add(rule);
             }
         }
         return patterns;
-    }
-
-    static Pattern parsePattern(String rawPattern) {
-        Pattern pattern = null;
-
-        try {
-            CharStream charStream = CharStreams.fromString(rawPattern);
-            StixPatternLexer stixLexer = new StixPatternLexer(charStream);
-            CommonTokenStream commonTokenStream = new CommonTokenStream(stixLexer);
-            StixPatternParser stixParser = new StixPatternParser(commonTokenStream);
-            stixParser.setBuildParseTree(true);
-            StixPatternParser.PatternContext ctx = stixParser.pattern();
-            StixPatternProcessor processor = new StixPatternProcessor();
-            ParseTreeWalker.DEFAULT.walk(processor, ctx);
-            pattern = processor.get();
-        } catch (Exception ex) {
-            ex.printStackTrace(System.out);
-        }
-
-        return pattern;
     }
 }

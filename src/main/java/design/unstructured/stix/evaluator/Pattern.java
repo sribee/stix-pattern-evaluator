@@ -17,6 +17,13 @@
  */
 package design.unstructured.stix.evaluator;
 
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+
+import design.unstructured.stix.evaluator.grammar.StixPatternLexer;
+import design.unstructured.stix.evaluator.grammar.StixPatternParser;
+
 /**
  *
  * @author ccarv
@@ -27,6 +34,17 @@ public class Pattern implements ExpressionEvaluator {
 
     Pattern(BaseObservationExpression expression) {
         this.expression = expression;
+    }
+
+    public static Pattern build(String rawPattern) {
+        StixPatternParser stixParser = new StixPatternParser(
+                new CommonTokenStream(new StixPatternLexer(CharStreams.fromString(rawPattern))));
+        StixPatternProcessor processor = new StixPatternProcessor();
+
+        stixParser.setBuildParseTree(true);
+        ParseTreeWalker.DEFAULT.walk(processor, stixParser.pattern());
+
+        return processor.get();
     }
 
     /**
