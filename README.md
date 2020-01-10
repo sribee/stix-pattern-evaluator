@@ -45,7 +45,7 @@ final Pattern compiledPattern = Pattern.build("[process:name = 'bad_behavior.exe
 As you can see, it is very straight forward. This is a very basic expression tree with only one condition. This will not produce any results until you initialize a `PatternEvaluator` and provide an object resolver. As mentioned above, there may be a specific use case where you would want to provide your own.
 
 ### Resolving the object path
-The STIX object path is part of the [STIX Cyber Observable](https://docs.oasis-open.org/cti/stix/v2.1/csprd02/stix-v2.1-csprd02.html#_Toc26789822) data model. In our above example, this would be the `process:name` in our condition. This example will demonstrate how the `PatternEvaluator` interacts with the `ObjectPathResolver`.
+The object path is part of the [STIX Cyber Observable](https://docs.oasis-open.org/cti/stix/v2.1/csprd02/stix-v2.1-csprd02.html#_Toc26789822) data model. In our above example, this would be the `process:name` in our condition. This example will demonstrate how the `PatternEvaluator` interacts with the `ObjectPathResolver`.
 
 First, we need to create a static resolver:
 ```java
