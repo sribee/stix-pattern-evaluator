@@ -32,9 +32,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * When ANTLR walks the grammer, this listener is notified when one of the
+ * When ANTLR walks the STIX pattern, this listener is notified when one of the
  * parsing rules is triggered. An instance of this class should be passed to the
  * ParseTreeWalker.
+ * 
+ * The result of walking the STIX pattern will be a pattern expression tree.
  */
 @SuppressWarnings({ "unchecked" })
 public class StixPatternProcessor implements StixPatternListener, Supplier<Pattern> {

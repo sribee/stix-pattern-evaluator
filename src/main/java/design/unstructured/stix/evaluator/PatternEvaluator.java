@@ -22,7 +22,7 @@ import design.unstructured.stix.evaluator.mapper.StixMapperException;
 import java.util.Set;
 
 /**
- * Evaluates a pattern object. An object resolver (use the
+ * Evaluates the pattern expression tree. An object resolver (use the
  * {@link ObjectPathResolver}) is required to supply an object path value. If a
  * resolver is not available, this class will do nothing.
  * 
@@ -37,8 +37,12 @@ public class PatternEvaluator {
     private final Object object;
 
     /**
-     * Use the ObjectPathResolver interface to resolve the patterns object path.
-     * This value will be used to compare the literal.
+     * Use the {@code ObjectPathResolver} interface to resolve the patterns object
+     * path. An expression will be evaluated regardless if the resolver is able to
+     * provide a value.
+     * 
+     * Passing an empty expression tree or passing a null resolver will result in an
+     * exception.
      *
      * @param pattern
      * @param resolver
@@ -61,8 +65,9 @@ public class PatternEvaluator {
 
     /**
      * Runs the evaluation on the pattern and returns the result of the expression.
+     * The execution depends on the complexity and depth of the expression tree.
      * 
-     * @return
+     * @return the result of the expression in this pattern
      * @throws StixMapperException
      * @throws PatternEvaluatorException
      */

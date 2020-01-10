@@ -8,11 +8,11 @@ It also provides STIX annotations and an object mapper to map your Java objects 
 This was originally designed for another project of mine that has since been abandoned. I am repurposing the code for public use, which means there will be a lack of authoritative documentation until I find the time to migrate the existing documentation over.
 
 ## Development Roadmap
-Since this library is still in its infant stages, it might be necessary to provide a roadmap to a minimum viable product. This project is open to contributions; I ask that you follow the proper procedures below for creating a pull request.
+Since this library is still in its infant stages, it might be necessary to provide a roadmap to a minimum viable product. This project is open to contributions.
 
-1. Repurpose unit tests from previous project
-2. Create / migrate necessary documentation for general use
-3. Develop basic examples to demonstrate the implications of the pattern evaluator and STIX object mapper
+1. Repurpose unit tests from previous project.
+2. Create / migrate necessary documentation for general use.
+3. Develop basic examples to demonstrate the implications of the pattern evaluator and STIX object mapper.
 4. General improvements to existing codebase; specifically, the STIX object mapper implementation.
 5. Support for stateful operations such as `FOLLOWEDBY`, `WITHIN`, `REPEATS`.
 
