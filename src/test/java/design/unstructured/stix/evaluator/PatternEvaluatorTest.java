@@ -37,6 +37,8 @@ public class PatternEvaluatorTest {
         printPattern(rawPattern);
         PatternEvaluator evaluator = new PatternEvaluator(Pattern.build(rawPattern), resolver, null);
 
+        System.out.println(Pattern.build(rawPattern));
+
         assertTrue(evaluator.get());
     }
 

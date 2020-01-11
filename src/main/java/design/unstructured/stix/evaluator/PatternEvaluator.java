@@ -27,14 +27,27 @@ import java.util.Set;
  * resolver is not available, this class will do nothing.
  * 
  */
-@SuppressWarnings({ "rawtypes" })
-public class PatternEvaluator {
+@SuppressWarnings({ "unchecked" })
+public class PatternEvaluator implements ComparisonEvaluator {
 
     private final Pattern pattern;
 
     private final ObjectPathResolver resolver;
 
     private final Object object;
+
+    private final ComparisonEvaluator comparisonEvaluator;
+
+    /**
+     * {@code comparisonEvaluator} defaults to {@link PatternEvaluator}.
+     *
+     * @see PatternEvaluator#PatternEvaluator(Pattern, ObjectPathResolver,
+     *      ComparisonEvaluator, Object)
+     */
+    public PatternEvaluator(Pattern pattern, ObjectPathResolver resolver, Object object)
+            throws PatternEvaluatorException {
+        this(pattern, resolver, null, object);
+    }
 
     /**
      * Use the {@code ObjectPathResolver} interface to resolve the patterns object
@@ -48,8 +61,8 @@ public class PatternEvaluator {
      * @param resolver
      * @throws PatternEvaluatorException
      */
-    public PatternEvaluator(Pattern pattern, ObjectPathResolver resolver, Object object)
-            throws PatternEvaluatorException {
+    public PatternEvaluator(Pattern pattern, ObjectPathResolver resolver, ComparisonEvaluator comparisonEvaluator,
+            Object object) throws PatternEvaluatorException {
         if (pattern.getExpression() == null) {
             throw new PatternEvaluatorException("Empty pattern evaluation.");
         }
@@ -60,6 +73,7 @@ public class PatternEvaluator {
 
         this.pattern = pattern;
         this.resolver = resolver;
+        this.comparisonEvaluator = (comparisonEvaluator == null ? this : comparisonEvaluator);
         this.object = object;
     }
 
@@ -72,28 +86,26 @@ public class PatternEvaluator {
      * @throws PatternEvaluatorException
      */
     public Boolean get() throws StixMapperException, PatternEvaluatorException {
-        expressionIterator(pattern.getExpression());
+        evaluator(pattern.getExpression());
 
         return pattern.evaluate();
     }
 
-    private void expressionIterator(BaseObservationExpression expression)
-            throws StixMapperException, PatternEvaluatorException {
+    private void evaluator(BaseObservationExpression expression) throws StixMapperException, PatternEvaluatorException {
         if (expression.getClass().equals(CombinedObservationExpression.class)) {
             CombinedObservationExpression combinedObsExp = (CombinedObservationExpression) expression;
 
-            expressionIterator(combinedObsExp.getFirstExpression());
-            expressionIterator(combinedObsExp.getSecondExpression());
+            evaluator(combinedObsExp.getFirstExpression());
+            evaluator(combinedObsExp.getSecondExpression());
 
         } else if (expression.getClass().equals(ObservationExpression.class)) {
             ObservationExpression obsExp = (ObservationExpression) expression;
 
-            expressionIterator(obsExp.getComparisonExpression());
+            evaluator(obsExp.getComparisonExpression());
         }
     }
 
-    private void expressionIterator(BaseComparisonExpression expression)
-            throws StixMapperException, PatternEvaluatorException {
+    private void evaluator(BaseComparisonExpression expression) throws StixMapperException, PatternEvaluatorException {
 
         // If our expression is not a ComparisonExpression, evaluate our combined
         // expressions
@@ -101,54 +113,58 @@ public class PatternEvaluator {
             CombinedComparisonExpression combinedExpression = (CombinedComparisonExpression) expression;
 
             if (expression.getClass().equals(CombinedComparisonExpression.class)) {
-                expressionIterator(combinedExpression.getFirstExpression());
-                expressionIterator(combinedExpression.getSecondExpression());
+                evaluator(combinedExpression.getFirstExpression());
+                evaluator(combinedExpression.getSecondExpression());
             }
 
         } else if (expression.getClass().equals(ComparisonExpression.class)) {
             ComparisonExpression comparisonExpression = (ComparisonExpression) expression;
-            Object objectPathValue = resolver.getValue(object, comparisonExpression.getObjectPath());
+            Object contextObject = resolver.getValue(object, comparisonExpression.getObjectPath());
+            Object patternObject = comparisonExpression.getValue();
 
             switch (comparisonExpression.getComparator()) {
             case Equal: {
-                comparisonExpression.setEvaluation(objectPathValue.equals(comparisonExpression.getValue()));
+                comparisonExpression.setEvaluation(comparisonEvaluator.isEqual(contextObject, patternObject));
                 break;
             }
 
             case NotEqual: {
-                comparisonExpression.setEvaluation(!objectPathValue.equals(comparisonExpression.getValue()));
+                comparisonExpression.setEvaluation(comparisonEvaluator.isNotEqual(contextObject, patternObject));
                 break;
             }
 
             case In: {
-                comparisonExpression.setEvaluation(((Set) comparisonExpression.getValue()).contains(objectPathValue));
+                comparisonExpression
+                        .setEvaluation(comparisonEvaluator.isIn(contextObject, (Set<Object>) patternObject));
                 break;
             }
 
             case GreaterThan: {
-                comparisonExpression.setEvaluation(((int) objectPathValue > (int) comparisonExpression.getValue()));
+                comparisonExpression
+                        .setEvaluation(comparisonEvaluator.isGreaterThan((int) contextObject, (int) patternObject));
                 break;
             }
 
             case GreaterThanOrEqual: {
-                comparisonExpression.setEvaluation(((int) objectPathValue >= (int) comparisonExpression.getValue()));
+                comparisonExpression.setEvaluation(
+                        comparisonEvaluator.isGreaterThanOrEqual((int) contextObject, (int) patternObject));
                 break;
             }
 
             case LessThan: {
-                comparisonExpression.setEvaluation(((int) objectPathValue < (int) comparisonExpression.getValue()));
+                comparisonExpression
+                        .setEvaluation(comparisonEvaluator.isLessThan((int) contextObject, (int) patternObject));
                 break;
             }
 
             case LessThanOrEqual: {
-                comparisonExpression.setEvaluation(((int) objectPathValue <= (int) comparisonExpression.getValue()));
+                comparisonExpression
+                        .setEvaluation(comparisonEvaluator.isLessThanOrEqual((int) contextObject, (int) patternObject));
                 break;
             }
 
             case Matches: {
-                java.util.regex.Pattern regexPattern = (java.util.regex.Pattern) comparisonExpression.getValue();
-
-                comparisonExpression.setEvaluation(regexPattern.matcher((String) objectPathValue).find());
+                comparisonExpression.setEvaluation(comparisonEvaluator.matches(contextObject, patternObject));
                 break;
             }
 
@@ -159,4 +175,47 @@ public class PatternEvaluator {
             }
         }
     }
+
+    @Override
+    public boolean isEqual(Object contextObject, Object patternObject) {
+        return contextObject.equals(patternObject);
+    }
+
+    @Override
+    public boolean isNotEqual(Object contextObject, Object patternObject) {
+        return !contextObject.equals(patternObject);
+    }
+
+    @Override
+    public boolean isIn(Object contextObject, Set<Object> patternObject) {
+        return patternObject.contains(contextObject);
+    }
+
+    @Override
+    public boolean isGreaterThan(int contextObject, int patternObject) {
+        return contextObject > patternObject;
+    }
+
+    @Override
+    public boolean isGreaterThanOrEqual(int contextObject, int patternObject) {
+        return contextObject >= patternObject;
+    }
+
+    @Override
+    public boolean isLessThan(int contextObject, int patternObject) {
+        return contextObject < patternObject;
+    }
+
+    @Override
+    public boolean isLessThanOrEqual(int contextObject, int patternObject) {
+        return contextObject <= patternObject;
+    }
+
+    @Override
+    public boolean matches(Object contextObject, Object patternObject) {
+        java.util.regex.Pattern regexPattern = (java.util.regex.Pattern) patternObject;
+
+        return regexPattern.matcher((String) contextObject).find();
+    }
+
 }

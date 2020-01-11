@@ -38,5 +38,10 @@
         "name": "Int literal less than or equal test",
         "description": "A test to verify the greater than using an int literal",
         "pattern": "[process:id <= 459]"
+    },
+    {
+        "name": "Nested OR expression with multiple conditions",
+        "description": "A test to verify multiple conditions with multiple nested expressions",
+        "pattern": "[[process:name = 'cmd.exe' OR process:name = 'notthis.exe'] AND [process:parent.name = 'explorer.exe']]"
     }
 ]

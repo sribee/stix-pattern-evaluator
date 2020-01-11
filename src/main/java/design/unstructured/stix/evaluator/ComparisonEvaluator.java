@@ -17,11 +17,22 @@
  */
 package design.unstructured.stix.evaluator;
 
-/**
- *
- * @author ccarv
- */
-public enum ComparisonComparators {
-    Equal, NotEqual, GreaterThan, LessThan, GreaterThanOrEqual, LessThanOrEqual, In, Like, Matches, IsSubSet,
-    IsSuperSet;
+import java.util.Set;
+
+public interface ComparisonEvaluator {
+    boolean isEqual(Object contextObject, Object patternObject);
+
+    boolean isNotEqual(Object contextObject, Object patternObject);
+
+    boolean isIn(Object contextObject, Set<Object> patternObject);
+
+    boolean isGreaterThan(int contextObject, int patternObject);
+
+    boolean isGreaterThanOrEqual(int contextObject, int patternObject);
+
+    boolean isLessThan(int contextObject, int patternObject);
+
+    boolean isLessThanOrEqual(int contextObject, int patternObject);
+
+    boolean matches(Object contextObject, Object patternObject);
 }

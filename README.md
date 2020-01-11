@@ -40,6 +40,13 @@ The [`StixPatternProcessor`](https://github.com/hashdelta/stix-pattern-evaluator
 ```java
 // Compile our pattern
 final Pattern compiledPattern = Pattern.build("[process:name = 'bad_behavior.exe']");
+
+System.out.println(compiledPattern);
+```
+
+Output:
+```
+Pattern[ObservationExpression(ComparisonExpression(process:name, Equal, bad_behavior.exe))]
 ```
 
 As you can see, it is very straight forward. This is a very basic expression tree with only one condition. This will not produce any results until you initialize a `PatternEvaluator` and provide an object resolver. As mentioned above, there may be a specific use case where you would want to provide your own.
