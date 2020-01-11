@@ -35,7 +35,7 @@ This library is available through Maven Central Repository.
 There are a few different ways to implement this library. Depending on your use case, you may want to use your own expression tree evaluator or use the built-in evaluator. These snippets will, at the very minimum, get you started compiling and evaluating basic STIX expressions. For more  examples, take a look at the [examples](examples/) (still a WIP) directory.
 
 ### Compiling a basic STIX pattern
-The [`StixPatternProcessor`](https://github.com/hashdelta/stix-pattern-evaluator/blob/master/src/main/java/design/unstructured/stix/evaluator/StixPatternProcessor.java) class is where the magic happens. When compiling a pattern, ANTLR will walk through the expression and notify the listener when a grammar rule is triggered. When ANTLR is finished walking through the STIX pattern, a binary expression tree structure is compiled and wrapped in a [`Pattern`](https://github.com/hashdelta/stix-pattern-evaluator/blob/master/src/main/java/design/unstructured/stix/evaluator/Pattern.java) object.
+The [`StixPatternProcessor`](src/main/java/design/unstructured/stix/evaluator/StixPatternProcessor.java) class is where the magic happens. When compiling a pattern, ANTLR will walk through the expression and notify the listener when a grammar rule is triggered. When ANTLR is finished walking through the STIX pattern, a binary expression tree structure is compiled and wrapped in a [`Pattern`](src/main/java/design/unstructured/stix/evaluator/Pattern.java) object.
 
 ```java
 // Compile our pattern
@@ -52,7 +52,7 @@ Pattern[ObservationExpression(ComparisonExpression(process:name, Equal, bad_beha
 As you can see, it is very straight forward. This is a very basic expression tree with only one condition. This will not produce any results until you initialize a `PatternEvaluator` and provide an object resolver. As mentioned above, there may be a specific use case where you would want to provide your own.
 
 ### Resolving the object path
-The object path is part of the [STIX Cyber Observable](https://docs.oasis-open.org/cti/stix/v2.1/csprd02/stix-v2.1-csprd02.html#_Toc26789822) data model. In our above example, this would be the `process:name` in our condition. This example will demonstrate how the `PatternEvaluator` interacts with the `ObjectPathResolver`.
+The object path is part of the [STIX Cyber Observable](https://docs.oasis-open.org/cti/stix/v2.1/csprd02/stix-v2.1-csprd02.html#_Toc26789822) data model. In our above example, this would be the `process:name` in our condition. This example will demonstrate how the [`PatternEvaluator`](src/main/java/design/unstructured/stix/evaluator/PatternEvaluator.java) interacts with the `ObjectPathResolver`.
 
 First, we need to create a static resolver:
 ```java
