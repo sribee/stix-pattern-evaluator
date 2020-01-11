@@ -17,19 +17,22 @@
  */
 package design.unstructured.stix.evaluator;
 
-import design.unstructured.stix.evaluator.grammar.StixPatternListener;
-import design.unstructured.stix.evaluator.grammar.StixPatternParser;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 import java.util.function.Function;
 import java.util.function.Supplier;
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import design.unstructured.stix.evaluator.grammar.StixPatternListener;
+import design.unstructured.stix.evaluator.grammar.StixPatternParser;
+import design.unstructured.stix.evaluator.mapper.ObjectPathResolver;
 
 /**
  * When ANTLR walks the STIX pattern, this listener is notified when one of the
@@ -43,7 +46,7 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
 
     private static final Logger logger = LoggerFactory.getLogger(StixPatternProcessor.class);
 
-    private static final DateTimeFormatter tsFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss[.SSS]'Z'");
+    private final DateTimeFormatter timestampFormatter;
 
     private final Stack<Object> scope = new Stack<>();
 
@@ -58,7 +61,25 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
     };
 
     /**
-     * Returns the Pattern created by the lexer and parser.
+     * {@code timestampFormatter} defaults to "yyyy-MM-dd'T'HH:mm:ss[.SSS]'Z'".
+     *
+     * @see StixPatternProcessor#StixPatternProcessor(DateTimeFormatter)
+     */
+    public StixPatternProcessor() {
+        timestampFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss[.SSS]'Z'");
+    }
+
+    /**
+     * Initialize a pattern listener. Specify a timestamp formatter.
+     * 
+     * @param timestampFormater
+     */
+    public StixPatternProcessor(final DateTimeFormatter timestampFormater) {
+        this.timestampFormatter = timestampFormater;
+    }
+
+    /**
+     * Returns the Pattern created by this listener.
      *
      * @return
      */
@@ -224,7 +245,7 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
         } else if (ctx.HexLiteral() != null) {
             scope.push(ctx.getText());
         } else if (ctx.TimestampLiteral() != null) {
-            scope.push(tsFormatter.parse(ctx.getText()));
+            scope.push(timestampFormatter.parse(ctx.getText()));
         }
     }
 

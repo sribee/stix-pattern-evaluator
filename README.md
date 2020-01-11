@@ -35,7 +35,7 @@ This library is available through Maven Central Repository.
 There are a few different ways to implement this library. Depending on your use case, you may want to use your own expression tree evaluator or use the built-in evaluator. These snippets will, at the very minimum, get you started compiling and evaluating basic STIX expressions. For more  examples, take a look at the [examples](examples/) (still a WIP) directory.
 
 ### Compiling a basic STIX pattern
-The [`StixPatternProcessor`](https://github.com/hashdelta/stix-pattern-evaluator/blob/master/src/main/java/design/unstructured/stix/evaluator/StixPatternProcessor.java) class is where the magic happens. When compiling a pattern, ANTLR will walk through the expression and notify the listener when a grammar rule is triggered. When ANTLR is finished walking through the STIX pattern, a binary expression tree structure is compiled and contained within the [`Pattern`](https://github.com/hashdelta/stix-pattern-evaluator/blob/master/src/main/java/design/unstructured/stix/evaluator/Pattern.java) object.
+The [`StixPatternProcessor`](https://github.com/hashdelta/stix-pattern-evaluator/blob/master/src/main/java/design/unstructured/stix/evaluator/StixPatternProcessor.java) class is where the magic happens. When compiling a pattern, ANTLR will walk through the expression and notify the listener when a grammar rule is triggered. When ANTLR is finished walking through the STIX pattern, a binary expression tree structure is compiled and wrapped in a [`Pattern`](https://github.com/hashdelta/stix-pattern-evaluator/blob/master/src/main/java/design/unstructured/stix/evaluator/Pattern.java) object.
 
 ```java
 // Compile our pattern
