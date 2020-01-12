@@ -26,13 +26,13 @@ public interface ComparisonEvaluator {
 
     boolean isIn(Object contextObject, Set<Object> patternObject);
 
-    boolean isGreaterThan(int contextObject, int patternObject);
+    boolean isGreaterThan(Number contextObject, Number patternObject);
 
-    boolean isGreaterThanOrEqual(int contextObject, int patternObject);
+    boolean isGreaterThanOrEqual(Number contextObject, Number patternObject);
 
-    boolean isLessThan(int contextObject, int patternObject);
+    boolean isLessThan(Number contextObject, Number patternObject);
 
-    boolean isLessThanOrEqual(int contextObject, int patternObject);
+    boolean isLessThanOrEqual(Number contextObject, Number patternObject);
 
     boolean matches(Object contextObject, Object patternObject);
 }

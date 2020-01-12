@@ -140,26 +140,26 @@ public class PatternEvaluator implements ComparisonEvaluator {
             }
 
             case GreaterThan: {
-                comparisonExpression
-                        .setEvaluation(comparisonEvaluator.isGreaterThan((int) contextObject, (int) patternObject));
+                comparisonExpression.setEvaluation(
+                        comparisonEvaluator.isGreaterThan((Number) contextObject, (Number) patternObject));
                 break;
             }
 
             case GreaterThanOrEqual: {
                 comparisonExpression.setEvaluation(
-                        comparisonEvaluator.isGreaterThanOrEqual((int) contextObject, (int) patternObject));
+                        comparisonEvaluator.isGreaterThanOrEqual((Number) contextObject, (Number) patternObject));
                 break;
             }
 
             case LessThan: {
                 comparisonExpression
-                        .setEvaluation(comparisonEvaluator.isLessThan((int) contextObject, (int) patternObject));
+                        .setEvaluation(comparisonEvaluator.isLessThan((Number) contextObject, (Number) patternObject));
                 break;
             }
 
             case LessThanOrEqual: {
-                comparisonExpression
-                        .setEvaluation(comparisonEvaluator.isLessThanOrEqual((int) contextObject, (int) patternObject));
+                comparisonExpression.setEvaluation(
+                        comparisonEvaluator.isLessThanOrEqual((Number) contextObject, (Number) patternObject));
                 break;
             }
 
@@ -192,23 +192,23 @@ public class PatternEvaluator implements ComparisonEvaluator {
     }
 
     @Override
-    public boolean isGreaterThan(int contextObject, int patternObject) {
-        return contextObject > patternObject;
+    public boolean isGreaterThan(Number contextObject, Number patternObject) {
+        return contextObject.doubleValue() > patternObject.doubleValue();
     }
 
     @Override
-    public boolean isGreaterThanOrEqual(int contextObject, int patternObject) {
-        return contextObject >= patternObject;
+    public boolean isGreaterThanOrEqual(Number contextObject, Number patternObject) {
+        return contextObject.doubleValue() >= patternObject.doubleValue();
     }
 
     @Override
-    public boolean isLessThan(int contextObject, int patternObject) {
-        return contextObject < patternObject;
+    public boolean isLessThan(Number contextObject, Number patternObject) {
+        return contextObject.doubleValue() < patternObject.doubleValue();
     }
 
     @Override
-    public boolean isLessThanOrEqual(int contextObject, int patternObject) {
-        return contextObject <= patternObject;
+    public boolean isLessThanOrEqual(Number contextObject, Number patternObject) {
+        return contextObject.doubleValue() <= patternObject.doubleValue();
     }
 
     @Override

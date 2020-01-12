@@ -17,7 +17,9 @@
  */
 package design.unstructured.stix.evaluator;
 
+import java.math.BigInteger;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
@@ -32,7 +34,6 @@ import org.slf4j.LoggerFactory;
 
 import design.unstructured.stix.evaluator.grammar.StixPatternListener;
 import design.unstructured.stix.evaluator.grammar.StixPatternParser;
-import design.unstructured.stix.evaluator.mapper.ObjectPathResolver;
 
 /**
  * When ANTLR walks the STIX pattern, this listener is notified when one of the
@@ -238,12 +239,18 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
 
         if (ctx.IntPosLiteral() != null || ctx.IntNegLiteral() != null) {
             scope.push(Integer.parseInt(ctx.getText()));
+
         } else if (ctx.FloatPosLiteral() != null || ctx.FloatNegLiteral() != null) {
             scope.push(Float.parseFloat(ctx.getText()));
+
         } else if (ctx.BinaryLiteral() != null) {
-            scope.push(ctx.getText());
+            String base64 = ctx.getText().substring(2, ctx.getText().length() - 1);
+            scope.push(new String(Base64.getDecoder().decode(base64)));
+
         } else if (ctx.HexLiteral() != null) {
-            scope.push(ctx.getText());
+            String hexString = ctx.getText().substring(2, ctx.getText().length() - 1);
+            scope.push(Integer.parseInt(hexString, 16));
+
         } else if (ctx.TimestampLiteral() != null) {
             scope.push(timestampFormatter.parse(ctx.getText()));
         }

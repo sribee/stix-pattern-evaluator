@@ -42,6 +42,6 @@
     {
         "name": "Nested OR expression with multiple conditions",
         "description": "A test to verify multiple conditions with multiple nested expressions",
-        "pattern": "[[process:name = 'cmd.exe' OR process:name = 'notthis.exe'] AND [process:parent.name = 'explorer.exe']]"
+        "pattern": "[process:name = 'cmd.exe' OR process:name = 'notthis.exe'] AND [process:parent.name = 'explorer.exe']"
     }
 ]
