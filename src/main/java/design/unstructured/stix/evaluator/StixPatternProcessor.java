@@ -17,7 +17,6 @@
  */
 package design.unstructured.stix.evaluator;
 
-import java.math.BigInteger;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.HashSet;
@@ -177,9 +176,6 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
             comparator = ComparisonComparators.GreaterThanOrEqual;
         } else if (ctx.LE() != null) {
             comparator = ComparisonComparators.LessThanOrEqual;
-        } else {
-            logger.error(
-                    "an unrecognized ordering comparator was used in this pattern and cannot be evaluated, this may lead to an inconsistent or invalid result.");
         }
 
         scope.push(new ComparisonExpression(objectPath, value, comparator, ctx.NOT()));
