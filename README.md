@@ -1,9 +1,11 @@
 # stix-pattern-evaluator
 <p style="text-align: center;">
-[![Build Status](https://travis-ci.com/hashdelta/stix-pattern-evaluator.svg?branch=master)](https://travis-ci.com/hashdelta/stix-pattern-evaluator)
-
-<a href="https://travis-ci.com/hashdelta/stix-pattern-evaluator"><img src="https://travis-ci.com/hashdelta/stix-pattern-evaluator.svg?branch=master" alt="build status"></a>
-
+    <a href="https://travis-ci.com/hashdelta/stix-pattern-evaluator">
+        <img src="https://travis-ci.com/hashdelta/stix-pattern-evaluator.svg?branch=master" alt="build status">
+    </a>
+    <a href="https://codecov.io/gh/hashdelta/stix-pattern-evaluator">
+        <img src="https://codecov.io/gh/hashdelta/stix-pattern-evaluator/branch/master/graph/badge.svg" alt="coverage" />
+    </a>
 </p>
 
 This library is still considered a prototype and should not be depended on in a production environment until more development, testing, and documentation has been completed.
