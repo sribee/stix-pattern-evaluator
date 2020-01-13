@@ -1,4 +1,11 @@
 # stix-pattern-evaluator
+<p style="text-align: center;">
+[![Build Status](https://travis-ci.com/hashdelta/stix-pattern-evaluator.svg?branch=master)](https://travis-ci.com/hashdelta/stix-pattern-evaluator)
+
+<a href="https://travis-ci.com/hashdelta/stix-pattern-evaluator"><img src="https://travis-ci.com/hashdelta/stix-pattern-evaluator.svg?branch=master" alt="build status"></a>
+
+</p>
+
 This library is still considered a prototype and should not be depended on in a production environment until more development, testing, and documentation has been completed.
 
 This project is a Cyber Threat Intelligence (CTI) STIX v2.1 pattern compiler and expression evaluator written in Java 8 using the [ANTLR 4](https://www.antlr.org/) language parser. The ANTLR grammar is based on the OASIS [cti-stix2-json-schemas](https://github.com/oasis-open/cti-stix2-json-schemas) with [some minor changes](https://github.com/hashdelta/stix-pattern-evaluator/tree/master/src/main/resources/StixPattern.g4). The goal of this application is to compile a STIX Pattern expression and convert it into a logical Java expression tree. The project also provides means to evaluate the compiled pattern expressions and provide results right out of the box.
