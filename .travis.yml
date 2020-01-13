@@ -1,3 +1,9 @@
 language: java
+
+# Handle git submodules yourself
+git:
+    submodules: false
+    
+# Code cov
 after_success:
   - bash <(curl -s https://codecov.io/bash)
