@@ -167,11 +167,10 @@ public class PatternEvaluator implements ComparisonEvaluator {
                 comparisonExpression.setEvaluation(comparisonEvaluator.matches(contextObject, patternObject));
                 break;
             }
-
-            default: {
-                throw new PatternEvaluatorException(
-                        "Comparator " + comparisonExpression.getComparator() + " is not supported.");
-            }
+            // default: {
+            // throw new PatternEvaluatorException(
+            // "Comparator " + comparisonExpression.getComparator() + " is not supported.");
+            // }
             }
         }
     }

@@ -74,12 +74,66 @@ public class PatternEvaluatorTest {
     }
 
     @Test
+    void stringLiteralNotEquality_ReturnsFalse()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
+        Pattern pattern = buildTestPattern("[process:name != 'cmd.exe']");
+        PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
+
+        assertFalse(evaluator.get());
+    }
+
+    @Test
     void integerLiteralEquality_ReturnsTrue()
             throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
         Pattern pattern = buildTestPattern("[process:id = 459]");
         PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
 
         assertTrue(evaluator.get());
+    }
+
+    @Test
+    void integerLiteralGreaterThan_ReturnsTrue()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
+        Pattern pattern = buildTestPattern("[process:id > 458]");
+        PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
+
+        assertTrue(evaluator.get());
+    }
+
+    @Test
+    void integerLiteralGreaterThan_ReturnsFalse()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
+        Pattern pattern = buildTestPattern("[process:id > 460]");
+        PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
+
+        assertFalse(evaluator.get());
+    }
+
+    @Test
+    void integerLiteralGreaterThanOrEqual_ReturnsFalse()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
+        Pattern pattern = buildTestPattern("[process:id >= 460]");
+        PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
+
+        assertFalse(evaluator.get());
+    }
+
+    @Test
+    void integerLiteralLessThan_ReturnsFalse()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
+        Pattern pattern = buildTestPattern("[process:id < 450]");
+        PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
+
+        assertFalse(evaluator.get());
+    }
+
+    @Test
+    void integerLiteralLessThanOrEqual_ReturnsFalse()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
+        Pattern pattern = buildTestPattern("[process:id <= 450]");
+        PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
+
+        assertFalse(evaluator.get());
     }
 
     @Test
@@ -230,6 +284,14 @@ public class PatternEvaluatorTest {
     void nullPatternArgument_ThrowsException() {
         assertThrows(PatternEvaluatorException.class, () -> {
             new PatternEvaluator(null, null, null);
+        });
+    }
+
+    @Test
+    void unsupportedComparator_ThrowsException() {
+        assertThrows(PatternEvaluatorException.class, () -> {
+            new PatternEvaluator(buildTestPattern("[process:name ISSUPERSET '192.168.170.0/24']"), resolver, null)
+                    .get();
         });
     }
 
