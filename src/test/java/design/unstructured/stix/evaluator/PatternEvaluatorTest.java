@@ -44,7 +44,8 @@ public class PatternEvaluatorTest {
     }
 
     @Test
-    void stringLiteralEquality_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
+    void stringLiteralEquality_ReturnsTrue()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
         Pattern pattern = buildTestPattern("[process:name = 'cmd.exe']");
         PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
 
@@ -55,7 +56,8 @@ public class PatternEvaluatorTest {
     }
 
     @Test
-    void stringLiteralEquality_ReturnsFalse() throws PatternEvaluatorException, StixMapperException {
+    void stringLiteralEquality_ReturnsFalse()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
         Pattern pattern = buildTestPattern("[process:name = 'shouldnotequate.exe']");
         PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
 
@@ -63,7 +65,8 @@ public class PatternEvaluatorTest {
     }
 
     @Test
-    void stringLiteralNotEquality_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
+    void stringLiteralNotEquality_ReturnsTrue()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
         Pattern pattern = buildTestPattern("[process:name != 'shouldnotequate.exe']");
         PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
 
@@ -71,7 +74,27 @@ public class PatternEvaluatorTest {
     }
 
     @Test
-    void floatLiteralGreaterThan_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
+    void integerLiteralEquality_ReturnsTrue()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
+        Pattern pattern = buildTestPattern("[process:id = 459]");
+        PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
+
+        assertTrue(evaluator.get());
+    }
+
+    @Test
+    void negativeIntegerLiteralEquality_ReturnsTrue()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
+        resolver.add("process:negative_id", -459);
+        Pattern pattern = buildTestPattern("[process:negative_id = -459]");
+        PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
+
+        assertTrue(evaluator.get());
+    }
+
+    @Test
+    void floatLiteralGreaterThan_ReturnsTrue()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
         Pattern pattern = buildTestPattern("[process:float_test > 5.3]");
         resolver.add("process:float_test", 5.4);
         PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
@@ -80,7 +103,18 @@ public class PatternEvaluatorTest {
     }
 
     @Test
-    void booleanLiteralEquality_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
+    void negativeFloatLiteralEquality_ReturnsTrue()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
+        Pattern pattern = buildTestPattern("[process:neg_float_test = -5.3]");
+        resolver.add("process:neg_float_test", -5.3);
+        PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
+
+        assertTrue(evaluator.get());
+    }
+
+    @Test
+    void booleanLiteralEquality_ReturnsTrue()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
         Pattern pattern = buildTestPattern("[process:boolean_test = true]");
         resolver.add("process:boolean_test", true);
         PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
@@ -89,7 +123,8 @@ public class PatternEvaluatorTest {
     }
 
     @Test
-    void hexLiteralEquality_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
+    void hexLiteralEquality_ReturnsTrue()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
         Pattern pattern = buildTestPattern("[process:hex_test = h'FFFFFF']");
         resolver.add("process:hex_test", 0xFFFFFF);
         PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
@@ -103,7 +138,8 @@ public class PatternEvaluatorTest {
     }
 
     @Test
-    void binaryLiteralEquality_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
+    void binaryLiteralEquality_ReturnsTrue()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
         Pattern pattern = buildTestPattern("[process:base64_test = b'dGVzdA==']");
         resolver.add("process:base64_test", "test");
         PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
@@ -112,7 +148,8 @@ public class PatternEvaluatorTest {
     }
 
     @Test
-    void multipleConditionsWithAndComparator_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
+    void multipleConditionsWithAndComparator_ReturnsTrue()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
         Pattern pattern = buildTestPattern(
                 "[process:name = 'cmd.exe' AND process:parent.command_line = 'cmd.exe --help --this --test_a_long_argument' AND process:id = 459 AND process:administrator = true]");
         PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
@@ -121,9 +158,10 @@ public class PatternEvaluatorTest {
     }
 
     @Test
-    void multipleConditionsWithOrComparator_ReturnsTrue() throws PatternEvaluatorException, StixMapperException {
+    void multipleConditionsWithOrComparator_ReturnsTrue()
+            throws PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
         Pattern pattern = buildTestPattern(
-                "[process:name = 'thisreturnsfalse.exe' OR process:parent.command_line = 'cmd.exe --help --this --test_a_long_argument']");
+                "[process:name = 'thisreturnsfalse.exe' OR process:parent.command_line = 'cmd.exe --help --this --test_a_long_argument'] OR [process:name = 'cmd.exe']");
         PatternEvaluator evaluator = new PatternEvaluator(pattern, resolver, null);
 
         assertTrue(evaluator.get());
@@ -140,10 +178,11 @@ public class PatternEvaluatorTest {
      * @throws IOException
      * @throws PatternEvaluatorException
      * @throws StixMapperException
+     * @throws StixPatternProcessorException
      */
     @Test
     void evaluatePatternFile() throws ParseException, JsonParseException, JsonMappingException, IllegalStateException,
-            IOException, PatternEvaluatorException, StixMapperException {
+            IOException, PatternEvaluatorException, StixMapperException, StixPatternProcessorException {
 
         PatternList patterns = PatternUtils.loadPatternFile(
                 new File(PatternEvaluatorTest.class.getClassLoader().getResource(TEST_PATTERN_FILE).getFile()));
@@ -175,12 +214,26 @@ public class PatternEvaluatorTest {
 
     @Test
     void badPatternInput_ThrowsException() {
-        assertThrows(Exception.class, () -> {
+        assertThrows(StixPatternProcessorException.class, () -> {
             buildTestPattern("[process:name ! 'invalid syntax']");
         });
     }
 
-    private static Pattern buildTestPattern(final String rawPattern) {
+    @Test
+    void nullResolverArgument_ThrowsException() {
+        assertThrows(PatternEvaluatorException.class, () -> {
+            new PatternEvaluator(buildTestPattern("[process:name = 'test']"), null, null);
+        });
+    }
+
+    @Test
+    void nullPatternArgument_ThrowsException() {
+        assertThrows(PatternEvaluatorException.class, () -> {
+            new PatternEvaluator(null, null, null);
+        });
+    }
+
+    private static Pattern buildTestPattern(final String rawPattern) throws StixPatternProcessorException {
         printPattern(rawPattern);
         Pattern pattern = Pattern.build(rawPattern);
         printPattern(pattern);

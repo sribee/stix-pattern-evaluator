@@ -237,7 +237,7 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
             scope.push(Integer.parseInt(ctx.getText()));
 
         } else if (ctx.FloatPosLiteral() != null || ctx.FloatNegLiteral() != null) {
-            scope.push(Float.parseFloat(ctx.getText()));
+            scope.push(Double.parseDouble(ctx.getText()));
 
         } else if (ctx.BinaryLiteral() != null) {
             String base64 = ctx.getText().substring(2, ctx.getText().length() - 1);

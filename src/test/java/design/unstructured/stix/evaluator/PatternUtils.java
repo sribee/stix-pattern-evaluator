@@ -16,18 +16,15 @@ public class PatternUtils {
 
         private static final long serialVersionUID = 1L;
 
-        void evaluateAll() throws ParseException {
-            int pos = 0;
-
+        void evaluateAll() throws ParseException, StixPatternProcessorException {
             for (StixPattern stixPattern : this) {
                 Pattern pattern = Pattern.build(stixPattern.getPattern());
 
                 if (pattern == null) {
-                    throw new ParseException("Unable to parse pattern: " + stixPattern.getPattern(), pos);
+                    throw new StixPatternProcessorException("Unable to parse pattern: " + stixPattern.getPattern());
                 }
 
                 stixPattern.setParsedPattern(pattern);
-                pos++;
             }
         }
     }

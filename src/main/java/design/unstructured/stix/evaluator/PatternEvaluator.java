@@ -63,7 +63,7 @@ public class PatternEvaluator implements ComparisonEvaluator {
      */
     public PatternEvaluator(Pattern pattern, ObjectPathResolver resolver, ComparisonEvaluator comparisonEvaluator,
             Object object) throws PatternEvaluatorException {
-        if (pattern.getExpression() == null) {
+        if (pattern == null || pattern.getExpression() == null) {
             throw new PatternEvaluatorException("Empty pattern evaluation.");
         }
 
