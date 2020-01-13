@@ -287,14 +287,6 @@ public class PatternEvaluatorTest {
         });
     }
 
-    @Test
-    void unsupportedComparator_ThrowsException() {
-        assertThrows(PatternEvaluatorException.class, () -> {
-            new PatternEvaluator(buildTestPattern("[process:name ISSUPERSET '192.168.170.0/24']"), resolver, null)
-                    .get();
-        });
-    }
-
     private static Pattern buildTestPattern(final String rawPattern) throws StixPatternProcessorException {
         printPattern(rawPattern);
         Pattern pattern = Pattern.build(rawPattern);
