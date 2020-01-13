@@ -6,6 +6,9 @@
     <a href="https://codecov.io/gh/hashdelta/stix-pattern-evaluator">
         <img src="https://codecov.io/gh/hashdelta/stix-pattern-evaluator/branch/master/graph/badge.svg" alt="coverage" />
     </a>
+    <a href="https://search.maven.org/artifact/design.unstructured/stix-pattern-evaluator">
+        <img src="https://maven-badges.herokuapp.com/maven-central/design.unstructured/stix-pattern-evaluator/badge.svg" alt="maven central" />
+    </a>
 </p>
 
 This library is still considered a prototype and should not be depended on in a production environment until more development, testing, and documentation has been completed.
