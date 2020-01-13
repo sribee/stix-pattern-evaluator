@@ -11,7 +11,7 @@
 	<artifactId>spring-kafka-feed-example</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Spring Kafka Feed Example</name>
-	<description>Demo project that demonstrates using the stix-pattern-evaluator library with Kafka Streams</description>
+	<description>A project that demonstrates using the stix-pattern-evaluator library with Kafka Streams</description>
 
 	<properties>
 		<java.version>1.8</java.version>
