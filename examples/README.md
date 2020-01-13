@@ -1,2 +1,0 @@
-# Examples
-Initial commit / placeholder. This directory will contain examples that demonstrate the use of the stix-pattern-evaluator library and mapping Java objects to their Cyber Observable counterparts.
