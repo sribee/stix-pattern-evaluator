@@ -35,6 +35,8 @@ Since this library is still in its infant stages, it might be necessary to provi
 ## Getting Started
 It is recommended to become familiar with STIX Patterning. The [OASIS specification](https://docs.oasis-open.org/cti/stix/v2.1/csprd02/stix-v2.1-csprd02.html) might be overwhelming; to make your life easier, take a look at [New Context's Quick Reference Card](examples/assets/STIX-Patterning-Quick-Reference-Card.pdf).
 
+There are a few different ways to implement this library. Depending on your use case, you may want to use your own [`ComparisonEvaluator`](src/main/java/design/unstructured/stix/evaluator/ComparisonEvaluator.java) or use the built-in evaluator. These snippets will, at the very minimum, get you started compiling and evaluating basic STIX patterns. For more  examples, take a look at the [examples](examples/) (currently a placeholder) directory.
+
 This library is available through Maven Central Repository.
 
 ```xml
@@ -45,7 +47,10 @@ This library is available through Maven Central Repository.
 </dependency>
 ```
 
-There are a few different ways to implement this library. Depending on your use case, you may want to use your own [`ComparisonEvaluator`](src/main/java/design/unstructured/stix/evaluator/ComparisonEvaluator.java) or use the built-in evaluator. These snippets will, at the very minimum, get you started compiling and evaluating basic STIX patterns. For more  examples, take a look at the [examples](examples/) (currently a placeholder) directory.
+A simple `install` will run the necessary phases:
+```bash
+mvn install
+```
 
 ### Compiling a STIX Pattern
 The [`StixPatternProcessor`](src/main/java/design/unstructured/stix/evaluator/StixPatternProcessor.java) class is an implementation of the `StixPatternListener`. This is where the grammar rules are parsed and compiled. When compiling a pattern, ANTLR will walk through the expression and notify the listener when a grammar rule is triggered. When ANTLR is finished walking through the STIX pattern, a binary expression tree is compiled and wrapped in a [`Pattern`](src/main/java/design/unstructured/stix/evaluator/Pattern.java) object.
