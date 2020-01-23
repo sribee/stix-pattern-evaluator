@@ -15,7 +15,7 @@
 package design.unstructured.stix.evaluator;
 
 import design.unstructured.stix.evaluator.mapper.ObjectPathResolver;
-import design.unstructured.stix.evaluator.mapper.StixMapperException;
+import design.unstructured.stix.evaluator.mapper.StixMappingException;
 import java.util.Set;
 
 /**
@@ -54,7 +54,8 @@ public class PatternEvaluator implements ComparisonEvaluator {
      * @param resolver
      * @throws PatternEvaluatorException
      */
-    public PatternEvaluator(Pattern pattern, ObjectPathResolver resolver, ComparisonEvaluator comparisonEvaluator, Object object) throws PatternEvaluatorException {
+    public PatternEvaluator(Pattern pattern, ObjectPathResolver resolver, ComparisonEvaluator comparisonEvaluator, Object object)
+            throws PatternEvaluatorException {
         if (pattern == null || pattern.getExpression() == null) {
             throw new PatternEvaluatorException("Empty pattern evaluation.");
         }
@@ -74,16 +75,16 @@ public class PatternEvaluator implements ComparisonEvaluator {
      * depends on the complexity and depth of the expression tree.
      * 
      * @return the result of the expression in this pattern
-     * @throws StixMapperException
+     * @throws StixMappingException
      * @throws PatternEvaluatorException
      */
-    public Boolean get() throws StixMapperException, PatternEvaluatorException {
+    public Boolean get() throws StixMappingException, PatternEvaluatorException {
         evaluator(pattern.getExpression());
 
         return pattern.evaluate();
     }
 
-    private void evaluator(BaseObservationExpression expression) throws StixMapperException, PatternEvaluatorException {
+    private void evaluator(BaseObservationExpression expression) throws StixMappingException, PatternEvaluatorException {
         if (expression.getClass().equals(CombinedObservationExpression.class)) {
             CombinedObservationExpression combinedObsExp = (CombinedObservationExpression) expression;
 
@@ -97,7 +98,7 @@ public class PatternEvaluator implements ComparisonEvaluator {
         }
     }
 
-    private void evaluator(BaseComparisonExpression expression) throws StixMapperException, PatternEvaluatorException {
+    private void evaluator(BaseComparisonExpression expression) throws StixMappingException, PatternEvaluatorException {
 
         // If our expression is not a ComparisonExpression, evaluate our combined
         // expressions
@@ -113,6 +114,14 @@ public class PatternEvaluator implements ComparisonEvaluator {
             ComparisonExpression comparisonExpression = (ComparisonExpression) expression;
             Object contextObject = resolver.getValue(object, comparisonExpression.getObjectPath());
             Object patternObject = comparisonExpression.getValue();
+
+            // The getValue(...) may return null, in which case the lookup failed for whatever reason. STIX v2.1
+            // has no specification on patterns with null comparison. It is safe to assume we can set our
+            // evaluation to false and exit to avoid NPE's.
+            if (contextObject == null) {
+                comparisonExpression.setEvaluation(false);
+                return;
+            }
 
             switch (comparisonExpression.getComparator()) {
                 case Equal: {

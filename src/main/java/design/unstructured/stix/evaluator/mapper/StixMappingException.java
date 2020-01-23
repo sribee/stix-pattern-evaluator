@@ -15,11 +15,14 @@
 package design.unstructured.stix.evaluator.mapper;
 
 /**
- * Still need to determine if this is the most appropriate name for this interface. Some other
- * considerations: ObjectPathMapper, ObservableMapper, ObservablePathMapper. I am not particularly
- * crazy about the "Resolver" lingo being used here.
+ *
+ * @author ccarv
  */
-public interface ObjectPathResolver {
+public class StixMappingException extends Exception {
 
-    Object getValue(Object object, String objectPath) throws StixMappingException;
+    private static final long serialVersionUID = 1L;
+
+    public StixMappingException(String message) {
+        super(message);
+    }
 }
