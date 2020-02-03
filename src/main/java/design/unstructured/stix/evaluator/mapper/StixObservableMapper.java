@@ -46,18 +46,6 @@ public class StixObservableMapper implements ObjectPathResolver {
 
     private final List<String> pathFilter = new ArrayList<>();
 
-    /**
-     * Use to split STIX observable object path (process:parent_ref:name) into a string array.
-     */
-    private final Function<String, String[]> propertySplitter = property -> {
-        String propertyReplaced = property;
-
-        for (String filter : pathFilter) {
-            propertyReplaced = propertyReplaced.replace(filter + ".", "");
-        }
-
-        return propertyReplaced.split("(\\.)|(:)");
-    };
 
     /**
      * Joins a string array back to a STIX observable object path.
@@ -123,8 +111,7 @@ public class StixObservableMapper implements ObjectPathResolver {
                 boolean isReferenceNode = entry.getKey().isEmpty();
                 Field field = entry.getValue();
                 String propertyName = (!isReferenceNode ? entry.getKey() : "&" + field.getName());
-                String[] properties = propertySplitter.apply(propertyName);
-
+                String[] properties = propertyName.split("(\\.)|(:)"); // propertySplitter.apply(propertyName);
                 Boolean isGeneric = isGenericJavaType(field.getType());
 
                 if (!observables.containsKey(field.getType()) && !isGeneric) {
@@ -258,7 +245,11 @@ public class StixObservableMapper implements ObjectPathResolver {
 
         } else {
             // Our path wasn't available, need to walk the tree manually
-            String[] properties = propertySplitter.apply(path);
+            String[] properties = ObjectPathUtils.explode(path, pathFilter);
+
+            if (properties == null || properties.length == 1) {
+                throw new StixMappingException("An invalid STIX observable object path (" + path + ") was specified.");
+            }
 
             nodePath = new ArrayList<>();
             node = observableTree.get(properties[0]);
@@ -278,7 +269,7 @@ public class StixObservableMapper implements ObjectPathResolver {
                     nodePath.add(node);
 
                     if (observables.get(node.getClazz()).equals(StixAnnotationType.ENTITY)) {
-                        String newPath = propertyJoiner.apply(ArrayUtils.remove(properties, i));
+                        String newPath = ObjectPathUtils.implode(ArrayUtils.remove(properties, i));
 
                         logger.trace("child node '{}' class type is type @StixEntity, using existing cache for lookup of path '{}'", node.getName(),
                                 newPath);

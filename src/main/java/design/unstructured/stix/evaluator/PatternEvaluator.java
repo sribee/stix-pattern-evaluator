@@ -210,7 +210,7 @@ public class PatternEvaluator implements ComparisonEvaluator {
     public boolean matches(Object contextObject, Object patternObject) {
         java.util.regex.Pattern regexPattern = (java.util.regex.Pattern) patternObject;
 
-        return regexPattern.matcher((String) contextObject).find();
+        return regexPattern.matcher((String) contextObject).matches();
     }
 
 }

@@ -82,13 +82,17 @@ public class StixMapperTest {
     }
 
     @Test
-    void getValue_FromNotExistentObservable_ThrowsException() {
+    void getValue_FromNotExistentObservable_ThrowsException() throws StixMappingException {
         assertThrows(StixMappingException.class, () -> {
             mapper.getValue(testProcess, "process:ad");
         });
 
         assertThrows(StixMappingException.class, () -> {
             mapper.getValue(testProcess, "process1");
+        });
+
+        assertThrows(StixMappingException.class, () -> {
+            mapper.getValue(testProcess, "");
         });
     }
 }
