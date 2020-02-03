@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Arrays;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,7 +14,7 @@ public class ObjectPathUtilsTest {
 
     @Test
     public void splitObjectPath_SingleProperty_NoFilter() {
-        String[] split = ObjectPathUtils.explode("process:name");
+        String[] split = ObjectPathUtils.toArray("process:name");
 
         assertEquals("process", split[0]);
         assertEquals("name", split[1]);
@@ -23,7 +22,7 @@ public class ObjectPathUtilsTest {
 
     @Test
     public void splitObjectPath_MultipleProperties() {
-        String[] split = ObjectPathUtils.explode("process:parent_ref.name");
+        String[] split = ObjectPathUtils.toArray("process:parent_ref.name");
 
         assertEquals("process", split[0]);
         assertEquals("parent_ref", split[1]);
@@ -32,7 +31,7 @@ public class ObjectPathUtilsTest {
 
     @Test
     public void splitObjectPath_10Properties() {
-        String[] split = ObjectPathUtils.explode("process:one.two.three.four.five.six.seven.eight.nine.ten");
+        String[] split = ObjectPathUtils.toArray("process:one.two.three.four.five.six.seven.eight.nine.ten");
 
         assertEquals("process", split[0]);
         assertEquals("one", split[1]);
@@ -49,7 +48,7 @@ public class ObjectPathUtilsTest {
 
     @Test
     public void splitObjectPath_SingleFilterProperty() {
-        String[] split = ObjectPathUtils.explode("process:parent_ref.name", Arrays.asList("parent_ref"));
+        String[] split = ObjectPathUtils.toArray("process:parent_ref.name", Arrays.asList("parent_ref"));
 
         assertEquals("process", split[0]);
         assertEquals("name", split[1]);
@@ -57,7 +56,7 @@ public class ObjectPathUtilsTest {
 
     @Test
     public void splitObjectPath_MultipleFilterProperty() {
-        String[] split = ObjectPathUtils.explode("process:parent_ref.test.name", Arrays.asList("parent_ref", "test"));
+        String[] split = ObjectPathUtils.toArray("process:parent_ref.test.name", Arrays.asList("parent_ref", "test"));
 
         assertEquals("process", split[0]);
         assertEquals("name", split[1]);
@@ -65,10 +64,10 @@ public class ObjectPathUtilsTest {
 
     @Test
     public void splitObjectPath_InvalidObjectPath_ReturnsNull() {
-        assertNull(ObjectPathUtils.explode("process"));
-        assertNull(ObjectPathUtils.explode("process.name"));
-        assertNull(ObjectPathUtils.explode("object:"));
-        assertNull(ObjectPathUtils.explode("o"));
-        assertNull(ObjectPathUtils.explode(""));
+        assertNull(ObjectPathUtils.toArray("process"));
+        assertNull(ObjectPathUtils.toArray("process.name"));
+        assertNull(ObjectPathUtils.toArray("object:"));
+        assertNull(ObjectPathUtils.toArray("o"));
+        assertNull(ObjectPathUtils.toArray(""));
     }
 }

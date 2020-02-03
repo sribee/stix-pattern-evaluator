@@ -14,10 +14,6 @@
  */
 package design.unstructured.stix.evaluator.mapper;
 
-import com.google.common.base.CaseFormat;
-import design.unstructured.stix.evaluator.mapper.annotations.StixAnnotationType;
-import design.unstructured.stix.evaluator.mapper.annotations.StixEntity;
-import design.unstructured.stix.evaluator.mapper.annotations.StixProperty;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,10 +21,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
+
+import com.google.common.base.CaseFormat;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import design.unstructured.stix.evaluator.mapper.annotations.StixAnnotationType;
+import design.unstructured.stix.evaluator.mapper.annotations.StixEntity;
+import design.unstructured.stix.evaluator.mapper.annotations.StixProperty;
 
 /**
  * The purpose of this class is to bring the Cyber Observable data model to your java objects. This
@@ -45,22 +47,6 @@ public class StixObservableMapper implements ObjectPathResolver {
     private final Map<String, StixObservablePropertyNode> observableTree = new HashMap<>();
 
     private final List<String> pathFilter = new ArrayList<>();
-
-
-    /**
-     * Joins a string array back to a STIX observable object path.
-     */
-    private final Function<String[], String> propertyJoiner = properties -> {
-        StringBuilder joined = new StringBuilder();
-
-        for (int i = 0; i < properties.length; i++) {
-            char delimeter = (i == 0 ? ':' : '.');
-
-            joined.append(properties[i]).append(delimeter);
-        }
-
-        return joined.substring(0, joined.length() - 1);
-    };
 
     /**
      * The StixObservableTreeIntrospector uses reflection (type introspection) to build a STIX
@@ -245,31 +231,31 @@ public class StixObservableMapper implements ObjectPathResolver {
 
         } else {
             // Our path wasn't available, need to walk the tree manually
-            String[] properties = ObjectPathUtils.explode(path, pathFilter);
+            String[] objectPath = ObjectPathUtils.toArray(path);
 
-            if (properties == null || properties.length == 1) {
+            if (objectPath == null || objectPath.length == 1) {
                 throw new StixMappingException("An invalid STIX observable object path (" + path + ") was specified.");
             }
 
             nodePath = new ArrayList<>();
-            node = observableTree.get(properties[0]);
+            node = observableTree.get(objectPath[0]);
 
             if (node == null) {
                 throw new StixMappingException(
-                        "Unable to find root observable node for path '" + path + "', the property '" + properties[0] + "' was not found");
+                        "Unable to find root observable node for path '" + path + "', the property '" + objectPath[0] + "' was not found");
             }
 
             nodePath.add(node);
 
-            for (int i = 1; i < properties.length; i++) {
-                node = node.getChildren().get(properties[i]);
+            for (int i = 1; i < objectPath.length; i++) {
+                node = node.getChildren().get(objectPath[i]);
 
                 if (node != null) {
                     logger.trace("found child node '{}'", node.getName());
                     nodePath.add(node);
 
                     if (observables.get(node.getClazz()).equals(StixAnnotationType.ENTITY)) {
-                        String newPath = ObjectPathUtils.implode(ArrayUtils.remove(properties, i));
+                        String newPath = ObjectPathUtils.toPath(ArrayUtils.remove(objectPath, i));
 
                         logger.trace("child node '{}' class type is type @StixEntity, using existing cache for lookup of path '{}'", node.getName(),
                                 newPath);
@@ -278,7 +264,7 @@ public class StixObservableMapper implements ObjectPathResolver {
                     }
                 } else {
                     throw new StixMappingException(
-                            "Unable to find observable node for path '" + path + "', property '" + properties[i] + "' was not found");
+                            "Unable to find observable node for path '" + path + "', property '" + objectPath[i] + "' was not found");
                 }
             }
         }

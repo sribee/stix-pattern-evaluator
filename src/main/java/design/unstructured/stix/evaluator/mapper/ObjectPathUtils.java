@@ -1,30 +1,33 @@
 package design.unstructured.stix.evaluator.mapper;
 
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * ObjectPath
+ * This utility class is designed to provide minimal helper functionality around the STIX
+ * Cyber-observable Objects per STIX v2.1 documentation. It does not provide linting in any form.
  */
 public class ObjectPathUtils {
 
-    public static String[] explode(String objectString) {
-        return explode(objectString, null);
+    /**
+     * {@code propertyFilters} defaults to {@code null}.
+     *
+     * @see #toArray(String, List)
+     */
+    public static String[] toArray(String objectString) {
+        return toArray(objectString, null);
     }
 
     /**
-     * Explodes a STIX observable object path into a string array. Property filters will be applied to
-     * the returned object path array.
+     * Separates a STIX observable object path string into a string array. Property filters will be
+     * applied to the returned object path array. A null will be returned for an invalid object path.
      * 
      * @param objectString
      * @param propertyFilters
-     * @return
+     * @return An array of STIX observable object and properties
      */
-    public static String[] explode(String objectString, List<String> propertyFilters) {
+    public static String[] toArray(String objectString, List<String> propertyFilters) {
         int objectPosition = objectString.indexOf(':');
 
         if (objectPosition < 1) {
@@ -54,14 +57,21 @@ public class ObjectPathUtils {
             propertyPath = new String[] {object, properties};
 
         } else {
-            // There is more than one property, use ArrayUtils to prepend our 'object'
+            // There is more than one property, use ArrayUtils to prepend our observable 'object'
             propertyPath = ArrayUtils.insert(0, propertyPath, object);
         }
 
         return propertyPath;
     }
 
-    public static String implode(String[] objectPath) {
+    /**
+     * Joins a string array to form a valid STIX observable object path. This does not validate whether
+     * the path points a known observable.
+     * 
+     * @param objectPath
+     * @return
+     */
+    public static String toPath(String[] objectPath) {
         StringBuilder joined = new StringBuilder();
 
         for (int i = 0; i < objectPath.length; i++) {
@@ -76,6 +86,8 @@ public class ObjectPathUtils {
     /**
      * To avoid using Java's {@code String::split(...)} and taking a performance hit, here is an
      * implementation that does not use regular expression.
+     * 
+     * Unknown author.
      * 
      * @param line
      * @param delimiter
