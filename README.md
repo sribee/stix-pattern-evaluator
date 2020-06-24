@@ -131,4 +131,4 @@ The STIX v2.1 specification supports 12 comparison operators. In the table below
 ## License
 Copyright (C) 2020 - Christopher Carver
 
-Licensed under the GNU General Public License v3.
+Licensed under the [Apache License v2](https://www.apache.org/licenses/LICENSE-2.0).

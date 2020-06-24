@@ -1,3 +1,22 @@
+/*
+* stix-pattern-evaluator
+* Copyright (C) 2020 - Christopher Carver
+* 
+* Licensed to the Apache Software Foundation (ASF) under one or more
+* contributor license agreements.  See the NOTICE file distributed with
+* this work for additional information regarding copyright ownership.
+* The ASF licenses this file to You under the Apache License, Version 2.0
+* (the "License"); you may not use this file except in compliance with
+* the License.  You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 package design.unstructured.stix.evaluator.mapper;
 
 import java.util.List;
@@ -5,8 +24,9 @@ import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
- * This utility class is designed to provide minimal helper functionality around the STIX
- * Cyber-observable Objects per STIX v2.1 documentation. It does not provide linting in any form.
+ * This utility class is designed to provide minimal helper functionality around
+ * the STIX Cyber-observable Objects per STIX v2.1 documentation. It does not
+ * provide linting in any form.
  */
 public class ObjectPathUtils {
 
@@ -20,8 +40,9 @@ public class ObjectPathUtils {
     }
 
     /**
-     * Separates a STIX observable object path string into a string array. Property filters will be
-     * applied to the returned object path array. A null will be returned for an invalid object path.
+     * Separates a STIX observable object path string into a string array. Property
+     * filters will be applied to the returned object path array. A null will be
+     * returned for an invalid object path.
      * 
      * @param objectString
      * @param propertyFilters
@@ -53,11 +74,13 @@ public class ObjectPathUtils {
         String[] propertyPath = stringSplit(properties, '.');
 
         if (propertyPath.length == 1) {
-            // There is only a single property, we can create the array manually to avoid overhead
-            propertyPath = new String[] {object, properties};
+            // There is only a single property, we can create the array manually to avoid
+            // overhead
+            propertyPath = new String[] { object, properties };
 
         } else {
-            // There is more than one property, use ArrayUtils to prepend our observable 'object'
+            // There is more than one property, use ArrayUtils to prepend our observable
+            // 'object'
             propertyPath = ArrayUtils.insert(0, propertyPath, object);
         }
 
@@ -65,8 +88,8 @@ public class ObjectPathUtils {
     }
 
     /**
-     * Joins a string array to form a valid STIX observable object path. This does not validate whether
-     * the path points a known observable.
+     * Joins a string array to form a valid STIX observable object path. This does
+     * not validate whether the path points a known observable.
      * 
      * @param objectPath
      * @return
@@ -84,8 +107,8 @@ public class ObjectPathUtils {
     }
 
     /**
-     * To avoid using Java's {@code String::split(...)} and taking a performance hit, here is an
-     * implementation that does not use regular expression.
+     * To avoid using Java's {@code String::split(...)} and taking a performance
+     * hit, here is an implementation that does not use regular expression.
      * 
      * Unknown author.
      * 

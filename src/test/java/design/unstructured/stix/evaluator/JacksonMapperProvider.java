@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 /**
- * Singleton provider for Jackson ObjectMapper reader and writer instances.
+ * Static provider for Jackson ObjectMapper reader and writer instances.
  */
 public final class JacksonMapperProvider {
 
