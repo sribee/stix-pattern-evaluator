@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import design.unstructured.stix.evaluator.mapper.ObjectPathResolver;
-import design.unstructured.stix.evaluator.mapper.StixMapperException;
+import design.unstructured.stix.evaluator.mapper.StixMappingException;
 
 public class StaticObjectPathProvider implements ObjectPathResolver {
 
@@ -17,7 +17,7 @@ public class StaticObjectPathProvider implements ObjectPathResolver {
     }
 
     @Override
-    public Object getValue(Object object, String objectPath) throws StixMapperException {
+    public Object getValue(Object object, String objectPath) throws StixMappingException {
         return objectPaths.get(objectPath);
     }
 

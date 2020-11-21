@@ -17,20 +17,17 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package design.unstructured.stix.evaluator.mapper.annotations;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package design.unstructured.stix.evaluator.mapper;
 
 /**
  *
  * @author ccarv
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface StixEntity {
+public class StixMappingException extends Exception {
 
-    String name() default "";
+    private static final long serialVersionUID = 1L;
+
+    public StixMappingException(String message) {
+        super(message);
+    }
 }

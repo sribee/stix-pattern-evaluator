@@ -1,26 +1,24 @@
 /*
- * stix-pattern-evaluator
- * Copyright (C) 2020 - Christopher Carver
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+* stix-pattern-evaluator
+* Copyright (C) 2020 - Christopher Carver
+* 
+* Licensed to the Apache Software Foundation (ASF) under one or more
+* contributor license agreements.  See the NOTICE file distributed with
+* this work for additional information regarding copyright ownership.
+* The ASF licenses this file to You under the Apache License, Version 2.0
+* (the "License"); you may not use this file except in compliance with
+* the License.  You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 package design.unstructured.stix.evaluator.mapper;
 
-import com.google.common.base.CaseFormat;
-import design.unstructured.stix.evaluator.mapper.annotations.StixAnnotationType;
-import design.unstructured.stix.evaluator.mapper.annotations.StixEntity;
-import design.unstructured.stix.evaluator.mapper.annotations.StixProperty;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,10 +26,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
+
+import com.google.common.base.CaseFormat;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import design.unstructured.stix.evaluator.mapper.annotations.StixAnnotationType;
+import design.unstructured.stix.evaluator.mapper.annotations.StixEntity;
+import design.unstructured.stix.evaluator.mapper.annotations.StixProperty;
 
 /**
  * The purpose of this class is to bring the Cyber Observable data model to your
@@ -40,44 +44,15 @@ import org.slf4j.LoggerFactory;
  *
  * @author ccarv
  */
-public class StixMapper implements ObjectPathResolver {
+public class StixObservableMapper implements ObjectPathResolver {
 
-    private static final Logger logger = LoggerFactory.getLogger(StixMapper.class);
+    private static final Logger logger = LoggerFactory.getLogger(StixObservableMapper.class);
 
     private final Map<Class<?>, StixAnnotationType> observables = new HashMap<>();
 
     private final Map<String, StixObservablePropertyNode> observableTree = new HashMap<>();
 
     private final List<String> pathFilter = new ArrayList<>();
-
-    /**
-     * Use to split STIX observable object path (process:parent_ref:name) into a
-     * string array.
-     */
-    private final Function<String, String[]> propertySplitter = property -> {
-        String propertyReplaced = property;
-
-        for (String filter : pathFilter) {
-            propertyReplaced = propertyReplaced.replace(filter + ".", "");
-        }
-
-        return propertyReplaced.split("(\\.)|(:)");
-    };
-
-    /**
-     * Joins a string array back to a STIX observable object path.
-     */
-    private final Function<String[], String> propertyJoiner = properties -> {
-        StringBuilder joined = new StringBuilder();
-
-        for (int i = 0; i < properties.length; i++) {
-            char delimeter = (i == 0 ? ':' : '.');
-
-            joined.append(properties[i]).append(delimeter);
-        }
-
-        return joined.substring(0, joined.length() - 1);
-    };
 
     /**
      * The StixObservableTreeIntrospector uses reflection (type introspection) to
@@ -129,8 +104,7 @@ public class StixMapper implements ObjectPathResolver {
                 boolean isReferenceNode = entry.getKey().isEmpty();
                 Field field = entry.getValue();
                 String propertyName = (!isReferenceNode ? entry.getKey() : "&" + field.getName());
-                String[] properties = propertySplitter.apply(propertyName);
-
+                String[] properties = propertyName.split("(\\.)|(:)"); // propertySplitter.apply(propertyName);
                 Boolean isGeneric = isGenericJavaType(field.getType());
 
                 if (!observables.containsKey(field.getType()) && !isGeneric) {
@@ -176,7 +150,7 @@ public class StixMapper implements ObjectPathResolver {
      * @see design.unstructured.stix.evaluator.mapper.annotations}
      * @param stixClasses
      */
-    public StixMapper(final Set<Class<?>> stixClasses) {
+    public StixObservableMapper(final Set<Class<?>> stixClasses) {
         logger.debug("scanning for @StixEntity and @StixObject in {} classes", stixClasses.size());
 
         // Scan for STIX Entity annotations
@@ -205,8 +179,10 @@ public class StixMapper implements ObjectPathResolver {
     /**
      * Adds a path filter that will be used during getFilter(...).
      */
-    public void addPathFilter(final String filter) {
+    public StixObservableMapper addPathFilter(final String filter) {
         pathFilter.add(filter);
+
+        return this;
     }
 
     /**
@@ -216,10 +192,10 @@ public class StixMapper implements ObjectPathResolver {
      * @param object
      * @param path
      * @return
-     * @throws StixMapperException
+     * @throws StixMappingException
      */
     @Override
-    public Object getValue(final Object object, final String path) throws StixMapperException {
+    public Object getValue(final Object object, final String path) throws StixMappingException {
         Object value = null;
 
         if (observables.containsKey(object.getClass())) {
@@ -237,7 +213,7 @@ public class StixMapper implements ObjectPathResolver {
                             instance = node.getField().get(instance);
 
                         } catch (IllegalArgumentException | IllegalAccessException ex) {
-                            throw new StixMapperException(ex.getMessage());
+                            throw new StixMappingException(ex.getMessage());
                         }
 
                     } else if (instance != null) {
@@ -257,7 +233,7 @@ public class StixMapper implements ObjectPathResolver {
      *
      * @return
      */
-    private List<StixObservablePropertyNode> buildNodePath(final String path) throws StixMapperException {
+    private List<StixObservablePropertyNode> buildNodePath(final String path) throws StixMappingException {
         List<StixObservablePropertyNode> nodePath;
         StixObservablePropertyNode node;
 
@@ -270,27 +246,31 @@ public class StixMapper implements ObjectPathResolver {
 
         } else {
             // Our path wasn't available, need to walk the tree manually
-            String[] properties = propertySplitter.apply(path);
+            String[] objectPath = ObjectPathUtils.toArray(path);
+
+            if (objectPath == null || objectPath.length == 1) {
+                throw new StixMappingException("An invalid STIX observable object path (" + path + ") was specified.");
+            }
 
             nodePath = new ArrayList<>();
-            node = observableTree.get(properties[0]);
+            node = observableTree.get(objectPath[0]);
 
             if (node == null) {
-                throw new StixMapperException("Unable to find root observable node for path '" + path
-                        + "', the property '" + properties[0] + "' was not found");
+                throw new StixMappingException("Unable to find root observable node for path '" + path
+                        + "', the property '" + objectPath[0] + "' was not found");
             }
 
             nodePath.add(node);
 
-            for (int i = 1; i < properties.length; i++) {
-                node = node.getChildren().get(properties[i]);
+            for (int i = 1; i < objectPath.length; i++) {
+                node = node.getChildren().get(objectPath[i]);
 
                 if (node != null) {
                     logger.trace("found child node '{}'", node.getName());
                     nodePath.add(node);
 
                     if (observables.get(node.getClazz()).equals(StixAnnotationType.ENTITY)) {
-                        String newPath = propertyJoiner.apply(ArrayUtils.remove(properties, i));
+                        String newPath = ObjectPathUtils.toPath(ArrayUtils.remove(objectPath, i));
 
                         logger.trace(
                                 "child node '{}' class type is type @StixEntity, using existing cache for lookup of path '{}'",
@@ -299,8 +279,8 @@ public class StixMapper implements ObjectPathResolver {
                         break;
                     }
                 } else {
-                    throw new StixMapperException("Unable to find observable node for path '" + path + "', property '"
-                            + properties[i] + "' was not found");
+                    throw new StixMappingException("Unable to find observable node for path '" + path + "', property '"
+                            + objectPath[i] + "' was not found");
                 }
             }
         }

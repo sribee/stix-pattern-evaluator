@@ -21,7 +21,7 @@ public class StixMapperTest {
 
     Process testProcess = new Process();
 
-    StixMapper mapper;
+    StixObservableMapper mapper;
 
     @BeforeAll
     static void configureLogger() throws SecurityException, IOException {
@@ -33,7 +33,7 @@ public class StixMapperTest {
         Set<Class<?>> classes = new HashSet<>();
         classes.add(Process.class);
         classes.add(ProcessInfo.class);
-        mapper = new StixMapper(classes);
+        mapper = new StixObservableMapper(classes);
 
         ProcessInfo processInfo = new ProcessInfo();
 
@@ -57,7 +57,7 @@ public class StixMapperTest {
     }
 
     @Test
-    void getValue_FromObservables() throws StixMapperException {
+    void getValue_FromObservables() throws StixMappingException {
         assertEquals("ping.exe", mapper.getValue(testProcess, "process:name"));
         assertEquals("C:\\Windows\\System32", mapper.getValue(testProcess, "process:path"));
         assertEquals("ping.exe google.com -t", mapper.getValue(testProcess, "process:command_line"));
@@ -65,7 +65,7 @@ public class StixMapperTest {
     }
 
     @Test
-    void getValue_FromParentObservables() throws StixMapperException {
+    void getValue_FromParentObservables() throws StixMappingException {
         ProcessInfo processInfo = new ProcessInfo();
 
         processInfo.setName("cmd.exe");
@@ -82,13 +82,17 @@ public class StixMapperTest {
     }
 
     @Test
-    void getValue_FromNotExistentObservable_ThrowsException() {
-        assertThrows(StixMapperException.class, () -> {
+    void getValue_FromNotExistentObservable_ThrowsException() throws StixMappingException {
+        assertThrows(StixMappingException.class, () -> {
             mapper.getValue(testProcess, "process:ad");
         });
 
-        assertThrows(StixMapperException.class, () -> {
+        assertThrows(StixMappingException.class, () -> {
             mapper.getValue(testProcess, "process1");
+        });
+
+        assertThrows(StixMappingException.class, () -> {
+            mapper.getValue(testProcess, "");
         });
     }
 }
