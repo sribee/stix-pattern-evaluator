@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>design.unstructured</groupId>
     <artifactId>stix-pattern-evaluator</artifactId>
-    <version>1.0.0-M3-SNAPSHOT</version>
+    <version>1.0.0-M3</version>
     <packaging>jar</packaging>
 
     <name>STIX Pattern Evaluator</name>
@@ -22,7 +22,7 @@
         <connection>scm:git:git://github.com/hashdelta/stix-pattern-evaluator.git</connection>
         <developerConnection>scm:git:git@github.com:hashdelta/stix-pattern-evaluator.git</developerConnection>
         <url>https://github.com/hashdelta/stix-pattern-evaluator/</url>
-        <tag>HEAD</tag>
+        <tag>stix-pattern-evaluator-1.0.0-M3</tag>
     </scm>
 
     <developers>
