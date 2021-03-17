@@ -246,7 +246,7 @@ public class StixObservableMapper implements ObjectPathResolver {
 
         } else {
             // Our path wasn't available, need to walk the tree manually
-            String[] objectPath = ObjectPathUtils.toArray(path);
+            String[] objectPath = ObjectPathUtils.toArray(path, pathFilter);
 
             if (objectPath == null || objectPath.length == 1) {
                 throw new StixMappingException("An invalid STIX observable object path (" + path + ") was specified.");
