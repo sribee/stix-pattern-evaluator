@@ -127,7 +127,7 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
         String value = (String) scope.pop();
         String objectPath = (String) scope.pop();
 
-        scope.push(new ComparisonExpression(objectPath, value, ComparisonComparators.Like, ctx.NOT()));
+        scope.push(new ComparisonExpression(objectPath, value, ComparisonComparators.Like, ctx.NOT() != null));
     }
 
     @Override
@@ -148,7 +148,7 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
                 java.util.regex.Pattern.CASE_INSENSITIVE);
         String objectPath = (String) scope.pop();
 
-        scope.push(new ComparisonExpression(objectPath, value, ComparisonComparators.Matches, ctx.NOT()));
+        scope.push(new ComparisonExpression(objectPath, value, ComparisonComparators.Matches, ctx.NOT() != null));
     }
 
     @Override
@@ -160,7 +160,7 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
         ComparisonComparators comparator = (ctx.EQ() != null ? ComparisonComparators.Equal
                 : ComparisonComparators.NotEqual);
 
-        scope.push(new ComparisonExpression(objectPath, value, comparator, ctx.NOT()));
+        scope.push(new ComparisonExpression(objectPath, value, comparator, ctx.NOT() != null));
     }
 
     @Override
@@ -181,7 +181,7 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
             comparator = ComparisonComparators.LessThanOrEqual;
         }
 
-        scope.push(new ComparisonExpression(objectPath, value, comparator, ctx.NOT()));
+        scope.push(new ComparisonExpression(objectPath, value, comparator, ctx.NOT() != null));
 
     }
 
@@ -192,7 +192,7 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
         Set<Object> value = (Set<Object>) scope.pop();
         String objectPath = (String) scope.pop();
 
-        scope.push(new ComparisonExpression(objectPath, value, ComparisonComparators.In, ctx.NOT()));
+        scope.push(new ComparisonExpression(objectPath, value, ComparisonComparators.In, ctx.NOT() != null));
     }
 
     /**

@@ -39,6 +39,7 @@ public class StixMapperTest {
 
         processInfo.setName("ping.exe");
         processInfo.setPath("C:\\Windows\\System32");
+        processInfo.setForwardPath("C:\\Windows\\System32");
         processInfo.setCommandLine("ping.exe google.com -t");
         processInfo.setRemapToId(598);
         testProcess.setInfo(processInfo);
@@ -48,7 +49,8 @@ public class StixMapperTest {
     void validateObservableObjects() {
         assertTrue(mapper.getObservableTree().containsKey("process"));
         assertTrue(mapper.getObservableTree().containsKey("process:parent_ref"));
-        assertTrue(mapper.getObservableTree().containsKey("process"));
+        assertTrue(mapper.getObservableTree().containsKey("process:path"));
+        assertTrue(mapper.getObservableTree().containsKey("process:forward_path"));
         assertTrue(mapper.getObservableTree().containsKey("process:name"));
         assertTrue(mapper.getObservableTree().containsKey("process:command_line"));
         assertTrue(mapper.getObservableTree().containsKey("process:pid"));
@@ -60,6 +62,7 @@ public class StixMapperTest {
     void getValue_FromObservables() throws StixMappingException {
         assertEquals("ping.exe", mapper.getValue(testProcess, "process:name"));
         assertEquals("C:\\Windows\\System32", mapper.getValue(testProcess, "process:path"));
+        assertEquals("C:/Windows/System32", mapper.getValue(testProcess, "process:forward_path"));
         assertEquals("ping.exe google.com -t", mapper.getValue(testProcess, "process:command_line"));
         assertEquals(598, mapper.getValue(testProcess, "process:pid"));
     }

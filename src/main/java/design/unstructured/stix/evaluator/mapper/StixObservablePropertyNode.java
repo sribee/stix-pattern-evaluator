@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import design.unstructured.stix.evaluator.EvaluatorFeatures;
 
 /**
  * Used to maintain and represent relationships between STIX objects, also known
@@ -34,6 +37,8 @@ import java.util.Map;
 public class StixObservablePropertyNode {
 
     private final String name;
+
+    private final Set<EvaluatorFeatures> features;
 
     private final Field field;
 
@@ -52,9 +57,10 @@ public class StixObservablePropertyNode {
      * @param name
      * @param field
      */
-    StixObservablePropertyNode(StixObservablePropertyNode parent, String name, Field field, Class<?> clazz,
-            boolean isReference) {
+    StixObservablePropertyNode(StixObservablePropertyNode parent, String name, Set<EvaluatorFeatures> features,
+            Field field, Class<?> clazz, boolean isReference) {
         this.name = name;
+        this.features = features;
         this.parent = parent;
         this.field = field;
         this.clazz = clazz;
@@ -157,6 +163,10 @@ public class StixObservablePropertyNode {
         }
 
         return path.toString().substring(0, path.length() - 2);
+    }
+
+    public Set<EvaluatorFeatures> getFeatures() {
+        return features;
     }
 
 }
