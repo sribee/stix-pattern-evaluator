@@ -144,8 +144,7 @@ public class StixPatternProcessor implements StixPatternListener, Supplier<Patte
         logger.trace("exitPropTestEqual: {} {} | stack={}", ctx, ctx.getText(), scope);
 
         String regex = (String) scope.pop();
-        java.util.regex.Pattern value = java.util.regex.Pattern.compile(regex,
-                java.util.regex.Pattern.CASE_INSENSITIVE);
+        java.util.regex.Pattern value = java.util.regex.Pattern.compile(regex, java.util.regex.Pattern.CASE_INSENSITIVE);
         String objectPath = (String) scope.pop();
 
         scope.push(new ComparisonExpression(objectPath, value, ComparisonComparators.Matches, ctx.NOT() != null));
