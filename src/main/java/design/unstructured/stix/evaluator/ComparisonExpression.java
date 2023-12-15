@@ -19,8 +19,6 @@
 */
 package design.unstructured.stix.evaluator;
 
-import org.antlr.v4.runtime.tree.TerminalNode;
-
 /**
  *
  * @author ccarv
@@ -33,11 +31,11 @@ public class ComparisonExpression extends BaseComparisonExpression implements Ex
 
     private final ComparisonComparators comparator;
 
-    private final TerminalNode negated;
+    private final Boolean negated;
 
     private Boolean evaluation = null;
 
-    ComparisonExpression(String objectPath, Object value, ComparisonComparators comparator, TerminalNode negated) {
+    ComparisonExpression(String objectPath, Object value, ComparisonComparators comparator, Boolean negated) {
         this.objectPath = objectPath;
         this.value = value;
         this.comparator = comparator;
@@ -68,7 +66,7 @@ public class ComparisonExpression extends BaseComparisonExpression implements Ex
     /**
      * @return the negated
      */
-    public TerminalNode isNegated() {
+    public Boolean isNegated() {
         return negated;
     }
 

@@ -9,7 +9,7 @@ import design.unstructured.stix.evaluator.mapper.annotations.StixProperty;
 @StixEntity
 public class Process {
 
-    @StixProperty(name = { "parent_ref", })
+    @StixProperty(name = { "parent_ref" })
     private Process parent;
 
     @StixProperty

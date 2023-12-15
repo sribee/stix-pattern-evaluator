@@ -24,6 +24,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import design.unstructured.stix.evaluator.EvaluatorFeatures;
+
 /**
  *
  * @author ccarv
@@ -33,4 +35,6 @@ import java.lang.annotation.Target;
 public @interface StixProperty {
 
     String[] name() default "";
+
+    EvaluatorFeatures[] features() default {};
 }

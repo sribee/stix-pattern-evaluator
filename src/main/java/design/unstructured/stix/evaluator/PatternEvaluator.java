@@ -19,9 +19,10 @@
 */
 package design.unstructured.stix.evaluator;
 
+import java.util.Set;
+
 import design.unstructured.stix.evaluator.mapper.ObjectPathResolver;
 import design.unstructured.stix.evaluator.mapper.StixMappingException;
-import java.util.Set;
 
 /**
  * Evaluates the pattern expression tree. An object resolver (use the
@@ -136,55 +137,58 @@ public class PatternEvaluator implements ComparisonEvaluator {
             }
 
             switch (comparisonExpression.getComparator()) {
-                case Equal: {
-                    comparisonExpression.setEvaluation(comparisonEvaluator.isEqual(contextObject, patternObject));
-                    break;
-                }
+            case Equal: {
+                comparisonExpression.setEvaluation(
+                        comparisonExpression.isNegated() ^ comparisonEvaluator.isEqual(contextObject, patternObject));
+                break;
+            }
 
-                case NotEqual: {
-                    comparisonExpression.setEvaluation(comparisonEvaluator.isNotEqual(contextObject, patternObject));
-                    break;
-                }
+            case NotEqual: {
+                comparisonExpression.setEvaluation(comparisonExpression.isNegated()
+                        ^ comparisonEvaluator.isNotEqual(contextObject, patternObject));
+                break;
+            }
 
-                case In: {
-                    comparisonExpression
-                            .setEvaluation(comparisonEvaluator.isIn(contextObject, (Set<Object>) patternObject));
-                    break;
-                }
+            case In: {
+                comparisonExpression.setEvaluation(comparisonExpression.isNegated()
+                        ^ comparisonEvaluator.isIn(contextObject, (Set<Object>) patternObject));
+                break;
+            }
 
-                case GreaterThan: {
-                    comparisonExpression.setEvaluation(
-                            comparisonEvaluator.isGreaterThan((Number) contextObject, (Number) patternObject));
-                    break;
-                }
+            case GreaterThan: {
+                comparisonExpression.setEvaluation(comparisonExpression.isNegated()
+                        ^ comparisonEvaluator.isGreaterThan((Number) contextObject, (Number) patternObject));
+                break;
+            }
 
-                case GreaterThanOrEqual: {
-                    comparisonExpression.setEvaluation(
-                            comparisonEvaluator.isGreaterThanOrEqual((Number) contextObject, (Number) patternObject));
-                    break;
-                }
+            case GreaterThanOrEqual: {
+                comparisonExpression.setEvaluation(comparisonExpression.isNegated()
+                        ^ comparisonEvaluator.isGreaterThanOrEqual((Number) contextObject, (Number) patternObject));
+                break;
+            }
 
-                case LessThan: {
-                    comparisonExpression.setEvaluation(
-                            comparisonEvaluator.isLessThan((Number) contextObject, (Number) patternObject));
-                    break;
-                }
+            case LessThan: {
+                comparisonExpression.setEvaluation(comparisonExpression.isNegated()
+                        ^ comparisonEvaluator.isLessThan((Number) contextObject, (Number) patternObject));
+                break;
+            }
 
-                case LessThanOrEqual: {
-                    comparisonExpression.setEvaluation(
-                            comparisonEvaluator.isLessThanOrEqual((Number) contextObject, (Number) patternObject));
-                    break;
-                }
+            case LessThanOrEqual: {
+                comparisonExpression.setEvaluation(comparisonExpression.isNegated()
+                        ^ comparisonEvaluator.isLessThanOrEqual((Number) contextObject, (Number) patternObject));
+                break;
+            }
 
-                case Matches: {
-                    comparisonExpression.setEvaluation(comparisonEvaluator.matches(contextObject, patternObject));
-                    break;
-                }
+            case Matches: {
+                comparisonExpression.setEvaluation(
+                        comparisonExpression.isNegated() ^ comparisonEvaluator.matches(contextObject, patternObject));
+                break;
+            }
 
-                default: {
-                    throw new PatternEvaluatorException(
-                            "Comparator " + comparisonExpression.getComparator() + " is not supported.");
-                }
+            default: {
+                throw new PatternEvaluatorException(
+                        "Comparator " + comparisonExpression.getComparator() + " is not supported.");
+            }
             }
         }
     }
